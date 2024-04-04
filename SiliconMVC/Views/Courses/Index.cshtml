@@ -1,6 +1,4 @@
-﻿@model List<CourseEntity>;
-@using Infrastructure.Models;
-
+﻿@model CourseViewModel;
 @{
     ViewData["Title"] = "Our Courses";
 }
@@ -21,19 +19,25 @@
     <div class="headlineCourses">
         <h1>Courses</h1>
         <div class="search-container">
-            <select id="myDropdown" class=select>
-                <option disabled selected>All categories</option>
-                <option value="val1">Val 1</option>
-                <option value="val2">Val 2</option>
-                <option value="val3">Val 3</option>
-            </select>
+
+            <div class="dropdown">
+                <button class="btn-transparent dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Dropdown button
+                </button>
+                <ul class="dropdown-menu">
+                    @foreach(var category in Model.Categories)
+                    {
+                        <li class="li-options"><a asp-controller="Courses" asp-action="Index" asp-route-category="@category.Id" class="dropdown-item">@category.CategoryName</a></li>
+                    }
+                </ul>
+            </div>
             <div class="input"><input placeholder="Serach courses" /><i class="fa-solid fa-magnifying-glass"></i></div>
         </div>
     </div>
 
     <div class="course-container">
 
-        @foreach(var course in Model)
+        @foreach(var course in Model.Courses)
         {
         <div class="courses-boxes">
             <div class="imageContainer">
@@ -44,16 +48,16 @@
                    <div class="best-seller"><label asp-for="@course.IsBestseller">Best Seller</label></div>                       
                 }
 
-                <div class="bookmark">
+                <a asp-controller="Courses" asp-action="MyCourses" asp-route-id="@course.Id" class="bookmark">
                     <div class="bookmarkchild">
                         <svg width="12" height="16" viewBox="0 0 12 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M10.5 0.5H1.5C0.67275 0.5 0 1.17275 0 2V5.957V6.5V15.5L6 12.071L12 15.5V6.5V5.957V2C12 1.17275 11.3273 0.5 10.5 0.5ZM10.5 12.9147L6 10.3438L1.5 12.9147V6.5V5.957V2H10.5V5.957V6.5V12.9147Z" fill="#33354D" />
                         </svg>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="text-container">
-                <a asp-controller="Courses" asp-action="Details" asp-route-id="@course.Id"><h5>@course.Title</h5></a>
+                <a class="a-title" asp-controller="Courses" asp-action="Details" asp-route-id="@course.Id"><h5>@course.Title</h5></a>
                 <p>By @course.Author</p>
                 <div class="price-container">
                         <h6 class="@(course.DiscountPrice != null ? "red" : "price")">$@course.Price</h6>

@@ -40,6 +40,7 @@ builder.Services.AddScoped<SubscribeRepository>();
 builder.Services.AddScoped<CoursesRepository>();
 builder.Services.AddScoped<CourseEntity>();
 builder.Services.AddScoped<UserContext>();
+builder.Services.AddScoped<CategoryRepository>();
 builder.Services.AddScoped<UserManager<UserEntity>>();
 builder.Services.AddScoped<SignInManager<UserEntity>>();
 

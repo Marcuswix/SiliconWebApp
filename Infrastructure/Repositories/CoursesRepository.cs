@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using System.Linq.Expressions;
 using System.Reflection;
 
 namespace Infrastructure.Repositories
@@ -42,7 +43,7 @@ namespace Infrastructure.Repositories
             }
         }
 
-        public RepositoriesResult GetOne(int id)
+        public RepositoriesResult GetOneById(int id)
         {
             try
             {
@@ -62,6 +63,28 @@ namespace Infrastructure.Repositories
             {
                 Debug.WriteLine("GetOneCourses" + ex.Message);
                 return ResponseFactory.Error();
+            }
+        }
+
+        public virtual async Task<RepositoriesResult> GetOneAsync(Expression<Func<CourseEntity, bool>> predicate)
+        {
+            try
+            {
+                var entityToGet = await _dataContext.Courses.FirstOrDefaultAsync(predicate);
+
+                if (entityToGet == null)
+                {
+                    return ResponseFactory.NotFound();
+                }
+                else
+                {
+                    return ResponseFactory.Ok(entityToGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("GetOneAsync" + ex.Message);
+                return ResponseFactory.Error(ex.Message);
             }
         }
 

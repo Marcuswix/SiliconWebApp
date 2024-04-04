@@ -30,5 +30,23 @@ namespace Infrastructure.Repositories
             }
             return null!;
         }
+
+        public async Task<CategoryEntity> GetACategory(int categoryId)
+        {
+            try
+            {
+                var result = await _dataContext.Categories.FirstOrDefaultAsync(x => x.Id == categoryId);
+
+                if (result != null)
+                {
+                    return result;
+                }
+            }
+            catch
+            {
+
+            }
+            return null!;
+        }
     }
 }

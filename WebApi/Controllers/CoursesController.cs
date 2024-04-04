@@ -42,10 +42,32 @@ namespace WebApi.Controllers
             return NotFound();
         }
 
+        [HttpGet]
+        [Route("GetBySearch")]
+        public async Task<IActionResult> GetBySearch(string search)
+        {
+            var titleResult = await _courseRepository.GetOneAsync(x => x.Title == search);
+            var authorResult = await _courseRepository.GetOneAsync(x => x.Author == search);
+
+            if (titleResult.StatusCode == Infrastructure.Models.StatusCodes.OK)
+            {
+                return Ok(titleResult);
+            }
+            if(authorResult.StatusCode == Infrastructure.Models.StatusCodes.OK)
+            {
+                return Ok(authorResult); 
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+
         [HttpGet("{id}")]
         public IActionResult GetOne(int id)
         {
-            var result = _courseRepository.GetOne(id);
+            var result = _courseRepository.GetOneById(id);
 
 
             if (result.StatusCode == Infrastructure.Models.StatusCodes.OK)

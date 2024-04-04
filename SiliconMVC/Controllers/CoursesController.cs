@@ -1,5 +1,7 @@
-﻿using Infrastructure.Entities;
+﻿using Azure;
+using Infrastructure.Entities;
 using Infrastructure.Repositories;
+using Infrastructure.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -14,14 +16,12 @@ namespace Infrastructure.Controllers
         private readonly HttpClient _httpClient;
         private readonly IConfiguration _configuration;
         private readonly UserManager<UserEntity> _userManager;
-        private readonly CategoryRepository _categoryRepository;
 
-        public CoursesController(HttpClient httpClient, IConfiguration configuration, UserManager<UserEntity> userManager, CategoryRepository categoryRepository)
+        public CoursesController(HttpClient httpClient, IConfiguration configuration, UserManager<UserEntity> userManager)
         {
             _httpClient = httpClient;
             _configuration = configuration;
             _userManager = userManager;
-            _categoryRepository = categoryRepository;
         }
 
         private void setValues()
@@ -33,7 +33,7 @@ namespace Infrastructure.Controllers
         [HttpGet]
         [Route("/courses")]
         [Authorize(Policy = "AuthenticatedUsers")]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int categoryId, string search)
         {
             setValues();
 
@@ -48,28 +48,33 @@ namespace Infrastructure.Controllers
 
                     var response = await _httpClient.GetAsync($"https://localhost:7117/api/Courses?key={apiKey}");
 
+                    var categories = await _httpClient.GetAsync("https://localhost:7117/api/Category");
+
+                    var jsonResult = await categories.Content.ReadAsStringAsync();
+                    var categoriesList = JsonConvert.DeserializeObject<List<CategoryEntity>>(jsonResult);
+
                     if (response.IsSuccessStatusCode)
                     {
                         var json = await response.Content.ReadAsStringAsync();
+                        var allCourses = JsonConvert.DeserializeObject<List<CourseEntity>>(json);
 
-                        if (json.StartsWith("{") || json.StartsWith("["))
+                        //Where kollar ifall ett viss element innehåller ett visst värde... 
+                        var filteredCourses = allCourses.Where(course => course.CategoryId == categoryId).ToList();
+
+                        var viewModel = new CourseViewModel
                         {
-                            var list = JsonConvert.DeserializeObject<List<CourseEntity>>(json);
-                            return View(list);
-                        }
-                        else
-                        {
-                            var course = JsonConvert.DeserializeObject<CourseEntity>(json);
-                            var dataList = new List<CourseEntity>() { course! };
-                            return View(dataList);
-                        }
+                            Categories = categoriesList,
+                            Courses = filteredCourses
+                        };
+
+                        return View(viewModel);
                     }
+
                     else
                     {
                         TempData["ErrorMessage"] = "At the moment there are no courses in the database.";
                         return View();
                     }
-
                 }
                 else
                 { return View(); }
