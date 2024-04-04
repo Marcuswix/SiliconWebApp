@@ -1,0 +1,88 @@
+﻿@model SubscribeModel;
+
+@*   Subscribe *@
+<section id="subscribe" class="section-margin">
+    <div class="section-subscribe">
+        <div class="headline">
+            <h1>Don't Want to Miss Anything?</h1>
+            <div class="imageContainer">
+                <img src="~/images/arrows.svg" alt="A currling arrow" />
+            </div>
+        </div>
+
+        <form class="mail-container" asp-controller="Home" asp-action="Subscribe" method="post" novalidate id="subscribeForm" onsubmit="{saveScrollPosition()}">
+                <div class="checkboxContainer">
+                    <h4 id="SmallHeadline">Sign up for <br>Newsletters</h4>
+
+                    <div class="form-check" id="Newsletter">
+                        <input asp-for="Newsletter" class="form-check-input" type="checkbox">
+                        <label asp-for="Newsletter" for="flexCheckDefault">
+                            Daily Newsletter
+                        </label>
+                    </div>
+
+                    <div class="form-check" id="AdvertisingUpdates">
+                        <input asp-for="AdvertisingUpdates" class="form-check-input" type="checkbox">
+                        <label asp-for="AdvertisingUpdates" for="flexCheckDefault">
+                            Advertising Updates
+                        </label>
+                    </div>
+                    <div class="form-check" id="WeekInReview">
+                        <input asp-for="WeekInReview" class="form-check-input" type="checkbox">
+                        <label asp-for="WeekInReview" for="flexCheckDefault">
+                            Week in Review
+                        </label>
+                    </div>
+                    <div class="form-check" id="EventUpdates">
+                        <input asp-for="EventUpdates" class="form-check-input" type="checkbox">
+                        <label asp-for="EventUpdates" for="flexCheckDefault">
+                            Event Updates
+                        </label>
+                    </div>
+                    <div class="form-check" id="StartupsWeekly">
+                        <input asp-for="StartUps" class="form-check-input" type="checkbox">
+                        <label asp-for="StartUps" for="flexCheckDefault">
+                            Startups Weekly
+                        </label>
+                    </div>
+                    <div class="form-check" id="Podcasts">
+                        <input asp-for="Podcasts" class="form-check-input" type="checkbox">
+                        <label asp-for="Podcasts" for="flexCheckDefault">
+                            Podcasts
+                        </label>
+                    </div>
+                </div>
+
+            <div><span id="AtLeastOneOptionSelected" asp-validation-for="AtLeastOneOptionSelected"></span></div>
+
+                <div class="InputContainer">
+
+                    <div class="subscribeInput">
+                        <div class="icontainer"><i class="fa-regular fa-envelope"></i></div>
+                        <input class="subscribe" type="email" asp-for="Email" />
+                    </div>
+                    <button class="btn-theme" type="submit">Subscribe *</button>
+                    <div class="terms"><p>* Yes, I agree to the <a asp-controller="" asp-action="">terms</a> and <a asp-controller="" asp-action="">privacy policy</a>.</p></div>
+
+                    <div id="invalidEmail"><span class="" asp-validation-for="Email"></span></div>
+
+                </div>
+                    <div>
+                        @if (TempData["ErrorMessage"] != null)
+                        {
+                            <span class="error">@TempData["ErrorMessage"]</span>
+                        }
+                        @if (TempData["Message"] != null)
+                        {
+                            <span class="success">@TempData["Message"]</span>
+                        }
+                    </div>
+            </form>
+    </div>
+</section>
+
+
+
+
+
+@await Html.PartialAsync("_ValidationScriptPartial")

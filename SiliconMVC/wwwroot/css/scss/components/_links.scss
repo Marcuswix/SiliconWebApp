@@ -1,0 +1,89 @@
+@import '../_core.scss';
+@import '_buttons.scss';
+@import '../core/_colors.scss';
+
+a {
+    @include standard-text;
+    color: $theme;
+    text-decoration: none;
+    transition: all 0.15s ease-in-out;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.menu-link {
+    @include text-nav;
+    text-decoration: none;
+    transition: color 0.15s ease-in-out, transform 0.15s ease-in-out;
+
+    &:hover {
+        text-decoration: none;
+        text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.5);
+
+        background-color: #5178F8;
+        
+        a {
+            transform: scale(1.1);
+        }
+    }
+
+    &:active,
+    &:focus,
+    .active {
+        color: $theme;
+        text-decoration: none;
+    }
+}
+
+.svgMenu {
+    fill: $gray-800;
+}
+
+.user-links {
+    @include button;
+    background: $transparent;
+    color: $gray-800;
+    border: none;
+    width: 14rem;
+
+    path {
+        fill: $gray-800;
+    }
+
+
+    &:hover {
+        background: $gray-600;
+        color: $gray-100;
+        text-decoration: none;
+
+        path {
+            fill: $gray-100
+        }
+    }
+
+    &:active {
+        background-color: $theme;
+        @include theme-shadow;
+
+        path {
+            color: $gray-100
+        }
+    }
+}
+
+.active {
+    background-color: $theme;
+    color: $gray-100;
+    @include theme-shadow;
+    fill: $gray-100 !important;
+
+    path {
+        fill: $gray-100;
+    }
+
+    i{
+        color: $gray-100;
+    }
+}

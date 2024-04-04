@@ -1,0 +1,99 @@
+@media(min-width: 10px)
+{
+    #lightDark
+    {
+        background: linear-gradient(to right, black 50%, white 50%);
+        width: 100%;
+        padding-block: 2rem;
+
+        .textContainer
+        {
+            display: flex;
+            justify-content: center;
+            column-gap: 1rem; 
+
+            .dark
+            {
+                width: 50%;
+                color: white;
+                text-align: right;
+                
+                h1
+                {
+                    color: white;
+                    text-align: right;
+                }
+            }
+    
+            .light
+            {
+                width: 50%;
+                text-align: left;
+            }
+        }
+
+        .imageContainer
+        {
+            grid-column: 1 / span 2; 
+            position: relative;
+            height: 50vh;
+            display: flex;
+
+            .macbookPro
+            {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%); /* Flyttar bilden till mitten genom att använda 50% av dess egna bredd och höjd */
+                max-width: 90%;
+                max-height: 90%;
+            }
+        }
+    }
+}
+
+@media(min-width: 1820px)
+{
+    #lightDark
+    {
+        display: flex;
+        flex-direction: column;
+        background: linear-gradient(to right, black 50%, white 50%);
+        padding-top: 5rem;
+        padding-bottom: 3rem;
+
+        .textContainer
+        {
+            display: flex;
+            justify-content: center;
+            column-gap: 1rem; 
+
+            .dark
+            {
+                width: 50%;
+                color: white;
+                text-align: right;
+                
+                h1
+                {
+                    color: white;
+                    text-align: right;
+                }
+            }
+    
+            .light
+            {
+                width: 50%;
+                text-align: left;
+            }
+        }
+    }
+
+    .imageContainer
+    {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-block: 3rem;
+    }
+}

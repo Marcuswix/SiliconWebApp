@@ -1,0 +1,50 @@
+
+
+@media(min-width: 10px) {
+    #page404 {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .section-container {
+            .page-content {
+                display: grid;
+                grid-template-columns: 1fr;
+                place-items: center;
+                gap: 1rem;
+                text-align: center;
+
+                .image-container {
+                    width: 55vw;
+                    margin-bottom: 2rem;
+
+                    .image {
+                        width: 100%;
+                    }
+                }
+            }
+            .goToHome {
+                width: 16rem;
+                margin-block: 2rem;
+            }
+        }
+    }
+}
+
+@media(min-width: 1820px) {
+    #page404 {
+        .section-container {
+            .page-content {
+
+                .image-container {
+                    width: 35vw;
+                }
+
+                h1 {
+                    font-weight: 900;
+                }
+            }
+        }
+    }
+}

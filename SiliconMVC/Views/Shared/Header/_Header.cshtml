@@ -1,0 +1,92 @@
+﻿@{
+    var themeMode = Context.Request.Cookies["ThemeMode"] ?? "light";
+    var isDark = (themeMode == "dark") ? true : false;
+}
+
+<header id="header" class="">
+    <div class="container">
+        <a class="logo" asp-controller="Home" asp-action="Index"><img src="~/images/@(isDark ? "logoDark.svg" : "solid.svg")" alt="Silicon logotype"></a>
+
+        <div class="menu">
+            <nav>
+                @if (ViewBag.ShowChoices)
+                {
+                    <a class="menu-link" href="#showcase">Overview</a>
+                    <a class="menu-link" href="#features">Features</a>                   
+                }
+
+                <a class="menu-link" asp-controller="Contact" asp-action="Index">Contact</a>
+
+                @if (_signInManager.IsSignedIn(User))
+                {
+                    <a class="menu-link" asp-controller="Courses" asp-action="Index">Courses</a>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a class="menu-link" asp-controller="Admin" asp-action="Index">Admin</a>
+                    }
+                }
+            </nav>
+        </div>
+
+        <div class="btn-switch">
+            <label>Light</label>
+            <label class="switch" for="switch-mode">
+                <input type="checkbox" id="switch-mode" checked="@isDark"/>
+                <span class="slider round"></span>
+            </label>
+            <label>Dark</label>
+        </div>
+
+        <div class="menuBarsContainer">
+            <i id="hamburger" class="fa-solid fa-bars"></i>
+            <div id="menu-mobil" class="mobil-menu">
+                <ul>
+                    <a class="menu-link" asp-controller="Home" asp-action="Index">
+                    <li class="menu-link">Home</li></a>
+                    <a class="menu-link" asp-controller="Contact" asp-action="Index">
+                    <li class="menu-link">Contact</li></a>
+
+                    @if (_signInManager.IsSignedIn(User))
+                    {
+                        <a class="menu-link" asp-controller="Courses" asp-action="Index">
+                        <li class="menu-link">Courses</li></a>
+                        <a class="menu-link" asp-controller="" asp-action="">
+                        <li class="menu-link">My Courses</li></a>
+                        
+                        <a class="menu-link" asp-controller="Account" asp-action="Index">
+                        <li class="menu-link">My Account</li></a>
+
+                        @if(User.IsInRole("Admin"))
+                        {
+                            <a class="menu-link" asp-controller="Admin" asp-action="Index">
+                            <li class="menu-link">Admin</li></a>
+                        }
+
+                        <a class="menu-link" asp-controller="Account" asp-action="SignOut">
+                        <li class="menu-link">Sign Out</li></a>
+                    }
+                    else
+                    {
+                        <a class="menu-link" asp-controller="SignIn" asp-action="Index">
+                        <li class="menu-link">Sign in</li></a>
+                        <a class="menu-link" asp-controller="SignUp" asp-action="Index">
+                        <li class="menu-link">Sign Up</li></a>
+                    }
+                </ul>
+            </div>
+        </div>
+
+        <div class="account-buttons">
+            @if (_signInManager.IsSignedIn(User))
+            {
+                var user = await _userManager.GetUserAsync(User);
+                <a asp-controller="account" asp-action="Index"><div class="image-container"><img class="profil-image" src="~/uploads/@(user.UrlImage ?? "DefaultProfileImage.png")" alt="@User.Identity.Name"/></div></a>
+            }
+            else
+            {
+                <a class="btn-gray" asp-controller="SignIn" asp-action="Index"><i class="fa-regular fa-right-to-bracket"></i><span>Sign In</span></a>
+                <a class="btn-theme" asp-controller="SignUp" asp-action="Index"><i class="fa-regular fa-user"></i><span>Sign Up</span></a>
+            }
+        </div>
+    </div>
+</header>

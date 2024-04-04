@@ -1,0 +1,73 @@
+@media(min-width: 10px)
+{
+    #manage
+    {
+        padding-block: 2rem;
+
+        .container
+        {
+            display: grid;
+            grid-template-columns: 1fr;
+            align-self: center;
+
+            .textContainer
+            {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+
+                h2
+                {
+                    margin: 0rem;
+                }
+
+                .contentContainer
+                {
+                    padding-block: 1rem;
+
+                    .contentText
+                    {
+                        display: flex;
+                        justify-content: left;
+                        align-items: center;
+                        margin-block: 1rem;
+
+                        p{
+                            margin: 0rem;
+                            margin-left: 0.5rem
+                        }
+                    }
+                }
+            }
+
+            .imageContainer
+            {
+                width: 100%;
+
+                .imageDashboard
+                {
+                    width: 100%;
+                    height: auto;
+                }
+            }
+        }
+    }
+}
+
+@media(min-width: 1820px)
+    {
+        #manage
+        {
+            .container
+            {
+                grid-template-columns: 1fr 1fr 1fr;
+    
+                .imageContainer
+                {
+                    grid-column: 2 span;
+                    margin-right: 4rem;
+                }
+            }
+        }
+    }

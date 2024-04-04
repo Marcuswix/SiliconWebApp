@@ -1,0 +1,57 @@
+﻿@model AccountBasicInfoViewModel;
+
+<form class="sign-in-form" id="basicInfoForm" asp-controller="Account" asp-action="SaveBasicInfo" method="post" novalidate>
+
+        <h2 id="AccountHeadline">Account Details</h2>
+        <div class="basicInfo">
+            <h5>Basic Info</h5>
+
+            @if (TempData["SuccessMessageBasicInfo"] != null)
+            {
+                <span id="successMessage" class="success span">
+                    @TempData["SuccessMessageBasicInfo"]
+                </span>
+            }
+
+            @if (TempData["ErrorMessageBasicInfo"] != null)
+            {
+                <span id="errorMessage" class="error span">
+                    @TempData["ErrorMessageBasicInfo"]
+                </span>
+            }
+        </div>
+
+
+
+    <div id="boxFirstName">
+        <label asp-for="BasicInfo.FirstName"><b>First name</b></label>
+        <span asp-validation-for="BasicInfo.FirstName"></span>
+        <input asp-for="@Model.BasicInfo.FirstName" value="@Model.BasicInfo.FirstName" />
+
+    </div>
+    <div id="boxLastName">
+        <label asp-for="BasicInfo.LastName"><b>Last name</b></label>
+        <span asp-validation-for="BasicInfo.LastName"></span>
+        <input asp-for="@Model.BasicInfo.LastName" value="@Model.BasicInfo.LastName" />
+    </div>
+
+    <div id="boxEmail">
+        <label asp-for="BasicInfo.Email"><b>Email</b></label>
+        <span asp-validation-for="BasicInfo.Email"></span>
+        <input asp-for="@Model.BasicInfo.Email" value="@Model.BasicInfo.Email" />
+    </div>
+    <div id="boxPhone">
+        <label asp-for="BasicInfo.Phone"><b>Phone<span class="grey-color">(optional)</span></b></label>
+        <span asp-validation-for="BasicInfo.Phone"></span>
+        <input asp-for="@Model.BasicInfo.Phone" value="@Model.BasicInfo.Phone" />
+    </div>
+    <div id="boxBio">
+        <label class="bio"><b>Bio<span class="grey-color">(optional)</span></b></label>
+        <textarea class="inputArea" asp-for="BasicInfo.Biography">
+        </textarea>
+    </div>
+    <div class="save-cancel">
+        <button class="btn-gray" type="reset">Cancel</button>
+        <button class="btn-theme" type="submit">Save changes</button>
+    </div>
+</form>

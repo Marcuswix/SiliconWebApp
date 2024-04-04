@@ -1,0 +1,56 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="compilerconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\css\scss\pages\home\" />
+    <Folder Include="wwwroot\css\scss\pages\Admin\" />
+    <Folder Include="wwwroot\css\scss\pages\notFound\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="compilerconfig.json" />
+    <None Include="wwwroot\css\scss\pages\courses\sections\_endSectionCourses.scss" />
+    <None Include="wwwroot\css\scss\pages\courses\sections\_showcaseCourses.scss" />
+    <None Include="wwwroot\css\scss\pages\courses\_sectionsCourses.scss" />
+    <None Include="wwwroot\images\coursesPage\group.svg" />
+    <None Include="wwwroot\images\iconsbrands\dropbox.svg" />
+    <None Include="wwwroot\images\iconsbrands\evernote.svg" />
+    <None Include="wwwroot\images\iconsbrands\gmail.svg" />
+    <None Include="wwwroot\images\iconsbrands\google.svg" />
+    <None Include="wwwroot\images\iconsbrands\mailChimp.svg" />
+    <None Include="wwwroot\images\iconsbrands\slack.svg" />
+    <None Include="wwwroot\images\iconsbrands\trello.svg" />
+    <None Include="wwwroot\images\iconsbrands\zoom.svg" />
+    <None Include="wwwroot\images\icons\add-group.svg" />
+    <None Include="wwwroot\images\icons\bell.svg" />
+    <None Include="wwwroot\images\icons\chat.svg" />
+    <None Include="wwwroot\images\icons\presentation.svg" />
+    <None Include="wwwroot\images\icons\shield.svg" />
+    <None Include="wwwroot\images\icons\test.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BuildWebCompiler" Version="1.12.405" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="8.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="8.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,30 @@
+﻿@inject FeatureService _featureService
+
+@{
+    var result = await _featureService.GetAllFeatures();
+    List<FeatureEntity> feature = (List<FeatureEntity>)result.ContentResult!;
+    var content = feature.First();
+}
+
+
+@* Section "Features" *@
+<section id="features" class="section-margin">
+    <div class="container">
+        <h1>@content.Title</h1>
+        <p>@content.Ingress</p>
+
+        <div class="tool-features">
+
+            @foreach (var item in content.FeatureItems)
+            {
+                <a href="#">
+                    <div class="box" id="box1">
+                        <img src="~/images/icons/@item.ImageUrl" alt="@item.AltText">
+                        <h5>@item.Title</h5>
+                        <p>@item.Text</p>
+                    </div>
+                </a>
+            }
+        </div>
+    </div>
+</section>

@@ -1,0 +1,153 @@
+@import '../_core.scss';
+
+header {
+    height: 82px;
+    display: flex;
+    justify-content: center;
+
+    .headerGrayColor {
+        background-color: $gray-100 !important;
+    }
+
+
+    .container {
+        padding: 15px;
+        display: grid;
+        align-items: center;
+        grid-template-columns: 1fr auto;
+        grid-template-areas: "logo mobile";
+        gap: 40px;
+        z-index: 2;
+        max-width: 1320px;
+        background-color: white;
+
+        @include lg {
+            grid-template-columns: auto 1fr auto auto;
+            grid-template-areas: "logo menu switch buttons";
+        }
+
+        .logo {
+            grid-area: logo;
+        }
+
+        .menu {
+            grid-area: menu;
+            display: none;
+
+            @include lg {
+                display: block;
+            }
+
+            nav {
+                display: flex;
+                gap: 15px;
+            }
+        }
+
+        .btn-switch {
+            grid-area: switch;
+            display: none;
+
+            @include lg {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 0.4rem;
+            }
+        }
+
+        .account-buttons {
+            grid-area: buttons;
+            display: none;
+            gap: 15px;
+
+            @include lg {
+                display: flex;
+            }
+        }
+
+        .btn-mobile {
+            grid-area: mobile;
+            display: block;
+
+            @include lg {
+                display: none;
+            }
+        }
+
+        .menuBarsContainer {
+            @include lg {
+                display: none;
+            }
+        }
+
+        #hamburger {
+            font-size: 2rem;
+            z-index: 4;
+
+            &:active {
+                color: rgba(0, 0, 0, 0.484);
+            }
+        }
+
+        .mobil-menu {
+            display: block;
+            width: 60%;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            background-color: $theme;
+            padding: 0;
+            z-index: 2;
+            left: -100%;
+            transition: left 300ms;
+            box-shadow: 0px 8px 18px -8px rgba(99, 102, 241, 0.90);
+
+            ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+
+                li {
+                    color: $gray-300;
+                    padding: 1rem;
+                    border-bottom: solid 1px $gray-300;
+                    box-shadow: 0px 2px 6px -1px rgba(19, 16, 34, 0.03);
+                }
+            }
+        }
+
+        .open {
+            left: 0 !important;
+        }
+
+        .image-container {
+            height: auto;
+            width: auto;
+            border: solid $gray-300 1px;
+            border-radius: 50%;
+            box-shadow: 0px 0px 1px $gray-300;
+            overflow: hidden; 
+
+            .profil-image {
+                z-index: -1;
+                height: 42px;
+                width: auto;
+            }
+        }
+    }
+
+    @media(max-width: 720px) {
+        .container {
+            position: fixed;
+        }
+    }
+
+    @media(min-width: 1820px) {
+        .container {
+            position: relative;
+        }
+    }
+}
+
+

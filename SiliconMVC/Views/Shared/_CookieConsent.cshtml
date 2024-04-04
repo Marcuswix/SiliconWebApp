@@ -1,0 +1,36 @@
+﻿@if(Context.Request.Cookies["CookieConsent"] == null)
+{
+    <div id="cookie-consent" class="alert alert-gray fixed-bottom">
+        <div class="container">
+            <span>This website uses cookies to improve the user experience. </span>
+            <button class="btn-theme" onclick="acceptCookieConsent()">Ok</button>
+        </div>
+    </div>
+
+    <script>
+        function acceptCookieConsent() {
+
+            try {
+                document.getElementById("cookie-consent").style.display = "none"
+
+                fetch('@Url.Action("CookieConsent", "SiteSettings")',
+                    {
+                        method: 'POST',
+                        headers:
+                        {
+                            'X-Requested-With': 'XMLHttpRequest'
+                        }
+                    })
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+            }
+            catch (error) {
+                console.log("Något gåpr fel här" + error)
+            }
+
+        }
+    </script>
+}
+

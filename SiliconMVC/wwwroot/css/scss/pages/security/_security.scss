@@ -1,0 +1,65 @@
+@media(min-width: 10px)
+{
+  .divContainer
+   {
+                display: grid;
+                gap: 1rem;
+   }
+
+            .SecurityPasswordForm
+            {
+                display: grid;
+                grid-template-columns: 1fr;
+                row-gap: 1.6rem;
+            }
+
+            .SecurityDeleteForm
+            {
+                display: grid;
+                grid-template-columns: 1fr;
+                row-gap: 1.6rem;
+            }
+
+}
+
+@media(min-width: 1820px)
+{
+    .SecurityPasswordForm
+    {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+
+        h2{
+            margin: 0;
+        }
+
+        #blueHeadline
+        {
+            grid-column: 1 / span 2;
+        }
+        
+        #Password
+        {
+            grid-column: 1 /span 1;
+        }
+
+        #boxNewPassword
+        {
+            grid-column: 1 / span 1;
+        }
+        #boxConfirmNewPassword
+        {
+            grid-column: 2 / span 1;
+        }
+        #buttons
+        {
+            grid-column: 1 / span 2; 
+        }
+    }
+
+    .SecurityDeleteForm
+    {
+        row-gap: 2rem;
+    }
+}

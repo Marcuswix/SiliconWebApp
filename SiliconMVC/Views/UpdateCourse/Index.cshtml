@@ -1,0 +1,110 @@
+﻿@model CourseEntity;
+
+<div class="container">
+    <form class="sign-in-form" method="post" asp-controller="UpdateCourse" asp-action="Update" novalidate>
+        <div class="headlines">
+            <h1>Update Course</h1>
+        </div>
+
+        @if(TempData["SuccessMessage"] != null)
+        {
+            <div class="success center">@TempData["SuccessMessage"]</div>
+        }
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="error center">@TempData["ErrorMessage"]</div>
+        }
+
+        <input type="hidden" name="_method" value="PUT" />
+        <input type="hidden" asp-for="Id" />
+
+
+        <div id="Title">
+            <label asp-for="Title"><b>Title</b></label>
+            <span class="" asp-validation-for="Title"></span>
+            <input asp-for="Title" />
+        </div>
+        <div id="Price">
+            <label asp-for="Price"><b>Price</b></label>
+            <span asp-validation-for="Price" class=""></span>
+            <input asp-for="Price" />
+        </div>
+
+        <div id="DiscountPrice">
+            <label asp-for="@Model.DiscountPrice"><b>Discount price</b></label>
+            <span asp-validation-for="DiscountPrice" class=""></span>
+            <input asp-for="DiscountPrice" />
+        </div>
+
+        <div id="Hours">
+            <label asp-for="Hours"><b>Hours</b></label>
+            <span asp-validation-for="Hours" class=""></span>
+            <input asp-for="Hours" />
+        </div>
+        <div id="LikesInNumbers">
+            <label asp-for="LikesInNumbers"><b>Likes In Numbers</b></label>
+            <span asp-validation-for="LikesInNumbers" class=""></span>
+            <input asp-for="LikesInNumbers" />
+        </div>
+
+        <div id="LikesInProcent">
+            <label asp-for="LikesInProcent"><b>Likes In Procent</b></label>
+            <span asp-validation-for="LikesInProcent" class=""></span>
+            <input asp-for="LikesInProcent" />
+        </div>
+
+        <div id="Author">
+            <label asp-for="Author"><b>Author</b></label>
+            <span asp-validation-for="Author" class=""></span>
+            <input asp-for="Author" />
+        </div>
+
+        <div id="Description">
+            <label asp-for="Description"><b>Description</b></label>
+            <span asp-validation-for="Description" class=""></span>
+            <textarea class="inputArea" asp-for="Description"></textarea>
+        </div>
+
+        <div id="WhatYouLearn">
+            <label asp-for="WhatYouLearn"><b>What You Learn</b></label>
+            <span asp-validation-for="WhatYouLearn" class=""></span>
+            <input asp-for="WhatYouLearn" />
+        </div>
+
+        <div id="CourseImage">
+            <label asp-for="@Model.ImageUrl"><b>Image Url</b></label>
+            <span asp-validation-for="ImageUrl" class=""></span>
+            <input asp-for="ImageUrl" />
+        </div>
+
+        <div id="AltText">
+            <label asp-for="ImageALtText"><b>Image alt text</b></label>
+            <span asp-validation-for="ImageALtText" class=""></span>
+            <input asp-for="ImageALtText" />
+        </div>
+
+        <div class="input-container">
+            <label asp-for="Category"><b>Category</b></label>
+            <select asp-for="Category" class="select">
+                <option disabled selected>Choose a category</option>
+                <Option value="1">Alt 1</Option>
+                <Option value="2">Alt 2</Option>
+                <Option value="3">Alt 3</Option>
+                <Option value="4">Alt 4</Option>
+                <Option value="5">Alt 5</Option>
+            </select>
+            <span asp-validation-for="Category" class=""></span>
+        </div>
+
+        <div class="IsABestSeller">
+            <div class="checkboxBestSeller">
+                <input asp-for="IsBestseller" class="form-check-input" type="checkbox">
+                <label asp-for="IsBestseller" class="form-check-label" for="flexCheckDefault">
+                    Is a bestseller?
+                </label>
+            </div>
+        </div>
+
+        <button class="btn-theme-s" type="submit">Save changes</button>
+    </form>
+</div>

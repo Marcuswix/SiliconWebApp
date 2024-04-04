@@ -1,0 +1,39 @@
+﻿@{
+    var themeMode = Context.Request.Cookies["ThemeMode"] ?? "ligth";
+}
+
+<!DOCTYPE html>
+<html lang="sv-se" class="@themeMode">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Something great...">
+    <meta name="keywords" content="Silicon, courses, web-developer, Html, css, Javascript, Front:end, Back-End, Fullstack ">
+    <script defer src="https://kit.fontawesome.com/4d5d7d75c3.js" crossorigin="anonymous"></script>
+    <link rel="icon" type="image/x-icon" href="~/favicon.ico">
+    <link defer href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <title>@ViewData["Title"] - Silicon</title>
+    <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+</head>
+<body>
+
+    <wrapper class="wrapper">
+    
+    <partial name="~/Views/Shared/Header/_Header.cshtml" />
+
+    <main id="main" class="">
+        @RenderBody()
+    </main>
+
+    <partial name="~/Views/Shared/Footer/_Footer.cshtml" />
+
+    </wrapper>
+
+    <partial name="_CookieConsent" />
+
+    <script src="/js/darkMode.js"></script>
+    <script src="/js/script.js"></script>
+    <script src="/js/saveScrollPosition.js"></script>
+
+</body>
+</html>

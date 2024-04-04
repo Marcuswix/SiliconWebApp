@@ -1,0 +1,73 @@
+@import '../_core.scss';
+
+@media(min-width: 10px)
+{
+    #sign-in {
+        width: 100%;
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+
+            .errorMessageContainer{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+                
+             .headlines {
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            hr {
+                margin-block: 0rem;
+            }
+
+            .loginSocialContainer {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                text-align: center;
+
+                .btn-container {
+                    display: grid;
+                    grid-template-columns: 1fr;
+                    gap: 1rem;
+                }
+            }
+        }
+    }
+}
+
+@media(min-width: 1820px)
+{
+    #sign-in {
+        padding-top: 4rem;
+
+        .container {
+
+            padding: 1rem;
+
+            .sign-in-form {
+                width: 34rem;
+                margin-block: 1rem;
+            }
+
+            hr {
+                margin-block: 0.5rem;
+            }
+
+            .loginSocialContainer {
+
+                .btn-container {
+                    grid-template-columns: 1fr 1fr;
+                    gap: 2rem;
+                }
+            }
+        }
+    }
+}

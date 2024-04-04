@@ -1,0 +1,165 @@
+﻿@model MessageViewModel;
+
+<section id="contact" class="section-margin">
+    <div class="container">
+        <nav class="navigation">
+            <a class="nav" asp-controller="Home" asp-action="Index">
+                <svg class="home" width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1.7522 15.4999H4.7522H9.2522H12.2522C13.0794 15.4999 13.7522 14.8272 13.7522 13.9999V7.24994C13.7522 7.05119 13.6734 6.85994 13.5324 6.71969L7.53245 0.719693C7.2392 0.426443 6.7652 0.426443 6.47195 0.719693L0.471947 6.71969C0.330947 6.85994 0.252197 7.05119 0.252197 7.24994V13.9999C0.252197 14.8272 0.924947 15.4999 1.7522 15.4999ZM5.5022 13.9999V10.2499H8.5022V13.9999H5.5022ZM1.7522 7.56044L7.0022 2.31044L12.2522 7.56044L12.2529 13.9999H10.0022V10.2499C10.0022 9.42269 9.32945 8.74994 8.5022 8.74994H5.5022C4.67495 8.74994 4.0022 9.42269 4.0022 10.2499V13.9999H1.7522V7.56044Z" fill="#9397AD" />
+                </svg>Home
+            </a>
+            >>
+            <a>Courses</a>
+        </nav>
+        <div class="section-container">
+            <div class="content">
+                <h1>Contact Us</h1>
+                <div class="box">
+                    <div class="image-container">
+                        <div class="white-circle">
+                            <svg width="24" height="20" viewBox="0 0 24 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M21.3333 0.666748H2.66668C1.37984 0.666748 0.333344 1.71325 0.333344 3.00008V17.0001C0.333344 18.2869 1.37984 19.3334 2.66668 19.3334H21.3333C22.6202 19.3334 23.6667 18.2869 23.6667 17.0001V3.00008C23.6667 1.71325 22.6202 0.666748 21.3333 0.666748ZM21.3333 3.00008V3.59625L12 10.8564L2.66668 3.59742V3.00008H21.3333ZM2.66668 17.0001V6.55141L11.2837 13.2539C11.4937 13.4184 11.7468 13.5001 12 13.5001C12.2532 13.5001 12.5063 13.4184 12.7163 13.2539L21.3333 6.55141L21.3357 17.0001H2.66668Z" fill="#6366F1" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="box-content">
+                        <h3>Email Us</h3>
+                        <p>Please feel free to drop us a line. We will respond as soon as possible.</p>
+                        <button class="btn-contact" id="email-us" onclick="{showHideMessage()}">Leave us a message<i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+
+                    @if (TempData["ThanksForYourMessage"] != null)
+                    {
+                        <span id="ThanksForYourMessage" class="success">@TempData["ThanksForYourMessage"]</span>
+                    }
+                </div>
+                <hr />
+                <div class="box">
+                    <div class="image-container">
+                        <div class="white-circle">
+                            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g clip-path="url(#clip0_20005153_3735)">
+                                    <path d="M16.2129 18.4077C15.5282 17.93 14.7965 17.5408 14.0313 17.2434C15.0492 16.3182 15.7245 15.0222 15.842 13.5713C17.3856 12.0671 19.4091 11.2426 21.5782 11.2426C23.2716 11.2426 24.8975 11.7525 26.2805 12.717C26.7761 13.0626 27.4575 12.9413 27.8032 12.4457C28.1486 11.9503 28.0273 11.2686 27.5319 10.9232C26.8472 10.4455 26.1154 10.0565 25.3502 9.75894C26.4734 8.73804 27.1796 7.26596 27.1796 5.63217C27.1796 2.55664 24.6777 0.0546875 21.6021 0.0546875C18.5268 0.0546875 16.0249 2.55664 16.0249 5.63217C16.0249 7.25934 16.7253 8.72608 17.8409 9.74655C17.6881 9.8053 17.5362 9.86747 17.3859 9.93369C16.7014 10.2349 16.058 10.6053 15.4596 11.0403C14.6344 8.99012 12.6253 7.53919 10.2833 7.53919C7.208 7.53919 4.70583 10.0411 4.70583 13.1165C4.70583 14.7391 5.40245 16.2018 6.51201 17.2219C3.54543 18.3333 1.14003 20.7206 0.160783 23.7651C-0.163924 24.7747 0.00804216 25.8454 0.632676 26.7027C1.25731 27.5597 2.22374 28.0513 3.28417 28.0513H12.7987C13.4026 28.0513 13.8923 27.5617 13.8923 26.9575C13.8923 26.3536 13.4026 25.864 12.7987 25.864H3.28417C2.93062 25.864 2.60848 25.7001 2.40019 25.4143C2.19191 25.1285 2.13466 24.7715 2.24275 24.4349C3.32369 21.0741 6.62032 18.7271 10.2594 18.7271C11.9526 18.7271 13.5787 19.237 14.9617 20.2015C15.4571 20.5471 16.1387 20.4256 16.4844 19.9302C16.8298 19.4348 16.7085 18.7531 16.2129 18.4077ZM21.6021 2.24197C23.4716 2.24197 24.9923 3.76276 24.9923 5.63217C24.9923 7.50138 23.4716 9.02237 21.6021 9.02237C19.7329 9.02237 18.2119 7.50138 18.2119 5.63217C18.2119 3.76276 19.7329 2.24197 21.6021 2.24197ZM10.2833 9.72626C12.1527 9.72626 13.6735 11.2473 13.6735 13.1165C13.6735 14.9859 12.1527 16.5067 10.2833 16.5067C8.4139 16.5067 6.89312 14.9859 6.89312 13.1165C6.89312 11.2473 8.4139 9.72626 10.2833 9.72626ZM27.9999 22.8566C27.9999 23.4605 27.5103 23.9501 26.9062 23.9501H23.8988V26.9575C23.8988 27.5617 23.4092 28.0513 22.8053 28.0513C22.2011 28.0513 21.7115 27.5617 21.7115 26.9575V23.9501H18.7041C18.1002 23.9501 17.6106 23.4605 17.6106 22.8566C17.6106 22.2525 18.1002 21.7629 18.7041 21.7629H21.7115V18.7555C21.7115 18.1516 22.2011 17.6619 22.8053 17.6619C23.4092 17.6619 23.8988 18.1516 23.8988 18.7555V21.7629H26.9062C27.5103 21.7629 27.9999 22.2525 27.9999 22.8566Z" fill="#6366F1" />
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_20005153_3735">
+                                        <rect width="28" height="28" fill="white" />
+                                    </clipPath>
+                                </defs>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="box-content">
+                        <h3>Careers</h3>
+                        <p>Sit ac ipsum leo lorem magna nunc mattis maecenas non vestibulum.</p>
+                        <button class="btn-contact" id="send-application" onclick="{showHideApplication()}">Send an application<i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+
+                    @if (TempData["ThanksForYourApplication"] != null)
+                    {
+                        <span id="thanksforyourApplication" class="success">@TempData["ThanksForYourApplication"]</span>
+                    }
+
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="form-container hideForm" id="contact-us">
+                <button class="x-mark-container" id="x-mark-contact" onclick="{hideMessage()}">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                <form id="Message" class="form-message" onsubmit="{onsubmitMessage()}" method="post" asp-controller="Contact" asp-action="Message" novalidate>
+                    <h2 id="headlineform">Get In Contact With Us</h2>
+                    <div class="input-container">
+                        <div>
+                            <label asp-for="Message.Name"><b>Full Name</b></label>
+                            <span asp-validation-for="Message.Name"></span>
+                        </div>
+                        <div class="input-theme">
+                            <input asp-for="Message.Name" />
+                        </div>
+                    </div>
+                    <div class="input-container">
+                        <div>
+                            <label asp-for="Message.Email"><b>Email</b></label>
+                            <span asp-validation-for="Message.Email"></span>
+                        </div>
+                        <div class="input-theme">
+                            <input asp-for="Message.Email" />
+                        </div>
+                    </div>
+
+                    <div class="input-container">
+                        <label><b>Service</b><b class="optional">(Optional)</b></label>
+                        <select class="select">
+                            <option disabled selected>Choose the service you are interested in</option>
+                            <Option value="1">Alt 1</Option>
+                            <Option value="2">Alt 2</Option>
+                            <Option value="3">Alt 3</Option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <div class="input-container">
+                            <div>
+                                <label asp-for="Message.Message"><b>Message</b></label>
+                                <span asp-validation-for="Message.Message"></span>
+                            </div>
+                        </div>
+                        <textarea asp-for="Message.Message" class="inputArea"></textarea>
+                    </div>
+                    <button class="btn-theme-s" type="submit">Send Contact Request</button>
+                </form>
+            </div>
+
+            <!-- Application Form -->
+            <div class="form-container hideForm" id="application">
+                <button class="x-mark-container" id="x-mark-contact" onclick="{hideMessage()}">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                <form id="Application" onsubmit="{onsubmitApplication()}" class="form-message" method="post" asp-controller="Contact" asp-action="Application" novalidate>
+                    <h2 id="headlineform">Wanna Work with Us?</h2>
+                    <div class="input-container">
+                        <div>
+                            <label asp-for="Application.Name"><b>Full Name</b></label>
+                            <span asp-validation-for="Application.Name"></span>
+                        </div>
+                            <input asp-for="Application.Name"/>
+                    </div>
+                    <div class="input-container">
+                        <div>
+                            <label asp-for="Application.Email"><b>Email</b></label>
+                            <span asp-validation-for="Application.Email"></span>
+                        </div>
+                            <input asp-for="Application.Email"/>
+                        </div>
+
+                    <div class="input-container">
+                        <label asp-for="Application.Career"><b>Career</b><b class=" optional">(Optional)</b></label>
+                        <select asp-for="Application.Career" class="select">
+                            <option disabled selected>Choose type of career</option>
+                            <Option value="1">Alt 1</Option>
+                            <Option value="2">Alt 2</Option>
+                            <Option value="3">Alt 3</Option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <div class="input-theme">
+                            <div class="input-container">
+                                <label asp-for="Application.Message"><b>Application Message</b></label>
+                                <span asp-validation-for="Application.Message"></span>
+                            </div>
+                        </div>
+                        <textarea asp-for="Application.Message" class="inputArea"></textarea>
+                    </div>
+                    <button class="btn-theme-s" type="submit">Send Application</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <iframe id="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12087.512031579992!2d-79.40546282484439!3d43.848669859795045!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882b2b159fb27d45%3A0xe87ce46f04341392!2sBayview%20Ave%2C%20Ontario%2C%20Canada!5e0!3m2!1sen!2sse!4v1708522964919!5m2!1sen!2sse" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+</section>
+
+@await Html.PartialAsync("_ValidationScriptPartial")

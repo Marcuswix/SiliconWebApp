@@ -1,0 +1,82 @@
+@import '../_core.scss';
+
+@media(min-width: 10px)
+{
+    #sign-up {
+        width: 100%;
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+
+            .headlines {
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .btn-theme-s {
+                width: 100%;
+            }
+
+            .form-check {
+                display: grid;
+                grid-template-columns: auto;
+                grid-template-rows: auto auto;
+                padding-block: 0.5rem;
+            }
+
+            .name-box {
+                display: grid;
+                grid-template-columns: 1fr;
+                row-gap: 2rem;
+            }
+
+            #termsspan {
+                margin: 0;
+            }
+
+            #confirmspan {
+                display: grid;
+                grid-template-columns: auto;
+                grid-template-rows: auto auto;
+            }
+
+            span {
+                color: $danger;
+                font-size: 0.9rem;
+                margin-left: 0.2rem;
+            }
+        }
+    }
+}
+
+@media(min-width: 1820px)
+{
+    #sign-up {
+
+        .container {
+
+            padding: 1rem;
+
+            .name-box {
+                grid-template-columns: 1fr 1fr;
+                row-gap: 0rem;
+                column-gap: 2rem;
+            }
+
+            .sign-in-form {
+                margin-block: 1rem;
+                width: 34rem;
+            }
+
+            #confirmspan {
+                display: grid;
+                grid-template-columns: auto 1fr;
+                grid-template-rows: auto;
+            }
+        }
+    }
+}

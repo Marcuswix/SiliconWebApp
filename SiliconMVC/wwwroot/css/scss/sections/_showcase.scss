@@ -1,0 +1,164 @@
+@media(min-width: 10px) {
+    #showcase {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-bottom: 2rem;
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1rem;
+            width: 100%;
+            text-align: center;
+            position: relative;
+
+            .content {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 1rem;
+                width: 100%;
+
+                .showcase-headline {
+                    h1 {
+                        font-size: 0.2rem;
+/*                      text-shadow: 1px 2px 3px #0b0f1947;*/
+                    }
+                }
+
+                p {
+                    margin-block: 2rem;
+                }
+
+                .btn-theme-s {
+                    margin-block: 1rem;
+                }
+
+                .lower-content {
+                    padding-top: 1rem;
+
+                    .logocontainer {
+                        display: grid;
+                        grid-template-columns: 1fr 1fr;
+                        row-gap: 1rem;
+                        justify-items: center;
+                    }
+                }
+            }
+
+            .image-container {
+                right: 0%;
+                bottom: 0%;
+                width: 100%;
+                height: auto;
+
+                .background-image {
+                    position: absolute;
+                    height: 50%;
+                    width: auto;
+                    right: 0%;
+                    bottom: 0%;
+                    z-index: -1;
+                    opacity: 0.2;
+                }
+            }
+        }
+    }
+}
+
+@media(min-width: 768px) {
+    #showcase {
+        .container {
+            .content {
+                .showcase-headline {
+                    font-size: 4rem;
+                }
+            }
+
+            .lower-content {
+                padding-top: 2rem;
+
+                .logocontainer {
+                    grid-template-columns: 1fr 1fr 1fr 1fr;
+                    margin-top: 2rem;
+                    gap: 2rem;
+                }
+            }
+        }
+
+        .background-image {
+            height: 75%;
+            right: -2%;
+            bottom: 0%;
+            z-index: -1;
+            opacity: 0.2;
+        }
+    }
+}
+
+@media(min-width: 1620px) {
+    #showcase {
+        width: 100%;
+        padding-top: 2rem;
+        padding-bottom: 14rem;
+
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            padding: 1rem;
+            text-align: left;
+
+            .content {
+                display: block;
+                padding-block: 4rem;
+                padding-left: 0rem;
+                width: 29rem;
+
+                .showcase-headline {
+                    font-family: "Rubik", sans-serif;
+                    font-size: 3rem;
+                    color: #0B0F19;
+                    font-weight: 800;
+                    line-height: 3.6rem;
+                }
+
+                p {
+                    margin-block: 2.5rem;
+                }
+
+                .btn-theme-s {
+                    margin-top: 1rem;
+                    width: 50%;
+                }
+
+                .lower-content {
+                    margin-top: 6rem;
+
+                    .logocontainer {
+                        justify-items: left;
+                        grid-template-columns: 1fr 1fr 1fr 1fr;
+                        margin-top: 2rem;
+                        gap: 2rem;
+                    }
+                }
+            }
+
+            .image-container {
+                position: relative;
+                width: 100%;
+                height: 100%;
+
+                .background-image {
+                    bottom: -32%;
+                    right: -44%;
+                    height: 140%;
+                    z-index: 1;
+                    opacity: 1;
+                    overflow: hidden;
+                }
+            }
+        }
+    }
+}

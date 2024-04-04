@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Security";
+}
+
+<section id="account" class="container">
+    <div class="leftside">
+
+        @await Html.PartialAsync("~/Views/Account/UserInfo.cshtml", ViewData["UserInfo"])
+
+    </div>
+
+    <hr class="hr" />
+
+    <!-- Right side -->
+    <div class="containerAccount">
+
+        @await Html.PartialAsync("~/Views/Security/PasswordInfo.cshtml")
+
+        <hr>
+
+        @await Html.PartialAsync("~/Views/Security/DeleteInfo.cshtml")
+
+    </div>
+</section>
+

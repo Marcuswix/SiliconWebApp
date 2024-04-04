@@ -1,0 +1,45 @@
+﻿@model List<SubscriberEntity>;
+@using Infrastructure.Entities;
+
+<div class="container">
+        <div class="headlines">
+            <h1>Subscribers</h1>
+        </div>
+    <div class="subscriberContainerParent">
+
+        <div class="container">
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <span class="success center">@TempData["SuccessMessage"]</span>
+            }
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <span class="error center">@TempData["ErrorMessage"]</span>
+            }
+        </div>
+
+        @foreach (var subscriber in Model)
+        {
+            <div class="name-box">
+                <div class="subscriberContainerChild">
+                    <label>@subscriber.Email</label>
+                    <button class="btn-red" onclick="areYouShure('@subscriber.Email')">Delete</button>
+                </div>
+            </div>
+
+            <div id="areYouShure_@subscriber.Email" class="areYouShureContainer">
+                <p>Are you sure you wish to unsubscribe?</p>
+                <div class="btnContainer">
+                    <form asp-controller="AdminSubscribe" asp-action="Delete" method="post" novalidate>
+                        <input type="hidden" name="email" value="@subscriber.Email" />
+                        <button class="btn-theme" type="submit">Yes</button>
+                    </form>
+                    <button class="btn-red" onclick="cancel('areYouShure_@subscriber.Email')">Cancel</button>
+                </div>
+            </div>
+        }
+    </div>
+
+    <script src="/js/areYouShure.js"></script>
+
+</div>

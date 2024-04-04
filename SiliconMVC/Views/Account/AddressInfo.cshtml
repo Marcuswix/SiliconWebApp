@@ -1,0 +1,45 @@
+﻿@model AccountAddressDetailsViewModel;
+
+<form class="sign-in-form" id="AddressForm" asp-controller="Account" asp-action="SaveAddressInfo" method="post" novalidate>
+
+    <div class="basicInfo">
+        <h5>Address</h5>
+
+        @if (TempData["SuccessMessageAddressInfo"] != null)
+        {
+            <span class="success span">@TempData["SuccessMessageAddressInfo"]</span>
+        }
+
+        @if (TempData["ErrorMessageAddressInfo"] != null)
+        {
+            <span class="error span">@TempData["ErrorMessageAddressInfo"]</span>
+        }
+
+    </div>
+
+
+    <div id="boxAddress">
+        <label><b>Address line 1</b></label>
+        <span asp-validation-for="AddressInfo.Address"></span>
+        <input asp-for="@Model.AddressInfo.Address" value="@Model.AddressInfo.Address" />
+    </div>
+    <div id="boxAddress2">
+        <label><b>Address line 2 <b class="grey-color"> (optional)</b></b></label>
+        <span asp-validation-for="AddressInfo.Address2"></span>
+        <input asp-for="@Model.AddressInfo.Address2" value="@Model.AddressInfo.Address2" />
+    </div>
+    <div id="boxPostalCode">
+        <label asp-for="AddressInfo.PostalCode"><b>Postal code</b></label>
+        <span asp-validation-for="AddressInfo.PostalCode"></span>
+        <input asp-for="@Model.AddressInfo.PostalCode" value="@Model.AddressInfo.PostalCode" />
+    </div>
+    <div id="boxCity">
+        <label asp-for="AddressInfo.City"><b>City</b></label>
+        <span asp-validation-for="AddressInfo.City"></span>
+        <input asp-for="@Model.AddressInfo.City" value="@Model.AddressInfo.City" />
+    </div>
+    <div class="save-cancel">
+        <button class="btn-gray" type="reset">Cancel</button>
+        <button class="btn-theme" type="submit">Save changes</button>
+    </div>
+</form>
