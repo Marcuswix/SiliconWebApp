@@ -33,6 +33,8 @@ namespace Infrastructure
             builder.Services.AddScoped<FeatureRepository>();
             builder.Services.AddScoped<FeatureItemRepository>();
             builder.Services.AddScoped<FeatureService>();
+            builder.Services.AddScoped<CourseServices>();
+            builder.Services.AddScoped<CategoryServices>();
             builder.Services.AddScoped<IntegrateRepository>();
             builder.Services.AddScoped<IntegrateItemRepository>();
             builder.Services.AddScoped<IntegrateService>();
@@ -92,6 +94,7 @@ namespace Infrastructure
             //        });
 
             //Lägg till Facebook auth...
+
             builder.Services.AddAuthentication().AddFacebook(x =>
             {
                 x.AppId = "1199838401400858";
@@ -113,7 +116,6 @@ namespace Infrastructure
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
-
             app.UseUserSessionValidation();
             app.UseAuthentication(); //Vem är du - vi har ett formulär som skickas till en server med en Post?
             app.UseStatusCodePagesWithReExecute("/error", "?statusCode={0}");

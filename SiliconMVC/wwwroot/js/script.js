@@ -107,6 +107,21 @@ function onsubmitApplication() {
     }, 3000);
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+    var sections = document.querySelectorAll("section");
+
+    sections.forEach(function (section) {
+        section.classList.remove("showSection");
+        section.classList.add("hideSection");
+
+
+        setTimeout(function () {
+            section.classList.remove("hideSection");
+            section.classList.add("showSection");
+        }, 10);
+    });
+});
+
 
 document.addEventListener("DOMContentLoaded", function () {
     var links = document.querySelectorAll("#AccountMenu a");

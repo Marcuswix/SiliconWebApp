@@ -46,6 +46,17 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+
+}
+
+.showSection {
+    transition: opacity ease-in 400ms;
+    opacity: 1;
+}
+
+.hideSection{
+    opacity: 0 !important;
 }
 
 .section-container

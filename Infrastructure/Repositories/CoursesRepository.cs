@@ -24,7 +24,7 @@ namespace Infrastructure.Repositories
         {
             try
             {
-                var result = _dataContext.Courses.ToList();
+                var result = await _dataContext.Courses.ToListAsync();
 
                 if(result != null)
                 {

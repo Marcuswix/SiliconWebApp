@@ -22,16 +22,28 @@
 
             <div class="dropdown">
                 <button class="btn-transparent dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Dropdown button
+                    @ViewData["Category"]
                 </button>
                 <ul class="dropdown-menu">
-                    @foreach(var category in Model.Categories)
+                    <li class="li-options">
+                        <a asp-controller="Courses" asp-action="Index" class="dropdown-item">All Categories</a>
+                    </li>
+                    @foreach (var category in Model.Categories)
                     {
-                        <li class="li-options"><a asp-controller="Courses" asp-action="Index" asp-route-category="@category.Id" class="dropdown-item">@category.CategoryName</a></li>
+                        @* Med asp-route-category skapar du en slut del på url och en unik query med "categoryId" *@
+                        <li class="li-options">
+                            <a asp-controller="Courses" asp-action="Index" asp-route-category="@category.Id" class="dropdown-item">@category.CategoryName</a>
+                        </li>
                     }
                 </ul>
             </div>
-            <div class="input"><input placeholder="Serach courses" /><i class="fa-solid fa-magnifying-glass"></i></div>
+
+            <form asp-controller="Courses" asp-action="Index">
+                <div class="input">
+                    <input placeholder="Serach courses" type="submit" />
+                <i class="fa-solid fa-magnifying-glass"></i></div>
+            </form>
+
         </div>
     </div>
 

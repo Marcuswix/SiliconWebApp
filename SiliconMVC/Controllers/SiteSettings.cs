@@ -27,7 +27,6 @@ namespace SiliconMVC.Controllers
             };
             Response.Cookies.Append("CookieConsent", "true", option);
             return Ok();
-
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using Infrastructure.Models;
+﻿using Infrastructure.Entities;
+using Infrastructure.Models;
+using Newtonsoft.Json;
 
 namespace Infrastructure.Services
 {
@@ -11,13 +13,23 @@ namespace Infrastructure.Services
             _httpClient = httpClient;
         }
 
-        //public async Task<RepositoriesResult> getAllCategories()
-        //{
-        //    try
-        //    {
-        //        var categories = _httpClient.GetAsync()
-        //    }
-        //    catch (Exception ex) { }
-        //}
+        public async Task<List<CategoryEntity>> getAllCategories()
+        {
+            try
+            {
+                var categories = await _httpClient.GetAsync("https://localhost:7117/api/Category");
+
+                if(categories.IsSuccessStatusCode)
+                {
+                    var json = await categories.Content.ReadAsStringAsync();
+                    var sendBack = JsonConvert.DeserializeObject<List<CategoryEntity>>(json);
+                    return sendBack;
+                }
+                return null!;
+            }
+            catch (Exception ex) {
+                return null!;
+            }
+        }
     }
 }
