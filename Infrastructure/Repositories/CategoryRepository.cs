@@ -48,5 +48,23 @@ namespace Infrastructure.Repositories
             }
             return null!;
         }
+
+        public async Task<CategoryEntity> GetACategoryBySearch(string search)
+        {
+            try
+            {
+                var result = await _dataContext.Categories.FirstOrDefaultAsync(x => x.CategoryName == search);
+
+                if (result != null)
+                {
+                    return result;
+                }
+            }
+            catch
+            {
+
+            }
+            return null!;
+        }
     }
 }

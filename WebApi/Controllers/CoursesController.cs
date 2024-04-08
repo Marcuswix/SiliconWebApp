@@ -16,12 +16,14 @@ namespace WebApi.Controllers
     public class CoursesController : ControllerBase
     {
         private readonly CoursesRepository _courseRepository;
+        private readonly CategoryRepository _categoryRepository;
         private readonly DataContext _dataContext;
 
-        public CoursesController(CoursesRepository courseRepository, DataContext dataContext)
+        public CoursesController(CoursesRepository courseRepository, DataContext dataContext, CategoryRepository categoryRepository)
         {
             _courseRepository = courseRepository;
             _dataContext = dataContext;
+            _categoryRepository = categoryRepository;
         }
 
         [HttpGet]
@@ -48,6 +50,8 @@ namespace WebApi.Controllers
         {
             var titleResult = await _courseRepository.GetOneAsync(x => x.Title == search);
             var authorResult = await _courseRepository.GetOneAsync(x => x.Author == search);
+            var getCategories = await _categoryRepository.GetACategoryBySearch(search);
+            var categoryResult = await _courseRepository.GetOneAsync(x => x.CategoryId == getCategories.Id);
 
             if (titleResult.StatusCode == Infrastructure.Models.StatusCodes.OK)
             {
@@ -56,6 +60,10 @@ namespace WebApi.Controllers
             if(authorResult.StatusCode == Infrastructure.Models.StatusCodes.OK)
             {
                 return Ok(authorResult); 
+            }
+            if (categoryResult.StatusCode == Infrastructure.Models.StatusCodes.OK)
+            {
+                return Ok(categoryResult);
             }
             else
             {

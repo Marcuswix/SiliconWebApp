@@ -1,4 +1,5 @@
 ﻿using Azure;
+using Azure.Core;
 using Infrastructure.Entities;
 using Infrastructure.Repositories;
 using Infrastructure.Services;
@@ -38,7 +39,7 @@ namespace Infrastructure.Controllers
         [HttpGet]
         [Route("/courses")]
         [Authorize(Policy = "AuthenticatedUsers")]
-        public async Task<IActionResult> Index([FromQuery(Name = "category")]int categoryId, string search)
+        public async Task<IActionResult> Index([FromQuery(Name = "category")]int categoryId, [FromQuery(Name = "search")]string search)
         {
             setValues();
 
@@ -51,23 +52,12 @@ namespace Infrastructure.Controllers
 
                     var apiKey = _configuration["ApiKey:Secret"];
 
-                    var courses = await _courseServices.GetCourses(apiKey);
-
-                    //var response = await _httpClient.GetAsync($"https://localhost:7117/api/Courses?key={apiKey}");
+                    var courses = await _courseServices.GetCourses(apiKey!);
 
                     var categories = await _categoryServices.getAllCategories();
 
-                    //var query = query
-                    //if(!string.IsNullOrEmpty(search))
-                    //{
-                    //    Queryable = query
-                    //}
-
                     if (courses != null)
                     {
-                        //var json = await response.Content.ReadAsStringAsync();
-                        //var allCourses = JsonConvert.DeserializeObject<List<CourseEntity>>(json);
-
                         if (categoryId != 0)
                         {
                             //Where kollar ifall ett viss element innehåller ett visst värde... 
@@ -85,27 +75,73 @@ namespace Infrastructure.Controllers
 
                             return View(viewModel);
                         }
-
-                        var viewModelAllCourses = new CourseViewModel
+                        else if (!string.IsNullOrEmpty(search))
                         {
-                            Courses = courses,
-                            Categories = categories
-                        };
+                            var searchByProductTitle = courses.Where(x => x.Title!.ToLower() != null && x.Title.ToLower().Contains(search.ToLower()));
 
-                        ViewData["Category"] = "Select a Category";
+                            if(searchByProductTitle.Any())
+                            {
+                                var viewModel = new CourseViewModel
+                                {
+                                    Courses = searchByProductTitle.ToList(),
+                                    Categories = categories
+                                };
 
-                        return View(viewModelAllCourses); 
+                                ViewData["Category"] = "Select a Category";
+                                return View(viewModel);
+                            }
+
+                            var searchByAuthorName = courses.Where(x => x.Author!.ToLower() != null && x.Author.ToLower().Contains(search.ToLower()));
+
+                            if (searchByAuthorName.Any())
+                            {
+                                var viewModel = new CourseViewModel
+                                {
+                                    Courses = searchByAuthorName.ToList(),
+                                    Categories = categories
+                                };
+                                ViewData["Category"] = "Select a Category";
+                                return View(viewModel);
+                            }
+
+                            var searchByCategory = categories.FirstOrDefault(x => x.CategoryName == search);
+
+                            if (searchByCategory != null)
+                            {
+                                    var filteredCourses = courses!.Where(course => course.CategoryId == searchByCategory.Id).ToList();
+
+                                    var viewModelCategory = new CourseViewModel
+                                    {
+                                        Courses = filteredCourses,
+                                        Categories = categories
+                                    };
+
+                                ViewData["Category"] = ViewData["Category"] = "Select a Category"; ;
+                                return View(viewModelCategory);
+                            }
+                        }
+                        else
+                        {
+                            var viewModelAllCourses = new CourseViewModel
+                            {
+                                Courses = courses,
+                                Categories = categories
+                            };
+
+                            ViewData["Category"] = "Select a Category";
+
+                            return View(viewModelAllCourses);
+                        }
                     }
-
                     else
                     {
                         TempData["ErrorMessage"] = "At the moment there are no courses in the database.";
                         return View();
                     }
                 }
-                else
-                { return View(); }
+                return View();
             }
+
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);

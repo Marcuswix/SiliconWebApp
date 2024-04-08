@@ -8,6 +8,11 @@
 
   <ItemGroup>
     <Content Remove="compilerconfig.json" />
+    <Content Remove="wwwroot\js\searchFunction.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\js\searchFunction.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,6 +41,7 @@
     <None Include="wwwroot\images\icons\presentation.svg" />
     <None Include="wwwroot\images\icons\shield.svg" />
     <None Include="wwwroot\images\icons\test.svg" />
+    <None Include="wwwroot\js\searchFunction.js" />
   </ItemGroup>
 
   <ItemGroup>

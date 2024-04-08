@@ -108,18 +108,10 @@ function onsubmitApplication() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-    var sections = document.querySelectorAll("section");
-
-    sections.forEach(function (section) {
-        section.classList.remove("showSection");
-        section.classList.add("hideSection");
-
-
+    var main = document.getElementById("main");
         setTimeout(function () {
-            section.classList.remove("hideSection");
-            section.classList.add("showSection");
-        }, 10);
-    });
+            main.classList.add("showSection");
+        }, 5);
 });
 
 

@@ -51,5 +51,34 @@ namespace Infrastructure.Services
                 return null!;;
             }
         }
+
+        public async Task<List<CourseEntity>> GetCoursesBySearch(string apiKey, string search)
+        {
+
+            try
+            {
+                var response = await _httpClient.GetAsync($"https://localhost:7117/api/Courses/GetBySearch?search={search}?key={apiKey}");
+
+                var categories = await _httpClient.GetAsync("https://localhost:7117/api/Category");
+
+                var jsonResult = await categories.Content.ReadAsStringAsync();
+                var categoriesList = JsonConvert.DeserializeObject<List<CategoryEntity>>(jsonResult);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var json = await response.Content.ReadAsStringAsync();
+                    var allCourses = JsonConvert.DeserializeObject<List<CourseEntity>>(json);
+
+                    return allCourses;
+                }
+                else
+                { return null!; }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return null!; ;
+            }
+        }
     }
 }

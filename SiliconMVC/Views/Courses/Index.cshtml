@@ -38,10 +38,12 @@
                 </ul>
             </div>
 
-            <form asp-controller="Courses" asp-action="Index">
+            <form asp-controller="Courses" asp-action="Index" method="get">
                 <div class="input">
-                    <input placeholder="Serach courses" type="submit" />
-                <i class="fa-solid fa-magnifying-glass"></i></div>
+                    <input id="search" name="search" placeholder="Serach courses" />
+                <i class="fa-solid fa-magnifying-glass"></i>
+                    <button type="submit" hidden></button>
+                </div>
             </form>
 
         </div>
