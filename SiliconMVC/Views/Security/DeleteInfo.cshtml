@@ -1,24 +1,41 @@
-﻿<div class="divContainer">
-    <div class="basicInfo">
-        <h5>Delete account</h5>
-        <span>Data was updated successfully</span>
-    </div>
-    <div class="content">
-        <p>
-            When you delete your account, your public profile will be deactivated immediately. If you change your mind before the 14 days are up, sign in with your email and password, and we’ll send you a link to reactivate your account.
-        </p>
-    </div>
-    <form class="SecurityDeleteForm">
+﻿@model DeleteAccountModel; 
 
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-                Yes, I want to delete my account.
-            </label>
+<div class="divContainer">
+    <div class="SecurityDeleteForm" novalidate>
+        
+        <div class="basicInfo" id="basicInfoDelete">
+            <h5>Delete account</h5>
         </div>
 
-        <div class="save-cancel">
-            <button class="btn-red">Delete</button>
+        <div class="content" id="termsDelete">
+            <p>
+                When you delete your account, your public profile will be deactivated immediately. If you change your mind before the 14 days are up, sign in with your email and password, and we’ll send you a link to reactivate your account.
+            </p>
         </div>
-    </form>
+
+        <div class="form-check" id="checkDelete">
+            <input asp-for="TermsAndConditions" name="Delete my account" class="form-check-input" type="checkbox" id="flexCheckDefault" />
+                <label asp-for="TermsAndConditions" class="form-check-label" for="flexCheckDefault">
+                    Yes, I want to delete my account.
+                </label>
+                <span id="deleteTermsAndConditions" asp-validation-for="TermsAndConditions"></span>
+        </div>
+
+        <div class="save-cancel" id="saveDelete">
+            <button class="btn-red" onClick="areYouShureDeleteAccount()">Delete</button>
+        </div>
+    </div>
+
+        <div id="areYouShureDeleteAccount" class="areYouShureContainer">
+            <p>Are you sure you wish to delete your account?</p>
+            <div class="btnContainer">
+                <form asp-controller="Security" asp-action="Delete" method="post" novalidate>
+                    <button class="btn-theme" type="submit">Yes</button>
+                </form>
+                <button class="btn-red" onclick="cancelDeleteAccount()">Cancel</button>
+            </div>
+        </div>
+
+<script src="/js/areYouShure.js"></script>
+
 </div>

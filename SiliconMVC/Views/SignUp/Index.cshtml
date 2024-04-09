@@ -8,6 +8,10 @@
     <div class="container">
         <form class="sign-in-form" method="post" asp-controller="SignUp" asp-action="SignUp" novalidate>
             <span>@Model.ErrorMessage</span>
+            @if (@TempData["SuccessfullyDeleted"] != null)
+            {
+                <span class="success">@TempData["SuccessfullyDeleted"]</span>
+            }
             <div class="headlines">
                 <h1>Create Account</h1>
                 <p>Already have an account?<a asp-controller="SignIn" asp-action="Index"> Sign in here.</a></p>

@@ -26,8 +26,7 @@ namespace Infrastructure.Models
         public string Email { get; set; } = null!;
 
         [Display(Name = "Phone (Optional)", Prompt = "Enter your phone number", Order = 3)]
-        [Required(ErrorMessage = "Invalid phone number")]
-        [DataType(DataType.PhoneNumber)]
+        [DataType(DataType.PhoneNumber, ErrorMessage = "Invalid phone number")]
         public string? Phone { get; set; }
 
         [Display(Name = "Bio", Prompt = "Add a short bio...", Order = 4)]

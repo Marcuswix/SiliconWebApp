@@ -1,165 +1,46 @@
-﻿using Infrastructure.Repositories;
-using Infrastructure.Models;
-using System.Diagnostics;
-using Infrastructure.Entities;
+﻿using Infrastructure.Entities;
 using Infrastructure.Factories;
-using Infrastructure.Helpers;
-using Infrastructure.ViewModels;
+using Infrastructure.Models;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 
 namespace Infrastructure.Services
 {
-    //public class UserServices
-    //{
-    //    private readonly UserRepository _repository;
-    //    private readonly AddressRepository _addressRepository;
+    public class UserServices
+    {
+        private readonly HttpClient _httpClient;
+        private readonly IConfiguration _configuration;
 
-    //    public UserServices(UserRepository repository, AddressRepository addressRepository)
-    //    {
-    //        _repository = repository;
-    //        _addressRepository = addressRepository;
-    //    }
 
-        //CRUD
+        public UserServices(HttpClient httpClient, IConfiguration configuration)
+        {
+            _httpClient = httpClient;
+            _configuration = configuration;
+        }
 
-        //Create
-    //    public async Task<RepositoriesResult> CreateUser(SignUpModel user)
-    //    {
-    //        try
-    //        {
-    //            var (password, securityKey) = PasswordHasher.GenerateSecurePassword(user.Password);
+        public async Task<RepositoriesResult> DeleteUser(string id, string apiKey)
+        {
+            try
+            {
+                if(id != null)
+                {
+                    var result = await _httpClient.DeleteAsync($"https://localhost:7117/api/Security?id={id}&key={apiKey}");
+                    
+                    if(result.IsSuccessStatusCode)
+                    {
+                        return ResponseFactory.Ok();
+                    }
 
-    //            if (user != null)
-    //            {
-    //                var userToSignUp = new UserEntity
-    //                {
-    //                    Id = Guid.NewGuid().ToString(),
-    //                    FirstName = user.FirstName,
-    //                    LastName = user.LastName,
-    //                    Email = user.Email,
-    //                    PasswordHash = password,
-    //                    Created = DateTime.Now,
-    //                    Updated = null!,
-    //                };
+                    return ResponseFactory.Error();
+                }
 
-    //                var existUser = await _repository.AlreadyExistAsync(x => x.Email == user.Email);
-
-    //                if (existUser.StatusCode == StatusCodes.NOT_FOUND)
-    //                {
-    //                    var result = await _repository.CreateOneAsync(userToSignUp);
-    //                    return ResponseFactory.Ok(result);
-    //                }
-
-    //                else
-    //                {
-    //                    return ResponseFactory.AlreadyExist();
-    //                }
-    //            }
-
-    //            return ResponseFactory.Error();
-    //        }
-
-    //        catch (Exception ex)
-    //        {
-    //            Debug.WriteLine("CreateUser" + ex.Message);
-    //            return ResponseFactory.Error();
-    //        }
-    //    }
-
-    //    public async Task<UserModel> SignInUserAsync(SignInModel user)
-    //    {
-    //        try
-    //        {
-    //            if (user != null)
-    //            {
-    //                var result = await _repository.GetOneUserAsync(user);
-
-    //                if (result.StatusCode == StatusCodes.OK && result != null!)
-    //                {
-    //                    UserEntity userEntity = (UserEntity)result.ContentResult!;
-
-    //                        return new UserModel
-    //                        {
-    //                            FirstName = userEntity.FirstName,
-    //                            LastName = userEntity.LastName,
-    //                            Email = userEntity.Email,
-    //                            Biography = userEntity.Biography ?? string.Empty,
-    //                            Phone = userEntity.PhoneNumber ?? string.Empty,
-    //                        };
-    //                }
-    //            }
-    //            return null!;
-    //        }
-    //        catch (Exception ex)
-    //        {
-    //            Debug.WriteLine("SignInUserAsync" + ex.Message);
-    //            return null!;
-
-    //        }
-    //    }
-
-    //    public async Task<RepositoriesResult> UpdateUserInfo(AccountDetailsModel model)
-    //    {
-    //        try
-    //        {
-    //            if (model != null)
-    //            {
-    //                var dataToUpdate = new UserEntity
-    //                {
-    //                    FirstName = model.FirstName,
-    //                    LastName = model.LastName,
-    //                    Email = model.Email,
-    //                    PhoneNumber = model.Phone,
-    //                    Biography = model.Biography,
-    //                };
-
-    //                var result = await _repository.UpdateOneAsync(x => x.Email == model.Email, dataToUpdate);
-
-    //                if (result.StatusCode == StatusCodes.OK) 
-    //                {
-    //                    return ResponseFactory.Ok(result);
-    //                }
-    //                else
-    //                {
-    //                    return ResponseFactory.Error();
-    //                }
-    //            }
-
-    //            return ResponseFactory.Error();
-    //        }
-    //        catch (Exception ex){ Debug.WriteLine("UpdateUserInfo" + ex.Message);
-    //        return ResponseFactory.Error(); ;
-    //        }
-    //    }
-
-    //    public async Task<RepositoriesResult> CreateAddress(AccountAddressDetailsViewModel model)
-    //    {
-    //        try
-    //        {
-    //            if (model != null)
-    //            {
-    //                var address = new AddressEntity
-    //                {
-    //                    StreetName = model.AddressInfo.Address,
-    //                    StreetName2 = model.AddressInfo.Address2,
-    //                    PostalCode = model.AddressInfo.PostalCode,
-    //                    City = model.AddressInfo.City,
-    //                };
-
-    //                var result = _addressRepository.CreateOneAsync(address);
-
-    //                if (result.Result.StatusCode == StatusCodes.OK)
-    //                {
-    //                    return ResponseFactory.Ok(address);
-    //                }
-    //            }
-
-    //            return ResponseFactory.Error();
-    //        }
-    //        catch (Exception ex)
-    //        {
-    //            Debug.WriteLine("CreateAddres" + ex.Message);
-    //            return ResponseFactory.Error(); ;
-    //        }
-    //    }
-    //}
+                return ResponseFactory.NotFound();
+            }
+            catch (Exception ex)
+            {
+                return ResponseFactory.Error();
+            }
+        }
+    }
 }

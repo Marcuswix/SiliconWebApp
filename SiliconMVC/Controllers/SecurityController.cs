@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Infrastructure.Entities;
+using Infrastructure.Services;
+using System.Net.Http.Headers;
 
 namespace SiliconMVC.Controllers
 {
@@ -13,11 +15,17 @@ namespace SiliconMVC.Controllers
 
         private readonly SignInManager<UserEntity> _signInManager;
         private readonly UserManager<UserEntity> _userManager;
+        private readonly HttpClient _httpClient;
+        private readonly UserServices _userServices;
+        private readonly IConfiguration _configuration;
 
-        public SecurityController(SignInManager<UserEntity> signInManager, UserManager<UserEntity> userManager)
+        public SecurityController(SignInManager<UserEntity> signInManager, UserManager<UserEntity> userManager, HttpClient httpClient, UserServices userServices, IConfiguration configuration)
         {
             _signInManager = signInManager;
             _userManager = userManager;
+            _httpClient = httpClient;
+            _userServices = userServices;
+            _configuration = configuration;
         }
 
         public void SetDefaultViewValues()
@@ -26,7 +34,7 @@ namespace SiliconMVC.Controllers
             ViewBag.ShowChoices = false;
         }
 
-        #region [HttpGet] ChangePassword
+        #region [HttpGet] Security
         [Authorize]
         [HttpGet]
         public IActionResult Index()
@@ -46,7 +54,7 @@ namespace SiliconMVC.Controllers
         #region [HttpGet] ChangePassword
         [Authorize]
         [HttpGet]
-        public IActionResult ChangePasswordView()
+        public IActionResult ChangePasswordView(PasswordModel model)
         {
             SetDefaultViewValues();
 
@@ -55,15 +63,15 @@ namespace SiliconMVC.Controllers
                 return RedirectToAction("SigIn", "Account");
             }
 
-            return View();
+            return View(model);
         }
         #endregion
 
 
-        #region [HttpGet] ChangePassword
+        #region [HttpGet] DeleteAccount
         [Authorize]
         [HttpGet]
-        public IActionResult DeleteAccountView()
+        public IActionResult DeleteAccountView(DeleteAccountModel model)
         {
             SetDefaultViewValues();
 
@@ -71,8 +79,7 @@ namespace SiliconMVC.Controllers
             {
                 return RedirectToAction("SigIn", "Account");
             }
-
-            return View();
+            return View(model);
         }
         #endregion 
 
@@ -86,24 +93,62 @@ namespace SiliconMVC.Controllers
 
             var user = await _userManager.GetUserAsync(User);
 
-            if (ModelState.IsValid && model != null)
+            if (ModelState.IsValid && model != null && User != null)
             {
 
                 if (model.NewPassword == model.ConfirmNewPassword)
                 {
-                    if (user != null && user.PasswordHash == model.Password)
+                    var changedPassword = await _userManager.ChangePasswordAsync(user!, model.Password, model.NewPassword);
+
+                    if (changedPassword.Succeeded)
                     {
-                        user.PasswordHash = model.NewPassword;
-                        return RedirectToAction("ChangePasswordView", "Account", model);
+                        TempData["MessageSuccessSecurity"] = "Password was successfully updated!";
+                        return RedirectToAction("Index", "Security");
                     }
                 }
                 else
                 {
-                    TempData["ErrorMessagePassword"] = "Passwords do not match";
+                    TempData["MessageErrorSecurity"] = "Passwords do not match...";
                 }
             }
-            return View(model);
+
+            TempData["MessageErrorSecurity"] = "Unable to save changes...";
+            return View("Index");
         }
-        #endregion   
+        #endregion
+
+        #region [HttpDelete] DeleteAccount
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> Delete(string api)
+        {
+
+            SetDefaultViewValues();
+
+            if (HttpContext.Request.Cookies.TryGetValue("AccessToken", out var token))
+            {
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+                var apiKey = _configuration["ApiKey:Secret"];
+
+                if (!_signInManager.IsSignedIn(User))
+                {
+                    return RedirectToAction("SigIn", "Account");
+                }
+
+                var user = await _userManager.GetUserAsync(User);
+                var result = await _userServices.DeleteUser(user!.Id, apiKey!);
+
+                if (result.StatusCode == Infrastructure.Models.StatusCodes.OK)
+                {
+                    await _signInManager.SignOutAsync(); 
+                    TempData["SuccessfullyDeleted"] = "The account was successfully deleted.";
+                    return RedirectToAction("Index", "SignUp");
+                }
+            }
+
+            return View("Index");
+        }
+        #endregion 
     }
 }

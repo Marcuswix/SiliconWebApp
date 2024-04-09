@@ -7,7 +7,7 @@ namespace Infrastructure.Models
     {
         [Required]
         [Display(Name = "Delete my account", Order = 0)]
-        [RequiredCheckbox(ErrorMessage = "You must confirm the delete terms & conditions")]
+        [RequiredCheckbox(ErrorMessage = "You must confirm the terms & conditions")]
         public bool TermsAndConditions { get; set; }
     }
 }

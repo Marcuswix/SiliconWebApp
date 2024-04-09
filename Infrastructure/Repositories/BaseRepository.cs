@@ -95,7 +95,7 @@ namespace Infrastructure.Repositories
         }
 
 
-        public virtual async Task<RepositoriesResult> DeleteOneAsync(Expression<Func<TEntity, bool>> predicate, int id)
+        public virtual async Task<RepositoriesResult> DeleteOneAsync(Expression<Func<TEntity, bool>> predicate, string id)
         {
             try
             {   
@@ -129,7 +129,7 @@ namespace Infrastructure.Repositories
                     return ResponseFactory.NotFound();
                 }
 
-                return ResponseFactory.Ok();
+                return ResponseFactory.Ok(result);
             }
             catch (Exception ex)
             {

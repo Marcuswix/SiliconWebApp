@@ -4,6 +4,7 @@ using Infrastructure.Factories;
 using Infrastructure.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using System.Linq.Expressions;
 
 namespace Infrastructure.Repositories
 {

@@ -33,6 +33,7 @@ namespace Infrastructure
             builder.Services.AddScoped<FeatureRepository>();
             builder.Services.AddScoped<FeatureItemRepository>();
             builder.Services.AddScoped<FeatureService>();
+            builder.Services.AddScoped<UserServices>();
             builder.Services.AddScoped<CourseServices>();
             builder.Services.AddScoped<CategoryServices>();
             builder.Services.AddScoped<IntegrateRepository>();

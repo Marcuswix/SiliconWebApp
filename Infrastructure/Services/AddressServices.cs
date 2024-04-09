@@ -4,20 +4,23 @@ using Infrastructure.Repositories;
 using Infrastructure.Factories;
 using System.Diagnostics;
 using Infrastructure.ViewModels;
+using Microsoft.AspNetCore.Identity;
 
 namespace Infrastructure.Services
 {
     public class AddressServices
     {
         private readonly AddressRepository _repository;
+        private readonly UserManager<UserEntity> _userManager;
 
-        public AddressServices(AddressRepository repository)
+        public AddressServices(AddressRepository repository, UserManager<UserEntity> userManager)
         {
             _repository = repository;
+            _userManager = userManager;
         }
 
         //Create
-        public async Task<RepositoriesResult> CreateAddress(AccountDetailsAddressModel address)
+        public async Task<RepositoriesResult> CreateAddress(AccountDetailsAddressModel address, UserEntity user)
         {
             try
             {
@@ -33,7 +36,7 @@ namespace Infrastructure.Services
 
                     var exists = await _repository.AlreadyExistAsync(x => x.StreetName == address.Address && x.PostalCode == address.PostalCode && x.City == address.City);
 
-                    if(exists == null)
+                    if(exists.StatusCode == StatusCodes.NOT_FOUND)
                     {
                         var result = await _repository.CreateOneAsync(addressToCreate);
 
@@ -43,9 +46,15 @@ namespace Infrastructure.Services
                         }
                     }
 
-                    else if(exists != null)
+                    else if(exists.StatusCode == StatusCodes.OK)
                     {
-                        return ResponseFactory.AlreadyExist();
+                        var existingAddress = exists.ContentResult as AddressEntity;
+
+                        var addressToAdd = existingAddress.Id;
+
+                        var result = await _repository.AddExistingAddressAsync(addressToAdd, user);
+
+                        return ResponseFactory.AlreadyExist(result);
                     }
 
                 }

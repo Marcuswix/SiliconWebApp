@@ -46,7 +46,7 @@ namespace SiliconMVC.Controllers
                 if (exist == true)
                 {
                     viewModel.ErrorMessage = "A user with the same email already exist";
-                    return View(viewModel);
+                    return View("Index", viewModel);
                 }
 
                 var userEntity = new UserEntity
@@ -65,7 +65,7 @@ namespace SiliconMVC.Controllers
 
                     if(roleResult.Succeeded)
                     {
-                        return RedirectToAction("SignIn", "Account");
+                        return RedirectToAction("Index", "SignIn");
                     }
                 }
             }

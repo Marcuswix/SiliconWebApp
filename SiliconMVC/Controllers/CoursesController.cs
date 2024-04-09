@@ -39,7 +39,7 @@ namespace Infrastructure.Controllers
         [HttpGet]
         [Route("/courses")]
         [Authorize(Policy = "AuthenticatedUsers")]
-        public async Task<IActionResult> Index([FromQuery(Name = "category")]int categoryId, [FromQuery(Name = "search")]string search)
+        public async Task<IActionResult> Index([FromQuery(Name = "category")]int categoryId, [FromQuery(Name = "search")]string search, int pageNumber = 1, int pageSize = 9)
         {
             setValues();
 
@@ -60,85 +60,96 @@ namespace Infrastructure.Controllers
                     {
                         if (categoryId != 0)
                         {
-                            //Where kollar ifall ett viss element innehåller ett visst värde... 
                             var filteredCourses = courses!.Where(course => course.CategoryId == categoryId).ToList();
 
-                            var viewModel = new CourseViewModel
+                            if(filteredCourses.Count > 0)
                             {
-                                Categories = categories,
-                                Courses = filteredCourses
-                            };
+                                var viewModelbyCategory = new CourseViewModel
+                                {
+                                    Categories = categories,
+                                    Courses = filteredCourses,
+                                    CurrentPage = pageNumber,
+                                    TotalPages = (int)Math.Ceiling((decimal)filteredCourses.Count / pageSize)
+                                };
 
-                            var categoryName = categories.FirstOrDefault(x => x.Id == categoryId);
+                                var categoryName = categories.FirstOrDefault(x => x.Id == categoryId);
 
-                            ViewData["Category"] = categoryName!.CategoryName;
+                                ViewData["Category"] = categoryName!.CategoryName;
 
-                            return View(viewModel);
+                                return View(viewModelbyCategory);
+                            }
+
                         }
                         else if (!string.IsNullOrEmpty(search))
                         {
-                            var searchByProductTitle = courses.Where(x => x.Title!.ToLower() != null && x.Title.ToLower().Contains(search.ToLower()));
+                            courses = courses.Where(x =>
+                               x.Title != null && x.Title.ToLower().Contains(search.ToLower()) ||
+                               x.Author != null && x.Author.ToLower().Contains(search.ToLower())
+                           ).ToList();
 
-                            if(searchByProductTitle.Any())
+                            var searchByCategory = categories.Where(x => x.CategoryName.ToLower().Contains(search.ToLower())
+                           ).ToList();
+
+                            if (searchByCategory.Any())
                             {
-                                var viewModel = new CourseViewModel
-                                {
-                                    Courses = searchByProductTitle.ToList(),
-                                    Categories = categories
-                                };
+                                var categoryFound = searchByCategory.First();
 
-                                ViewData["Category"] = "Select a Category";
-                                return View(viewModel);
-                            }
-
-                            var searchByAuthorName = courses.Where(x => x.Author!.ToLower() != null && x.Author.ToLower().Contains(search.ToLower()));
-
-                            if (searchByAuthorName.Any())
-                            {
-                                var viewModel = new CourseViewModel
-                                {
-                                    Courses = searchByAuthorName.ToList(),
-                                    Categories = categories
-                                };
-                                ViewData["Category"] = "Select a Category";
-                                return View(viewModel);
-                            }
-
-                            var searchByCategory = categories.FirstOrDefault(x => x.CategoryName == search);
-
-                            if (searchByCategory != null)
-                            {
-                                    var filteredCourses = courses!.Where(course => course.CategoryId == searchByCategory.Id).ToList();
+                                var filteredCourses = courses!.Where(course => course.CategoryId == categoryFound.Id).ToList();
 
                                     var viewModelCategory = new CourseViewModel
                                     {
                                         Courses = filteredCourses,
-                                        Categories = categories
+                                        Categories = categories,
+                                        CurrentPage = pageNumber,
+                                        TotalPages = (int)Math.Ceiling((decimal)filteredCourses.Count / pageSize)
                                     };
 
-                                ViewData["Category"] = ViewData["Category"] = "Select a Category"; ;
+                                ViewData["Category"] = categoryFound.CategoryName;
                                 return View(viewModelCategory);
                             }
-                        }
-                        else
-                        {
-                            var viewModelAllCourses = new CourseViewModel
+                            else
                             {
-                                Courses = courses,
-                                Categories = categories
-                            };
+                                var viewModelAllCourses = new CourseViewModel
+                                {
+                                    Categories = categories,
+                                    Courses = courses,
+                                    CurrentPage = pageNumber,
+                                    TotalPages = (int)Math.Ceiling((decimal)courses!.Count / pageSize)
+                                };
 
-                            ViewData["Category"] = "Select a Category";
-
-                            return View(viewModelAllCourses);
+                                TempData["ErrorMessage"] = "No courses found...";
+                                ViewData["Category"] = "Select a Category"; ;
+                                return View(viewModelAllCourses);
+                            }
                         }
+
+                        var paginatedCourse = courses.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
+
+                        var viewModel = new CourseViewModel
+                        {
+                            Categories = categories,
+                            Courses = paginatedCourse,
+                            CurrentPage = pageNumber,
+                            TotalPages = (int)Math.Ceiling((decimal)courses.Count / pageSize)
+                        };
+
+                        ViewData["Category"] = "Select a Category";
+                        return View(viewModel);
                     }
                     else
                     {
-                        TempData["ErrorMessage"] = "At the moment there are no courses in the database.";
-                        return View();
+                        ViewData["Category"] = "Select a Category";
+                        var viewModelAllCourses = new CourseViewModel
+                        {
+                            Categories = categories,
+                            Courses = courses,
+                            CurrentPage = pageNumber,
+                            TotalPages = (int)Math.Ceiling((decimal)courses.Count / pageSize)
+                        };
+                        return View(viewModelAllCourses);
                     }
                 }
+                TempData["ErrorMessage"] = "No courses found...";
                 return View();
             }
 

@@ -59,6 +59,7 @@ namespace SiliconMVC.Controllers
         public async Task<IActionResult> SignIn(SignInViewModel model, string returnUrl)
         {
             SetDefaultValues();
+            ViewData["ReturnUrl"] = returnUrl ?? Url.Content("~/");
 
             if (ModelState.IsValid)
             {

@@ -258,6 +258,9 @@ h6, .h6 {
   opacity: 1 !important;
 }
 
+.section-container {
+  width: 100%;
+}
 @media (min-width: 398px) {
   .section-container {
     max-width: 320px;
@@ -524,6 +527,9 @@ h6, .h6 {
   opacity: 1 !important;
 }
 
+.section-container {
+  width: 100%;
+}
 @media (min-width: 398px) {
   .section-container {
     max-width: 320px;
@@ -790,6 +796,9 @@ h6, .h6 {
   opacity: 1 !important;
 }
 
+.section-container {
+  width: 100%;
+}
 @media (min-width: 398px) {
   .section-container {
     max-width: 320px;
@@ -1333,6 +1342,9 @@ h6, .h6 {
   opacity: 1 !important;
 }
 
+.section-container {
+  width: 100%;
+}
 @media (min-width: 398px) {
   .section-container {
     max-width: 320px;
@@ -1787,6 +1799,9 @@ h6, .h6 {
   opacity: 1 !important;
 }
 
+.section-container {
+  width: 100%;
+}
 @media (min-width: 398px) {
   .section-container {
     max-width: 320px;
@@ -2193,6 +2208,9 @@ h6, .h6 {
   opacity: 1 !important;
 }
 
+.section-container {
+  width: 100%;
+}
 @media (min-width: 398px) {
   .section-container {
     max-width: 320px;
@@ -2594,6 +2612,9 @@ h6, .h6 {
   opacity: 1 !important;
 }
 
+.section-container {
+  width: 100%;
+}
 @media (min-width: 398px) {
   .section-container {
     max-width: 320px;
@@ -3199,6 +3220,9 @@ h6, .h6 {
   opacity: 1 !important;
 }
 
+.section-container {
+  width: 100%;
+}
 @media (min-width: 398px) {
   .section-container {
     max-width: 320px;
@@ -3610,6 +3634,9 @@ h6, .h6 {
   opacity: 1 !important;
 }
 
+.section-container {
+  width: 100%;
+}
 @media (min-width: 398px) {
   .section-container {
     max-width: 320px;
@@ -4039,6 +4066,9 @@ h6, .h6 {
   opacity: 1 !important;
 }
 
+.section-container {
+  width: 100%;
+}
 @media (min-width: 398px) {
   .section-container {
     max-width: 320px;
@@ -4359,6 +4389,9 @@ h6, .h6 {
   opacity: 1 !important;
 }
 
+.section-container {
+  width: 100%;
+}
 @media (min-width: 398px) {
   .section-container {
     max-width: 320px;
@@ -4687,6 +4720,9 @@ h6, .h6 {
   opacity: 1 !important;
 }
 
+.section-container {
+  width: 100%;
+}
 @media (min-width: 398px) {
   .section-container {
     max-width: 320px;
@@ -5105,6 +5141,9 @@ h6, .h6 {
   opacity: 1 !important;
 }
 
+.section-container {
+  width: 100%;
+}
 @media (min-width: 398px) {
   .section-container {
     max-width: 320px;
@@ -5436,6 +5475,9 @@ h6, .h6 {
   opacity: 1 !important;
 }
 
+.section-container {
+  width: 100%;
+}
 @media (min-width: 398px) {
   .section-container {
     max-width: 320px;
@@ -5496,8 +5538,8 @@ h6, .h6 {
   #courses .headlineCourses {
     display: flex;
     flex-direction: column;
-    padding-bottom: 1rem;
     align-items: center;
+    gap: 1rem;
   }
   #courses .headlineCourses .search-container {
     display: flex;
@@ -5511,7 +5553,7 @@ h6, .h6 {
     display: flex;
     justify-content: space-between;
     padding: 0.5rem;
-    min-width: 14rem;
+    min-width: 12rem;
   }
   #courses .headlineCourses .search-container .dropdown-item {
     min-width: 14rem;
@@ -5522,6 +5564,10 @@ h6, .h6 {
     display: grid;
     grid-template-columns: 1fr;
     gap: 2rem;
+  }
+  .course-container #noCoursesFound {
+    padding: 2rem;
+    text-align: center;
   }
   .course-container .courses-boxes {
     border-radius: 0.6rem;
@@ -5683,6 +5729,9 @@ h6, .h6 {
   }
   .course-container {
     grid-template-columns: 1fr 1fr 1fr;
+  }
+  .course-container #noCoursesFound {
+    grid-column: 2;
   }
   .course-container .courses-boxes {
     transition: ease-in-out 120ms;
@@ -5955,6 +6004,9 @@ h6, .h6 {
   opacity: 1 !important;
 }
 
+.section-container {
+  width: 100%;
+}
 @media (min-width: 398px) {
   .section-container {
     max-width: 320px;
@@ -6286,6 +6338,9 @@ h6, .h6 {
   opacity: 1 !important;
 }
 
+.section-container {
+  width: 100%;
+}
 @media (min-width: 398px) {
   .section-container {
     max-width: 320px;
@@ -6346,8 +6401,8 @@ h6, .h6 {
   #courses .headlineCourses {
     display: flex;
     flex-direction: column;
-    padding-bottom: 1rem;
     align-items: center;
+    gap: 1rem;
   }
   #courses .headlineCourses .search-container {
     display: flex;
@@ -6361,7 +6416,7 @@ h6, .h6 {
     display: flex;
     justify-content: space-between;
     padding: 0.5rem;
-    min-width: 14rem;
+    min-width: 12rem;
   }
   #courses .headlineCourses .search-container .dropdown-item {
     min-width: 14rem;
@@ -6372,6 +6427,10 @@ h6, .h6 {
     display: grid;
     grid-template-columns: 1fr;
     gap: 2rem;
+  }
+  .course-container #noCoursesFound {
+    padding: 2rem;
+    text-align: center;
   }
   .course-container .courses-boxes {
     border-radius: 0.6rem;
@@ -6533,6 +6592,9 @@ h6, .h6 {
   }
   .course-container {
     grid-template-columns: 1fr 1fr 1fr;
+  }
+  .course-container #noCoursesFound {
+    grid-column: 2;
   }
   .course-container .courses-boxes {
     transition: ease-in-out 120ms;
@@ -6771,6 +6833,9 @@ h6, .h6 {
   opacity: 1 !important;
 }
 
+.section-container {
+  width: 100%;
+}
 @media (min-width: 398px) {
   .section-container {
     max-width: 320px;
@@ -7093,16 +7158,44 @@ h6, .h6 {
   .divContainer {
     display: grid;
     gap: 1rem;
+    position: relative;
   }
   .SecurityPasswordForm {
     display: grid;
     grid-template-columns: 1fr;
     row-gap: 1.6rem;
   }
+  .SecurityPasswordForm #blueHeadline {
+    grid-column: 1/span 2;
+  }
+  .SecurityPasswordForm #Password {
+    grid-column: 1/span 2;
+  }
+  .SecurityPasswordForm #boxNewPassword {
+    grid-column: 1/span 2;
+  }
+  .SecurityPasswordForm #boxConfirmNewPassword {
+    grid-column: 1/span 2;
+  }
+  .SecurityPasswordForm #buttons {
+    grid-column: 1/span 2;
+  }
   .SecurityDeleteForm {
     display: grid;
     grid-template-columns: 1fr;
     row-gap: 1.6rem;
+  }
+  .SecurityDeleteForm #basicInfoDelete {
+    grid-row: 1;
+  }
+  .SecurityDeleteForm #termsDelete {
+    grid-row: 2;
+  }
+  .SecurityDeleteForm #checkDelete {
+    grid-row: 3;
+  }
+  .SecurityDeleteForm #saveDelete {
+    grid-row: 4;
   }
 }
 @media (min-width: 1820px) {
@@ -7356,6 +7449,9 @@ h6, .h6 {
   opacity: 1 !important;
 }
 
+.section-container {
+  width: 100%;
+}
 @media (min-width: 398px) {
   .section-container {
     max-width: 320px;

@@ -250,8 +250,18 @@ namespace Infrastructure.Controllers
                     PostalCode = model.AddressInfo.PostalCode,
                     City = model.AddressInfo.City,
                 };
-                    await _addressServices.CreateAddress(newAddress);
-                    return RedirectToAction("Index", "Account", model);
+                    var result = await _addressServices.CreateAddress(newAddress, user);
+
+                    if(result.StatusCode == Infrastructure.Models.StatusCodes.EXISTS)
+                    {
+                        result.ContentResult = newAddress;
+
+                    TempData["SuccessMessageAddressInfo"] = "A address was successfully added!";
+                    return RedirectToAction("Index", "Account", newAddress);
+                    }
+
+                TempData["SuccessMessageAddressInfo"] = "A address was successfully added!";
+                return RedirectToAction("Index", "Account", model);
                 }
                 if (ModelState.IsValid && user!.AddressId != null)
                 {

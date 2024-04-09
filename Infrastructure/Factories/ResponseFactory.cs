@@ -68,5 +68,15 @@ namespace Infrastructure.Factories
                 StatusCode = StatusCodes.EXISTS,
             };
         }
+
+        public static RepositoriesResult AlreadyExist(object obj, string? message = null)
+        {
+            return new RepositoriesResult
+            {
+                ContentResult = obj,
+                Message = message ?? "Already Exist",
+                StatusCode = StatusCodes.EXISTS,
+            };
+        }
     }
 }
