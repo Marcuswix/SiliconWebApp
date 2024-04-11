@@ -1,0 +1,177 @@
+@import "../../../core/_colors.scss";
+@import '../../../components/_tags.scss';
+@import '../../../components/_links.scss';
+
+//mobil first
+@media(min-width:10px) {
+
+    .backgroundImage {
+        position: absolute;
+        top: 0;
+        width: 100vw;
+        height: 320px;
+        background-size: cover;
+        background-position: center;
+        filter: brightness(0.35) blur(2px);
+        z-index: -2;
+    }
+
+    #ImageHeadline {
+        position: relative;
+        width: 100%;
+        height: 340px;
+
+            .navigationContainer {
+                display: none;
+            }
+
+            .ImageHeadlineContainer {
+                display: grid;
+                gap: 0.1rem;
+                height: 200px;
+
+                .marks {
+                    display: flex;
+                    align-items: center;
+                    column-gap: 0.5rem;
+                }
+
+                .h1-courses {
+                    font-weight: 800;
+                    font-size: 1.25rem;
+                    margin: 0;
+                    color: white !important;
+                    display: flex;
+                    align-items: center;
+                }
+
+                .underline {
+                    color: $gray-400;
+                    font-size: 0.9rem;
+                    font-weight: 200;
+                    margin: 0;
+                    display: flex;
+                    align-items: center;
+                }
+            }
+        }
+
+        .likesAndTeacher {
+            display: grid;
+            gap: 1rem;
+            padding: 1rem;
+
+            .timeAndLikesParent {
+                display: flex;
+                justify-content: left;
+                color: white;
+                color: $gray-300;
+
+                p {
+                    color: $gray-800;
+                    font-size: 0.6rem;
+                    margin-left: 0.2rem;
+                    margin-bottom: 0;
+                }
+
+                .svg {
+                    color: $gray-800;
+                }
+
+                .starsContainer {
+                    display: flex;
+                }
+
+                .timeAndLikesChild {
+                    display: flex;
+                    align-items: center;
+                }
+
+                .verticalborder {
+                    border-right: solid $gray-300 1px;
+                    margin-inline: 1rem;
+                }
+            }
+
+            .courseLeader-container {
+                display: flex;
+                align-items: center;
+
+                .image-container {
+                    height: 4rem;
+                    width: auto;
+
+                    .imageLeader {
+                        height: 100%;
+                        width: auto;
+                    }
+                }
+
+                .nameContainer {
+                    color: black;
+                    margin-left: 1rem;
+
+                    p {
+                        margin: 0;
+                    }
+                }
+            }
+        }
+    }
+
+@media(min-width:992px) {
+    .backgroundImage {
+        width: 100%;
+        height: 628px;
+    }
+
+    #ImageHeadline {
+        height: 525px;
+
+
+            .navigationContainer {
+                display: block;
+                padding: 1rem;
+            }
+
+            .ImageHeadlineContainer {
+                display: grid;
+                gap: 0rem;
+                padding: 1rem;
+                height: 200px;
+
+                .h1-courses {
+                    font-size: 2rem;
+                }
+
+                .underline {
+                    font-size: 1rem;
+                }
+            }
+        }
+
+        .likesAndTeacher {
+            display: grid;
+            gap: 7rem;
+            padding: 1rem;
+
+            .timeAndLikesParent {
+
+                p {
+                    color: $gray-400;
+                    font-size: 1rem;
+                    margin-left: 0.5rem;
+                }
+
+                .svg {
+                    color: $gray-400;
+                }
+            }
+
+            .courseLeader-container {
+                .nameContainer {
+                    color: white;
+                }
+            }
+        }
+    }

@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Content Remove="compilerconfig.json" />
+    <Content Remove="wwwroot\css\scss\pages\CourseDetails\_courseDetailsDetails.scss" />
     <Content Remove="wwwroot\js\searchFunction.js" />
   </ItemGroup>
 

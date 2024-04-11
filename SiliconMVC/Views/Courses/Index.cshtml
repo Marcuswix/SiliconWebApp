@@ -29,7 +29,7 @@
                     </li>
                     @foreach (var category in Model.Categories)
                     {
-                        @* Med asp-route-category skapar du en slut del på url och en unik query med "categoryId" *@
+                        @* Med asp-route-category skapar du en slut-del på url och en unik query med "categoryId" *@
                         <li class="li-options">
                             <a asp-controller="Courses" asp-action="Index" asp-route-category="@category.Id" class="dropdown-item">@category.CategoryName</a>
                         </li>
@@ -59,7 +59,10 @@
 
                         @if (@course.IsBestseller == true)
                         {
-                            <div class="best-seller"><label asp-for="@course.IsBestseller">Best Seller</label></div>
+                            <div class="best-seller-container">
+                                <div class="best-seller"><label asp-for="@course.IsBestseller">Best Seller</label></div>
+                            </div>
+                            
                         }
 
                         <a asp-controller="Courses" asp-action="MyCourses" asp-route-id="@course.Id" class="bookmark">
@@ -71,7 +74,7 @@
                         </a>
                     </div>
                     <div class="text-container">
-                        <a class="a-title" asp-controller="Courses" asp-action="Details" asp-route-id="@course.Id"><h5>@course.Title</h5></a>
+                        <a class="a-title" asp-controller="CourseDetails" asp-action="Index" asp-route-id="@course.Id"><h5>@course.Title</h5></a>
                         <p>By @course.Author</p>
                         <div class="price-container">
                             <h6 class="@(course.DiscountPrice != null ? "red" : "price")">$@course.Price</h6>

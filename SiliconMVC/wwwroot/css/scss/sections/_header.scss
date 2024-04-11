@@ -4,6 +4,9 @@ header {
     height: 82px;
     display: flex;
     justify-content: center;
+    width: 100vw;
+    background-color: white;
+
 
     .headerGrayColor {
         background-color: $gray-100 !important;
@@ -127,7 +130,7 @@ header {
             border: solid $gray-300 1px;
             border-radius: 50%;
             box-shadow: 0px 0px 1px $gray-300;
-            overflow: hidden; 
+            overflow: hidden;
 
             .profil-image {
                 z-index: -1;

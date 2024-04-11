@@ -1,21 +1,12 @@
 @import '../../../_core.scss';
+@import '../../../components/_tags.scss';
+@import '../../../components/_links.scss';
+
 
 @media(min-width:10px)
 {
     #courses {
         padding-inline: 1rem;
-
-        .navigation {
-            margin-top: 1rem;
-            display: flex;
-            justify-content: left;
-            align-items: center;
-
-            .home {
-                margin-bottom: 0.2rem;
-                margin-right: 0.2rem;
-            }
-        }
 
         .headlineCourses {
             display: flex;
@@ -52,12 +43,12 @@
         grid-template-columns: 1fr;
         gap: 2rem;
 
-        #noCoursesFound{
+        #noCoursesFound {
             padding: 2rem;
             text-align: center;
-        } 
-            
-            .courses-boxes {
+        }
+
+        .courses-boxes {
             border-radius: 0.6rem;
             box-shadow: 0px 4px 13px -2px rgba(19, 16, 34, 0.06), 0px 4.8px 24.4px -6px rgba(19, 16, 34, 0.10);
             height: auto;
@@ -91,46 +82,10 @@
                     border-radius: 0.6rem 0.6rem 0 0;
                 }
 
-                .best-seller {
+                .best-seller-container {
                     position: absolute;
                     left: 3%;
                     top: 6%;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    width: auto;
-                    padding-inline: 10px;
-                    background-color: $success;
-                    color: white;
-                    border-radius: 0.2rem;
-
-                    p {
-                        font-size: 0.9rem;
-                    }
-                }
-
-                .bookmark {
-                    width: 2rem;
-                    height: 2rem;
-                    border-radius: 50%;
-                    background-color: white;
-                    position: absolute;
-                    right: 3%;
-                    top: 6%;
-                    transition: ease-in-out 120ms;
-
-                    &:hover {
-                        background-color: $gray-500;
-                        transform: scale(1.2);
-                    }
-
-                    .bookmarkchild {
-                        position: relative;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        top: 25%;
-                    }
                 }
             }
 

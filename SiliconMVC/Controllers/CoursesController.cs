@@ -144,7 +144,7 @@ namespace Infrastructure.Controllers
                             Categories = categories,
                             Courses = courses,
                             CurrentPage = pageNumber,
-                            TotalPages = (int)Math.Ceiling((decimal)courses.Count / pageSize)
+                            TotalPages = (int)Math.Ceiling((decimal)courses!.Count / pageSize)
                         };
                         return View(viewModelAllCourses);
                     }

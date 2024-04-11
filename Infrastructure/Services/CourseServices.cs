@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.Diagnostics;
 using System.Net.Http.Headers;
 
@@ -79,6 +80,55 @@ namespace Infrastructure.Services
                 Debug.WriteLine(ex.Message);
                 return null!; ;
             }
+        }
+
+        public async Task<CourseEntity> GetOneCourse(string apiKey, int id)
+        {
+            var result = await _httpClient.GetAsync($"https://localhost:7117/api/Courses/{id}?key={apiKey}");
+
+            if (result.IsSuccessStatusCode)
+            {
+                try
+                {
+                    var json = await result.Content.ReadAsStringAsync();
+                    var jsonObject = JObject.Parse(json);
+                    var contentResult = jsonObject["contentResult"].ToString();
+
+                    var entity = JsonConvert.DeserializeObject<CourseEntity>(contentResult);
+
+                    if (entity != null)
+                    {
+                        var viewModel = new CourseEntity
+                        {
+                            Id = id,
+                            Title = entity.Title,
+                            Author = entity.Author,
+                            Description = entity.Description,
+                            DiscountPrice = entity.DiscountPrice,
+                            CategoryId = entity.CategoryId,
+                            Hours = entity.Hours,
+                            ImageALtText = entity.ImageALtText,
+                            ImageUrl = entity.ImageUrl,
+                            IsBestseller = entity.IsBestseller,
+                            LikesInNumbers = entity.LikesInNumbers,
+                            LikesInProcent = entity.LikesInProcent,
+                            WhatYouLearn = entity.WhatYouLearn,
+                            Price = entity.Price,
+                        };
+
+                        return viewModel;
+                    }
+
+                    return null!;
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                    return null!;
+                }
+            }
+
+            return null!;
         }
     }
 }

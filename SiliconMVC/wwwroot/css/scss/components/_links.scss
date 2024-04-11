@@ -4,12 +4,16 @@
 
 a {
     @include standard-text;
-    color: $theme;
+    color: $gray-500;
     text-decoration: none;
     transition: all 0.15s ease-in-out;
 
     &:hover {
         text-decoration: underline;
+    }
+
+    &:Active {
+        color: $gray-700;
     }
 }
 
@@ -85,5 +89,17 @@ a {
 
     i{
         color: $gray-100;
+    }
+}
+
+.navigation {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+
+    .home {
+        margin-bottom: 0.2rem;
+        margin-right: 0.2rem;
     }
 }

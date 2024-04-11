@@ -1,0 +1,59 @@
+@import '../core/_colors.scss';
+
+.best-seller {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    height: 24px;
+    padding-inline: 10px;
+    background-color: $success;
+    color: white;
+    border-radius: 0.2rem;
+
+    p {
+        font-size: 0.9rem;
+        margin: 0;
+    }
+}
+
+.digital-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    height: 24px;
+    padding-inline: 10px;
+    background-color: $gray-300;
+    color: black;
+    border-radius: 0.2rem;
+
+    p {
+        font-size: 0.9rem;
+        margin: 0;
+    }
+}
+
+.bookmark {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background-color: white;
+    position: absolute;
+    right: 3%;
+    top: 6%;
+    transition: ease-in-out 120ms;
+
+    &:hover {
+        background-color: $gray-500;
+        transform: scale(1.2);
+    }
+
+    .bookmarkchild {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top: 25%;
+    }
+}

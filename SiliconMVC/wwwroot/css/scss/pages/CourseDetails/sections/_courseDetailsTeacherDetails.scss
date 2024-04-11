@@ -1,0 +1,94 @@
+﻿@import '../../../core/_colors.scss';
+
+//Mobil first
+@media(min-width: 10px) {
+    #CourseTeacher {
+        display: grid;
+        grid: 1fr;
+        position: relative;
+
+        .something {
+            color: white;
+            width: 100%;
+            z-index: 0;
+            position: absolute;
+        }
+
+        .imageContainer {
+            z-index: 1;
+            width: 100%;
+            overflow: hidden;
+
+            img {
+                width: 100%;
+            }
+        }
+
+        .textContainerCourses {
+            padding: 1rem;
+            width: 100%;
+            background-color: #0B0F19;
+            z-index: -1;
+
+            .contentContainerCourses {
+                h1 {
+                    color: white;
+                    font-weight: 900;
+                }
+
+                color: $gray-500;
+                display: grid;
+                gap: 1rem;
+
+                .btnContainerCourses {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1rem;
+
+                    a {
+                        text-decoration: none;
+                    }
+                }
+            }
+        }
+    }
+}
+
+//Desktop 992px
+@media(min-width: 992px) {
+    #CourseTeacher {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 40% 60%;
+        position: relative;
+
+        .imageContainer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .imageContainer img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .textContainerCourses {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .contentContainerCourses {
+                max-width: 28rem;
+
+                .btnContainerCourses {
+                    display: flex;
+                    flex-direction: row;
+                    gap: 1rem;
+                }
+            }
+        }
+    }
+}

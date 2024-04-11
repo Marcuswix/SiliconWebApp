@@ -38,44 +38,44 @@ namespace Infrastructure.Repositories
             }
         }
 
-        public async Task<RepositoriesResult> GetOneUserAsync(SignInModel model)
-        {
-            try
-            {
-                var result = await _userContext.Users.FirstOrDefaultAsync(x => x.Email == model.Email);
+        //public async Task<RepositoriesResult> GetOneUserAsync(SignInModel model)
+        //{
+        //    try
+        //    {
+        //        var result = await _userContext.Users.FirstOrDefaultAsync(x => x.Email == model.Email);
 
-                if (result != null)
-                {
-                    return ResponseFactory.Ok(result);
-                }
+        //        if (result != null)
+        //        {
+        //            return ResponseFactory.Ok(result);
+        //        }
 
-                return ResponseFactory.NotFound();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine("GetOneAsyncUsers" + ex.Message);
-                return ResponseFactory.Error(ex.Message);
-            }
-        }
+        //        return ResponseFactory.NotFound();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Debug.WriteLine("GetOneAsyncUsers" + ex.Message);
+        //        return ResponseFactory.Error(ex.Message);
+        //    }
+        //}
 
-        public async Task<RepositoriesResult> GetUserInfoAsync(UserModel model)
-        {
-            try
-            {
-                var result = await _userContext.Users.FirstOrDefaultAsync(x => x.Email == model.Email);
+        //public async Task<RepositoriesResult> GetUserInfoAsync(UserModel model)
+        //{
+        //    try
+        //    {
+        //        var result = await _userContext.Users.FirstOrDefaultAsync(x => x.Email == model.Email);
 
-                if (result != null)
-                {
-                    return ResponseFactory.Ok(result);
-                }
+        //        if (result != null)
+        //        {
+        //            return ResponseFactory.Ok(result);
+        //        }
 
-                return ResponseFactory.NotFound();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine("GetUserInfoAsync" + ex.Message);
-                return ResponseFactory.Error(ex.Message);
-            }
-        }
+        //        return ResponseFactory.NotFound();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Debug.WriteLine("GetUserInfoAsync" + ex.Message);
+        //        return ResponseFactory.Error(ex.Message);
+        //    }
+        //}
     }
 }

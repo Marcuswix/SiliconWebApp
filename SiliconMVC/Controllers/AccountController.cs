@@ -36,7 +36,7 @@ namespace Infrastructure.Controllers
         //INDEX
         [Authorize]
         [HttpGet]
-        [Route("/account")]
+        [Route("/accountdetails")]
         public async Task<IActionResult> Index()
         {
             SetDefaultViewValues();
