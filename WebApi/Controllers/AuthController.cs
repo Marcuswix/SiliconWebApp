@@ -2,6 +2,7 @@
 using Infrastructure.Entities;
 using Infrastructure.Factories;
 using Infrastructure.Models;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -41,6 +42,23 @@ namespace WebApi.Controllers
                     return Created();
                 }
                 return Conflict();
+        }
+
+        [HttpPost]
+        [Route("registerReact")]
+        public async Task<IActionResult> RegisterReact([FromBody] SignUpRequest signUpRequest)
+        {
+            var userEntity = new UserEntity
+            {
+                Email = signUpRequest.Email,
+                FirstName = signUpRequest.FirstName,
+                LastName = signUpRequest.LastName,
+                PasswordHash = signUpRequest.Password,
+            };
+
+            _userContext.Users.Add(userEntity);
+            await _userContext.SaveChangesAsync();
+            return Created();
         }
 
         [HttpPost]

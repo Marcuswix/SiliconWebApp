@@ -10656,11 +10656,14 @@ a:Active {
     align-items: center;
   }
   .likesAndTeacher .courseLeader-container .image-container {
-    height: 4rem;
+    height: auto;
     width: auto;
+    border-radius: 50%;
+    overflow: hidden;
   }
-  .likesAndTeacher .courseLeader-container .image-container .imageLeader {
-    height: 100%;
+  .likesAndTeacher .courseLeader-container .image-container .imageTeacher {
+    z-index: -1;
+    height: 48px;
     width: auto;
   }
   .likesAndTeacher .courseLeader-container .nameContainer {
