@@ -1,5 +1,6 @@
 ﻿using Infrastructure.Entities;
 using Infrastructure.Models;
+using Infrastructure.ViewModels;
 
 namespace Infrastructure.Factories
 {
@@ -26,22 +27,6 @@ namespace Infrastructure.Factories
                     CategoryName = entity.Category.CategoryName ?? string.Empty,
                 };
                 return model;
-            }
-            catch { }
-            return null!;
-        }
-
-        public static IEnumerable<CourseModel> Create(List<CourseEntity> entities) 
-        {
-            List<CourseModel> courses = new List<CourseModel>();
-
-            try
-            {
-                foreach (var entity in entities) 
-                {
-                    courses.Add(Create(entity)); 
-                }
-                return courses;
             }
             catch { }
             return null!;

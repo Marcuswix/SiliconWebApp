@@ -1,5 +1,6 @@
 ﻿using Infrastructure.Entities;
 using Infrastructure.Services;
+using Infrastructure.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -28,9 +29,9 @@ namespace SiliconMVC.Controllers
         }
 
         [HttpGet]
-        [Route("/coursedetails/{id}")]
+        [Route("/{courseId}")]
         [Authorize(Policy = "AuthenticatedUsers")]
-        public async Task <IActionResult> Index(int id)
+        public async Task <IActionResult> Index(int courseId)
         {
             SetValues();
 
@@ -41,14 +42,14 @@ namespace SiliconMVC.Controllers
 
                 var apiKey = _configuration["ApiKey:Secret"];
 
-                var result = await _courseServices.GetOneCourse(apiKey, id);
+                var result = await _courseServices.GetOneCourse(apiKey, courseId);
 
                 if(result != null)
                 {
-                    return View(result);
+                        return View(result);
+                 
                 }
             }
-
             return View();
         }
     }

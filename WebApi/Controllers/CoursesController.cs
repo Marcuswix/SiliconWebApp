@@ -17,12 +17,10 @@ namespace WebApi.Controllers
     {
         private readonly CoursesRepository _courseRepository;
         private readonly CategoryRepository _categoryRepository;
-        private readonly DataContext _dataContext;
 
-        public CoursesController(CoursesRepository courseRepository, DataContext dataContext, CategoryRepository categoryRepository)
+        public CoursesController(CoursesRepository courseRepository, CategoryRepository categoryRepository)
         {
             _courseRepository = courseRepository;
-            _dataContext = dataContext;
             _categoryRepository = categoryRepository;
         }
 
@@ -30,7 +28,7 @@ namespace WebApi.Controllers
         public async Task<IActionResult> GetAll()
         {
 
-            var result = await _dataContext.Courses.ToListAsync();
+            var result = await _courseRepository.GetAll();
 
             if(result != null)
             {

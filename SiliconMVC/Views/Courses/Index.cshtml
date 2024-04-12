@@ -74,7 +74,7 @@
                         </a>
                     </div>
                     <div class="text-container">
-                        <a class="a-title" asp-controller="CourseDetails" asp-action="Index" asp-route-id="@course.Id"><h5>@course.Title</h5></a>
+                        <a class="a-title" asp-controller="CourseDetails" asp-action="Index" asp-route-courseId="@course.Id"><h5>@course.Title</h5></a>
                         <p>By @course.Author</p>
                         <div class="price-container">
                             <h6 class="@(course.DiscountPrice != null ? "red" : "price")">$@course.Price</h6>

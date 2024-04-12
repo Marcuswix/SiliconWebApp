@@ -42,6 +42,8 @@ builder.Services.AddScoped<CourseEntity>();
 builder.Services.AddScoped<UserContext>();
 builder.Services.AddScoped<CategoryRepository>();
 builder.Services.AddScoped<UserRepository>();
+builder.Services.AddScoped<CourseDetailsRepository>();
+builder.Services.AddScoped<TeacherRepository>();
 builder.Services.AddScoped<UserManager<UserEntity>>();
 builder.Services.AddScoped<SignInManager<UserEntity>>();
 

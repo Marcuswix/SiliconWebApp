@@ -24,30 +24,28 @@ namespace Infrastructure.Repositories
         {
             try
             {
-                var result = await _dataContext.Courses.ToListAsync();
+                var result = await _dataContext.Courses.OrderBy(x => x.Id).ToListAsync();
 
-                if(result != null)
-                {
-                    return ResponseFactory.Ok(result);
-                }
-                if(result == null)
+                if (result == null)
                 {
                     return ResponseFactory.NotFound();
                 }
-                return ResponseFactory.Error();
 
+                return ResponseFactory.Ok(result);
             }
-            catch (Exception ex) 
-            { Debug.WriteLine("GetAllCourses" + ex.Message);
+            catch (Exception ex)
+            {
+                Debug.WriteLine("GetAllCourses" + ex.Message);
                 return ResponseFactory.Error();
             }
         }
+
 
         public RepositoriesResult GetOneById(int id)
         {
             try
             {
-                var result = _dataContext.Courses.FirstOrDefault(x => x.Id == id);
+                var result = _dataContext.Courses.Include(x => x.Category).Include(x => x.ProgramDetailsEntity.ProgramDetails).Include(x => x.WhatYouLearnEntity.whatYouLearnItems).Include(x => x.Teacher).FirstOrDefault(x => x.Id == id);
 
                 if (result != null)
                 {

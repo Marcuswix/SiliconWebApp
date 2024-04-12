@@ -1,4 +1,5 @@
 ﻿using Infrastructure.Entities;
+using Infrastructure.Helpers;
 using Infrastructure.Models;
 using Infrastructure.Repositories;
 using Infrastructure.ViewModels;
@@ -26,32 +27,42 @@ namespace Infrastructure.Services
 
         public async Task<List<CourseEntity>> GetCourses(string apiKey)
         {
-
             try
             {
-                    var response = await _httpClient.GetAsync($"https://localhost:7117/api/Courses?key={apiKey}");
+                var coursesResponse = await _httpClient.GetAsync($"https://localhost:7117/api/Courses?key={apiKey}");
 
-                    var categories = await _httpClient.GetAsync("https://localhost:7117/api/Category");
+                if (coursesResponse.IsSuccessStatusCode)
+                {
+                    var coursesJson = await coursesResponse.Content.ReadAsStringAsync();
+                    var coursesObject = JObject.Parse(coursesJson);
+                    var coursesArray = coursesObject["contentResult"]["$values"].ToObject<List<CourseEntity>>();
 
-                    var jsonResult = await categories.Content.ReadAsStringAsync();
-                    var categoriesList = JsonConvert.DeserializeObject<List<CategoryEntity>>(jsonResult);
+                    // Hämta kategorier separat
+                    var categoriesResponse = await _httpClient.GetAsync("https://localhost:7117/api/Category");
+                    var categoriesJson = await categoriesResponse.Content.ReadAsStringAsync();
+                    var categories = JsonConvert.DeserializeObject<List<CategoryEntity>>(categoriesJson);
 
-                    if (response.IsSuccessStatusCode)
+                    // Lägg till kategorier till varje kurs
+                    foreach (var course in coursesArray)
                     {
-                        var json = await response.Content.ReadAsStringAsync();
-                        var allCourses = JsonConvert.DeserializeObject<List<CourseEntity>>(json);
-
-                        return allCourses;
+                        course.Category = categories.FirstOrDefault(c => c.Id == course.CategoryId);
                     }
+
+                    return coursesArray;
+                }
                 else
-                { return null!; }
+                {
+                    return null;
+                }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
-                return null!;;
+                return null;
             }
         }
+
+
 
         public async Task<List<CourseEntity>> GetCoursesBySearch(string apiKey, string search)
         {
@@ -90,33 +101,57 @@ namespace Infrastructure.Services
             {
                 try
                 {
+                    var courseJson = await result.Content.ReadAsStringAsync();
+                    var courseObject = JsonConvert.DeserializeObject<CourseResponse>(courseJson);
+
+                    // Här antas att "contentResult" innehåller själva kursdatan
+                    if (courseObject?.ContentResult != null)
+                    {
+                        return courseObject.ContentResult;
+                    }
+                    else
+                    {
+                        // Om JSON-strängen inte innehåller förväntad data, returnera null eller kasta ett undantag
+                        return null;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                    return null;
+                }
+            }
+            else
+            {
+                // Om HTTP-anslutningen misslyckades, returnera null eller kasta ett undantag
+                return null;
+            }
+        }
+
+        // En hjälpklass för att matcha JSON-strukturen
+        private class CourseResponse
+        {
+            public CourseEntity ContentResult { get; set; }
+            public int StatusCode { get; set; }
+            public string Message { get; set; }
+        }
+
+        public async Task<TeacherEntity> GetOneTeacher(string apiKey, int id)
+        {
+            var result = await _httpClient.GetAsync($"https://localhost:7117/api/Teacher/{id}");
+
+            if (result.IsSuccessStatusCode)
+            {
+                try
+                {
                     var json = await result.Content.ReadAsStringAsync();
                     var jsonObject = JObject.Parse(json);
                     var contentResult = jsonObject["contentResult"].ToString();
-
-                    var entity = JsonConvert.DeserializeObject<CourseEntity>(contentResult);
+                    var entity = JsonConvert.DeserializeObject<TeacherEntity>(contentResult);
 
                     if (entity != null)
                     {
-                        var viewModel = new CourseEntity
-                        {
-                            Id = id,
-                            Title = entity.Title,
-                            Author = entity.Author,
-                            Description = entity.Description,
-                            DiscountPrice = entity.DiscountPrice,
-                            CategoryId = entity.CategoryId,
-                            Hours = entity.Hours,
-                            ImageALtText = entity.ImageALtText,
-                            ImageUrl = entity.ImageUrl,
-                            IsBestseller = entity.IsBestseller,
-                            LikesInNumbers = entity.LikesInNumbers,
-                            LikesInProcent = entity.LikesInProcent,
-                            WhatYouLearn = entity.WhatYouLearn,
-                            Price = entity.Price,
-                        };
-
-                        return viewModel;
+                        return entity;
                     }
 
                     return null!;
@@ -129,6 +164,7 @@ namespace Infrastructure.Services
             }
 
             return null!;
+
         }
     }
 }

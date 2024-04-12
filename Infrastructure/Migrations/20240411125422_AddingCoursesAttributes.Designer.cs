@@ -4,6 +4,7 @@ using Infrastructure.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240411125422_AddingCoursesAttributes")]
+    partial class AddingCoursesAttributes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,22 +54,13 @@ namespace Infrastructure.Migrations
                     b.Property<string>("Author")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CategoryId")
+                    b.Property<int?>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DiscountPrice")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ExtraInfoOne")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ExtraInfoThree")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ExtraInfoTwo")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Hours")
@@ -93,25 +87,16 @@ namespace Infrastructure.Migrations
                     b.Property<string>("LikesInProcent")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("NumberOfArticles")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int?>("NumberOfStars")
                         .HasColumnType("int");
 
                     b.Property<string>("Price")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ProgramDetailsEntityId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("ProgramDetailsId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Resourses")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("TeacherId")
+                    b.Property<int?>("TeacherId")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
@@ -122,9 +107,6 @@ namespace Infrastructure.Migrations
                     b.Property<string>("WhatYouLearn")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("WhatYouLearnEntityId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("WhatYouLearnId")
                         .HasColumnType("int");
 
@@ -132,11 +114,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("ProgramDetailsEntityId");
-
                     b.HasIndex("TeacherId");
-
-                    b.HasIndex("WhatYouLearnEntityId");
 
                     b.ToTable("Courses");
                 });
@@ -305,34 +283,17 @@ namespace Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.HasKey("Id");
-
-                    b.ToTable("ProgramDetails");
-                });
-
-            modelBuilder.Entity("Infrastructure.Entities.ProgramDetailsItemsEntity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int?>("CourseEntityId")
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Detail")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("DetailTitle")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ProgramDetailsId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("ProgramDetailsId");
+                    b.HasIndex("CourseEntityId");
 
-                    b.ToTable("ProgramDetailsItems");
+                    b.ToTable("ProgramDetails");
                 });
 
             modelBuilder.Entity("Infrastructure.Entities.SubscriberEntity", b =>
@@ -379,14 +340,8 @@ namespace Infrastructure.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<string>("ExtraInfo")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FaceBookFollowers")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
@@ -395,9 +350,6 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("YoutubeSubscribers")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -412,31 +364,18 @@ namespace Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("CourseEntityId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Fact")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("CourseEntityId");
 
                     b.ToTable("WhatYouLearn");
-                });
-
-            modelBuilder.Entity("Infrastructure.Entities.WhatYouLearnItemsEntity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("WhatYouLearnId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("WhatyoulearnFact")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("WhatYouLearnId");
-
-                    b.ToTable("WhatYouLearnItems");
                 });
 
             modelBuilder.Entity("Infrastructure.Entities.CourseEntity", b =>
@@ -444,30 +383,15 @@ namespace Infrastructure.Migrations
                     b.HasOne("Infrastructure.Entities.CategoryEntity", "Category")
                         .WithMany("Courses")
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Infrastructure.Entities.ProgramDetailsEntity", "ProgramDetailsEntity")
-                        .WithMany()
-                        .HasForeignKey("ProgramDetailsEntityId");
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Infrastructure.Entities.TeacherEntity", "Teacher")
-                        .WithMany()
-                        .HasForeignKey("TeacherId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Infrastructure.Entities.WhatYouLearnEntity", "WhatYouLearnEntity")
-                        .WithMany()
-                        .HasForeignKey("WhatYouLearnEntityId");
+                        .WithMany("Courses")
+                        .HasForeignKey("TeacherId");
 
                     b.Navigation("Category");
 
-                    b.Navigation("ProgramDetailsEntity");
-
                     b.Navigation("Teacher");
-
-                    b.Navigation("WhatYouLearnEntity");
                 });
 
             modelBuilder.Entity("Infrastructure.Entities.FeatureItemEntity", b =>
@@ -503,31 +427,30 @@ namespace Infrastructure.Migrations
                     b.Navigation("Manager");
                 });
 
-            modelBuilder.Entity("Infrastructure.Entities.ProgramDetailsItemsEntity", b =>
+            modelBuilder.Entity("Infrastructure.Entities.ProgramDetailsEntity", b =>
                 {
-                    b.HasOne("Infrastructure.Entities.ProgramDetailsEntity", "ProgramDetailsEntity")
-                        .WithMany("ProgramDetails")
-                        .HasForeignKey("ProgramDetailsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ProgramDetailsEntity");
+                    b.HasOne("Infrastructure.Entities.CourseEntity", null)
+                        .WithMany("ProgramDetailsItems")
+                        .HasForeignKey("CourseEntityId");
                 });
 
-            modelBuilder.Entity("Infrastructure.Entities.WhatYouLearnItemsEntity", b =>
+            modelBuilder.Entity("Infrastructure.Entities.WhatYouLearnEntity", b =>
                 {
-                    b.HasOne("Infrastructure.Entities.WhatYouLearnEntity", "WhatYouLearnEntity")
-                        .WithMany("whatYouLearnItems")
-                        .HasForeignKey("WhatYouLearnId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("WhatYouLearnEntity");
+                    b.HasOne("Infrastructure.Entities.CourseEntity", null)
+                        .WithMany("WhatYouLearnItems")
+                        .HasForeignKey("CourseEntityId");
                 });
 
             modelBuilder.Entity("Infrastructure.Entities.CategoryEntity", b =>
                 {
                     b.Navigation("Courses");
+                });
+
+            modelBuilder.Entity("Infrastructure.Entities.CourseEntity", b =>
+                {
+                    b.Navigation("ProgramDetailsItems");
+
+                    b.Navigation("WhatYouLearnItems");
                 });
 
             modelBuilder.Entity("Infrastructure.Entities.FeatureEntity", b =>
@@ -545,14 +468,9 @@ namespace Infrastructure.Migrations
                     b.Navigation("Tags");
                 });
 
-            modelBuilder.Entity("Infrastructure.Entities.ProgramDetailsEntity", b =>
+            modelBuilder.Entity("Infrastructure.Entities.TeacherEntity", b =>
                 {
-                    b.Navigation("ProgramDetails");
-                });
-
-            modelBuilder.Entity("Infrastructure.Entities.WhatYouLearnEntity", b =>
-                {
-                    b.Navigation("whatYouLearnItems");
+                    b.Navigation("Courses");
                 });
 #pragma warning restore 612, 618
         }
