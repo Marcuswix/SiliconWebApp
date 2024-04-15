@@ -1,6 +1,12 @@
 ﻿@model CourseEntity;
+@{
+    var user = await _userManager.GetUserAsync(User);
+}
 
+@if (Model != null)
+{
     <div class="backgroundImage" style="background-image: url('@Model.ImageUrl');"></div>
+}
 
     <div class="container">
 
@@ -37,10 +43,10 @@
                     <p class="underline">@Model.Ingress</p>
                 </div>
 
-                @{
+                    @{
                     var numberOfStars = Model.NumberOfStars ?? 0;
                     var numberOfEmptyStars = 5 - numberOfStars;
-                }
+                    }
 
                 <div class="likesAndTeacher">
 
@@ -75,7 +81,7 @@
                                 <path d="M9.99996 1.66675C5.40496 1.66675 1.66663 5.40508 1.66663 10.0001C1.66663 14.5951 5.40496 18.3334 9.99996 18.3334C14.595 18.3334 18.3333 14.5951 18.3333 10.0001C18.3333 5.40508 14.595 1.66675 9.99996 1.66675ZM9.99996 16.6667C6.32413 16.6667 3.33329 13.6759 3.33329 10.0001C3.33329 6.32425 6.32413 3.33341 9.99996 3.33341C13.6758 3.33341 16.6666 6.32425 16.6666 10.0001C16.6666 13.6759 13.6758 16.6667 9.99996 16.6667Z" fill="#9397AD" />
                                 <path d="M10.8333 5.83325H9.16663V10.3449L11.9108 13.0891L13.0891 11.9108L10.8333 9.65492V5.83325Z" fill="#9397AD" />
                             </svg>
-                            <p>@Model.Hours</p>
+                            <p>@Model.Hours Hours </p>
                         </div>
                     </div>
 
@@ -84,14 +90,13 @@
                             @if(Model.Teacher != null)
                             {
                                 if(Model.Teacher.ImageUrl == null)
-                            {
-                                <img class="imageTeacher" src="~/images/DefaultProfil.png" />
-                            }
-                            else
-                            {
-                            
-                            }
-                                <img class="imageTeacher" src="~/images/teachers/@Model.Teacher.ImageUrl" />
+                                {
+                                    <img class="imageTeacher" src="~/images/DefaultProfil.png" />
+                                }
+                                else
+                                {
+                                    <img class="imageTeacher" src="~/images/teachers/@Model.Teacher.ImageUrl" />
+                                }                               
                             }
                             else
                             {
@@ -107,7 +112,6 @@
                 </div>
 
         </section>
-
 
 
         <section id="CourseDetails">
@@ -141,7 +145,7 @@
                 </ul>
             </div>
 
-            <div class="joinCourse">
+            <form class="joinCourse" asp-controller="CourseDetails" asp-action="JoinCourse" method="post" novalidate>
                 <h5>This course includes:</h5>
                 <ul>
                     <li>
@@ -195,12 +199,14 @@
                     <div class="Price">$@Model.DiscountPrice</div>
                     <div class="orgPrice">$@Model.Price</div>
                 }
-
                 </div>
-                <button class="btn-theme-s">
+
+                <input type="hidden" name="courseId" value="@Model.Id" />
+                <input type="hidden" name="userId" value="@user.Id" />
+                <button class="btn-theme-s" type="submit">
                     Join course
                 </button>
-            </div>
+            </form>
 
         </section>
 
@@ -212,49 +218,36 @@
 
             <div class="contentContainer">
 
-                <div class="boxContainer">
-                    <div class="numberContainer">
-                        <div class="outerCircle">
-                            <div class="innerCircle">
-                                <h3>1</h3>
-                            </div>
-                        </div>
-                        <div class="line"></div>
-                    </div>
-                    <div class="textContainerProgramDetails">
-                        <h5>Introduction. Getting started</h5>
-                        <p>Nulla faucibus mauris pellentesque blandit faucibus non. Sit ut et at suspendisse gravida hendrerit tempus placerat.</p>
-                    </div>
-                </div>
+            @if (Model.ProgramDetailsEntity != null)
+            {
+                var numberOfItems = 0;
+                var totalItems = Model.ProgramDetailsEntity.ProgramDetails.Count();
 
-                <div class="boxContainer">
-                    <div class="numberContainer">
-                        <div class="outerCircle">
-                            <div class="innerCircle">
-                                <h3>1</h3>
-                            </div>
-                        </div>
-                        <div class="line"></div>
-                    </div>
-                    <div class="textContainerProgramDetails">
-                        <h5>Introduction. Getting started</h5>
-                        <p>Nulla faucibus mauris pellentesque blandit faucibus non. Sit ut et at suspendisse gravida hendrerit tempus placerat.</p>
-                    </div>
-                </div>
+                foreach (var item in Model.ProgramDetailsEntity.ProgramDetails)
+                {
+                    numberOfItems++;
 
-                <div class="boxContainer">
-                    <div class="numberContainer">
-                        <div class="outerCircle">
-                            <div class="innerCircle">
-                                <h3>1</h3>
+                    <div class="boxContainer">
+                        <div class="numberContainer">
+                            <div class="outerCircle">
+                                <div class="innerCircle">
+                                        <h3>
+                                                @numberOfItems
+                                        </h3>
+                                </div>
                             </div>
+                            @if(numberOfItems != totalItems)
+                            {
+                                <div class="line"></div>
+                            }
+                        </div>
+                        <div class="textContainerProgramDetails">
+                            <h5>Introduction. Getting started</h5>
+                            <p>Nulla faucibus mauris pellentesque blandit faucibus non. Sit ut et at suspendisse gravida hendrerit tempus placerat.</p>
                         </div>
                     </div>
-                    <div class="textContainerProgramDetails">
-                        <h5>Introduction. Getting started</h5>
-                        <p>Nulla faucibus mauris pellentesque blandit faucibus non. Sit ut et at suspendisse gravida hendrerit tempus placerat.</p>
-                    </div>
-                </div>
+                }
+            }
 
             </div>
 
@@ -262,28 +255,38 @@
 
         </section>
 
+   @if(Model.Teacher != null)
+   {
    <section id="CourseTeacher">
 
-            <img class="something" src="./images/coursesPage/pattern.svg" />
+        <img class="something" src="~/images/coursesPage/pattern.svg" />
 
-            <div class="imageContainer">
-                <img src="/images/coursesPage/CourseLeaderSquare.png" />
-            </div>
+        <div class="imageContainer">
+        @if (Model.Teacher.ImageUrl != null)
+        {
+            <img src="/images/teachers/@Model.Teacher.ImageUrl" alt="@Model.Teacher.Name"/>
+        }
+        else
+        {
+            <img src="~/images/DefaultProfil.png" />
+        }
+        </div>
 
             <div class="textContainerCourses">
 
                 <div class="contentContainerCourses">
                     <h6>Learn from the best</h6>
-                    <h1>@Model.Author</h1>
-                    <p>Dolor ipsum amet cursus quisque porta adipiscing. Lorem convallis malesuada sed maecenas. Ac dui at vitae mauris cursus in nullam porta sem. Quis pellentesque elementum ac bibendum. Nunc aliquam in tortor facilisis. Vulputate eget risus, metus phasellus. Pellentesque faucibus amet, eleifend diam quam condimentum convallis ultricies placerat. Duis habitasse placerat amet, odio pellentesque rhoncus, feugiat at. Eget pellentesque tristique felis magna fringilla.</p>
+                    <h1>@Model.Teacher.Name</h1>
+                    <p>@Model.Teacher.Description</p>
                     <div class="btnContainerCourses">
-                        <a class="btn-red"><i class="fa-brands fa-youtube"></i>240K subscribers</a>
-                        <a class="btn-theme"><i class="fa-brands fa-square-facebook"></i>180k followers</a>
+                        <a class="btn-red"><i class="fa-brands fa-youtube"></i>@Model.Teacher.YoutubeSubscribers subscribers</a>
+                        <a class="btn-theme"><i class="fa-brands fa-square-facebook"></i>@Model.Teacher.FaceBookFollowers followers</a>
                     </div>
                 </div>
 
                 </div>
 
    </section>
+   }
 
 </div>

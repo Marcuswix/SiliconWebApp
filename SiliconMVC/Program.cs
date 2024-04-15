@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Infrastructure.Helpers;
 
 namespace Infrastructure
 {
@@ -38,7 +39,8 @@ namespace Infrastructure
             builder.Services.AddScoped<CategoryServices>();
             builder.Services.AddScoped<IntegrateRepository>();
             builder.Services.AddScoped<IntegrateItemRepository>();
-            builder.Services.AddScoped<IntegrateService>();
+            builder.Services.AddScoped<IntegrateService>(); 
+            builder.Services.AddScoped<CourseResponse>();
             builder.Services.AddScoped<AccountServices>();
             builder.Services.AddScoped<AddressServices>();
             builder.Services.AddScoped<AddressRepository>();
@@ -46,6 +48,7 @@ namespace Infrastructure
             builder.Services.AddScoped<SignInManager<UserEntity>>(); 
             builder.Services.AddScoped<SubscribeRepository>();
             builder.Services.AddScoped<AccountServices>();
+            builder.Services.AddScoped<UserCourseServices>();
 
             builder.Services.AddHttpClient();
 

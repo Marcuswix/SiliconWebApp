@@ -1,6 +1,4 @@
-﻿using Infrastructure.Entities;
-using Infrastructure.Services;
-using Infrastructure.ViewModels;
+﻿using Infrastructure.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -14,12 +12,14 @@ namespace SiliconMVC.Controllers
         private readonly HttpClient _httpClient;
         private readonly IConfiguration _configuration;
         private readonly CourseServices _courseServices;
+        private readonly UserCourseServices _userCourseServices;
 
-        public CourseDetailsController(HttpClient httpClient, IConfiguration configuration, CourseServices courseServices)
+        public CourseDetailsController(HttpClient httpClient, IConfiguration configuration, CourseServices courseServices, UserCourseServices userCourseServices)
         {
             _httpClient = httpClient;
             _configuration = configuration;
             _courseServices = courseServices;
+            _userCourseServices = userCourseServices;
         }
 
         private void SetValues()
@@ -48,6 +48,31 @@ namespace SiliconMVC.Controllers
                 {
                         return View(result);
                  
+                }
+            }
+            return View();
+        }
+
+        [HttpPost]
+        [Route("/{courseId}")]
+        [Authorize(Policy = "AuthenticatedUsers")]
+        public async Task<IActionResult> JoinCourse(int courseId, string userId)
+        {
+            SetValues();
+
+            if (HttpContext.Request.Cookies.TryGetValue("AccessToken", out var token))
+            {
+
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+                var apiKey = _configuration["ApiKey:Secret"];
+
+                var result = await _userCourseServices.AddUserCourse(apiKey, userId, courseId);
+
+                if (result != null)
+                {
+                    return View(result);
+
                 }
             }
             return View();

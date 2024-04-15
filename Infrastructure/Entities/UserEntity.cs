@@ -32,5 +32,7 @@ namespace Infrastructure.Entities
         public AddressEntity? Address { get; set; }
 
         public bool IsExternalAccount { get; set; } = false;
+
+        public ICollection<UserCourse>? UserCourses { get; set; }
     }
 }

@@ -45,5 +45,7 @@ namespace Infrastructure.Entities
 
         public int? ProgramDetailsId { get; set; }
         public ProgramDetailsEntity? ProgramDetailsEntity { get; set; }
+
+        public List<UserCourse>? UserCourses { get; set; }
     }
 }

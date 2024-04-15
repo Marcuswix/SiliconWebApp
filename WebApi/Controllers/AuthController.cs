@@ -2,6 +2,7 @@
 using Infrastructure.Entities;
 using Infrastructure.Factories;
 using Infrastructure.Models;
+using Infrastructure.Repositories;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -17,31 +18,32 @@ namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthController(IConfiguration configuration, UserContext userContext, SignInManager<UserEntity> signInManager) : ControllerBase
+    public class AuthController(IConfiguration configuration, UserContext userContext, SignInManager<UserEntity> signInManager, UserCourseRepository userCourseRepository) : ControllerBase
     {
         private readonly SignInManager<UserEntity> _signInManager = signInManager;
         private readonly IConfiguration _configuration = configuration;
         private readonly UserContext _userContext = userContext;
+        private readonly UserCourseRepository _userCourseRepository = userCourseRepository;
 
         [HttpPost]
         [Route("register")]
         public async Task<IActionResult> Register(SignUpModel model)
         {
-                if (!await _userContext.Users.AnyAsync(x => x.Email == model.Email))
+            if (!await _userContext.Users.AnyAsync(x => x.Email == model.Email))
+            {
+                var userEntity = new UserEntity
                 {
-                    var userEntity = new UserEntity
-                    {
-                        Email = model.Email,
-                        FirstName = model.FirstName,
-                        LastName = model.LastName,
-                        PasswordHash = model.Password,
-                    };
+                    Email = model.Email,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    PasswordHash = model.Password,
+                };
 
-                    _userContext.Users.Add(userEntity);
-                    await _userContext.SaveChangesAsync();
-                    return Created();
-                }
-                return Conflict();
+                _userContext.Users.Add(userEntity);
+                await _userContext.SaveChangesAsync();
+                return Created();
+            }
+            return Conflict();
         }
 
         [HttpPost]
@@ -107,8 +109,8 @@ namespace WebApi.Controllers
                 }
                 return Unauthorized();
             }
-            catch (Exception ex) { return  BadRequest(ex.Message); }
-            
+            catch (Exception ex) { return BadRequest(ex.Message); }
+
         }
 
         [HttpPost]
@@ -141,6 +143,21 @@ namespace WebApi.Controllers
                 });
             }
             return Unauthorized();
+        }
+
+        [HttpPost]
+        [Route("userCourse")]
+        public async Task<IActionResult> UserCourse(int courseId, string userId)
+        {
+            var result = await _userCourseRepository.UserCourse(courseId, userId);
+
+            if (result != null)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest();
+
         }
 
         //[UseApiKey]

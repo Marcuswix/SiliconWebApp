@@ -10,12 +10,8 @@ namespace Infrastructure.Helpers
 {
     public class CourseResponse
     {
-        [JsonProperty("$id")]
-        public string Id { get; set; }
-
+        public CourseEntity ContentResult { get; set; }
         public int StatusCode { get; set; }
-
-        [JsonProperty("contentResult")]
-        public List<Dictionary<string, CourseEntity>>? ContentResult { get; set; }
+        public string Message { get; set; }
     }
 }

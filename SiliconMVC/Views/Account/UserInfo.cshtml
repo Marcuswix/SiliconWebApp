@@ -16,7 +16,7 @@
             </label>
         </form>
         <div class="image-container-child">
-        <img class="image" src="~/uploads/@(user.UrlImage ?? "DefaultProfileImage.png")" alt="@User.Identity.Name profile image" ) />
+        <img class="image" src="~/uploads/@(user.UrlImage ?? "DefaultProfileImage.png")" alt="@if(User.Identity.Name != null){@User.Identity.Name}" />
         </div>
 
     </div>

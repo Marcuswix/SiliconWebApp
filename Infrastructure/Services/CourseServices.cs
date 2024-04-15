@@ -1,11 +1,5 @@
 ﻿using Infrastructure.Entities;
 using Infrastructure.Helpers;
-using Infrastructure.Models;
-using Infrastructure.Repositories;
-using Infrastructure.ViewModels;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -17,12 +11,12 @@ namespace Infrastructure.Services
     public class CourseServices
     {
         private readonly HttpClient _httpClient;
-        private readonly IConfiguration _configuration;
+        private readonly CourseResponse _response;
 
-        public CourseServices(HttpClient httpClient, IConfiguration configuration)
+        public CourseServices(HttpClient httpClient, CourseResponse response)
         {
             _httpClient = httpClient;
-            _configuration = configuration;
+            _response = response;
         }
 
         public async Task<List<CourseEntity>> GetCourses(string apiKey)
@@ -104,14 +98,12 @@ namespace Infrastructure.Services
                     var courseJson = await result.Content.ReadAsStringAsync();
                     var courseObject = JsonConvert.DeserializeObject<CourseResponse>(courseJson);
 
-                    // Här antas att "contentResult" innehåller själva kursdatan
                     if (courseObject?.ContentResult != null)
                     {
                         return courseObject.ContentResult;
                     }
                     else
                     {
-                        // Om JSON-strängen inte innehåller förväntad data, returnera null eller kasta ett undantag
                         return null;
                     }
                 }
@@ -123,17 +115,8 @@ namespace Infrastructure.Services
             }
             else
             {
-                // Om HTTP-anslutningen misslyckades, returnera null eller kasta ett undantag
                 return null;
             }
-        }
-
-        // En hjälpklass för att matcha JSON-strukturen
-        private class CourseResponse
-        {
-            public CourseEntity ContentResult { get; set; }
-            public int StatusCode { get; set; }
-            public string Message { get; set; }
         }
 
         public async Task<TeacherEntity> GetOneTeacher(string apiKey, int id)

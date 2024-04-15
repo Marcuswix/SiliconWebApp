@@ -9,7 +9,11 @@
     justify-content: center;
     align-items: center;
     gap: 12px;
+    min-height: 34px;
     transition: background-color ease-in-out 120ms;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .btn-theme { 

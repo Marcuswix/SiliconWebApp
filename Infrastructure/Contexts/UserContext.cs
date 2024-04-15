@@ -12,7 +12,6 @@ namespace Infrastructure.Contexts
 
         public virtual DbSet<AddressEntity>? Addresses { get; set; }
 
-        public DbSet<UserEntity> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

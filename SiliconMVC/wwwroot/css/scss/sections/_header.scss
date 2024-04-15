@@ -138,6 +138,10 @@ header {
                 width: auto;
             }
         }
+
+        .fa-right-to-bracket
+            {transform: rotate(90deg);
+        }
     }
 
     @media(max-width: 720px) {

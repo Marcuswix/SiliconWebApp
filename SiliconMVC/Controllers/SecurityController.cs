@@ -8,8 +8,6 @@ using System.Net.Http.Headers;
 
 namespace SiliconMVC.Controllers
 {
-
-    [Authorize]
     public class SecurityController : Controller
     {
 
@@ -35,8 +33,9 @@ namespace SiliconMVC.Controllers
         }
 
         #region [HttpGet] Security
-        [Authorize]
         [HttpGet]
+        [Authorize(Policy = "AuthenticatedUsers")]
+        [Route("/security")]
         public IActionResult Index()
         {
 
@@ -51,9 +50,10 @@ namespace SiliconMVC.Controllers
         }
         #endregion
 
+
         #region [HttpGet] ChangePassword
-        [Authorize]
         [HttpGet]
+        [Authorize(Policy = "AuthenticatedUsers")]
         public IActionResult ChangePasswordView(PasswordModel model)
         {
             SetDefaultViewValues();
@@ -69,8 +69,8 @@ namespace SiliconMVC.Controllers
 
 
         #region [HttpGet] DeleteAccount
-        [Authorize]
         [HttpGet]
+        [Authorize(Policy = "AuthenticatedUsers")]
         public IActionResult DeleteAccountView(DeleteAccountModel model)
         {
             SetDefaultViewValues();
@@ -81,12 +81,12 @@ namespace SiliconMVC.Controllers
             }
             return View(model);
         }
-        #endregion 
+        #endregion
 
 
         #region [HttpPost] ChangePassword
-        [Authorize]
         [HttpPost]
+        [Authorize(Policy = "AuthenticatedUsers")]
         public async Task<IActionResult> ChangePassword(PasswordModel model)
         {
             SetDefaultViewValues();
@@ -117,9 +117,10 @@ namespace SiliconMVC.Controllers
         }
         #endregion
 
+
         #region [HttpDelete] DeleteAccount
-        [Authorize]
         [HttpPost]
+        [Authorize(Policy = "AuthenticatedUsers")]
         public async Task<IActionResult> Delete(string api)
         {
 
@@ -152,3 +153,5 @@ namespace SiliconMVC.Controllers
         #endregion 
     }
 }
+
+
