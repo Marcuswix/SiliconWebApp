@@ -40,23 +40,9 @@ namespace Infrastructure.Contexts
 
         public DbSet<WhatYouLearnItemsEntity> WhatYouLearnItems { get; set; }
 
-        public DbSet<UserCourse> UserCourses { get; set; }
-
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-
-            builder.Entity<UserCourse>().HasKey(x => new { x.UserId, x.CourseId });
-
-            builder.Entity<UserCourse>()
-                .HasOne(x => x.User)
-                .WithMany(x => x.UserCourses)
-                .HasForeignKey(x => x.UserId);
-
-            builder.Entity<UserCourse>()
-                .HasOne(x => x.Course)
-                .WithMany(x => x.UserCourses)
-                .HasForeignKey(x => x.CourseId);
 
             builder.Entity<CourseEntity>()
                 .HasOne(x => x.Category)

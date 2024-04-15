@@ -18,12 +18,12 @@ namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthController(IConfiguration configuration, UserContext userContext, SignInManager<UserEntity> signInManager, UserCourseRepository userCourseRepository) : ControllerBase
+    public class AuthController(IConfiguration configuration, UserContext userContext, SignInManager<UserEntity> signInManager, CourseDetailsRepository courseDetailsRepository) : ControllerBase
     {
         private readonly SignInManager<UserEntity> _signInManager = signInManager;
         private readonly IConfiguration _configuration = configuration;
         private readonly UserContext _userContext = userContext;
-        private readonly UserCourseRepository _userCourseRepository = userCourseRepository;
+        private readonly CourseDetailsRepository _courseDetailsRepository = courseDetailsRepository;
 
         [HttpPost]
         [Route("register")]
@@ -36,6 +36,7 @@ namespace WebApi.Controllers
                     Email = model.Email,
                     FirstName = model.FirstName,
                     LastName = model.LastName,
+                    UserName = model.Email,
                     PasswordHash = model.Password,
                 };
 
@@ -149,7 +150,7 @@ namespace WebApi.Controllers
         [Route("userCourse")]
         public async Task<IActionResult> UserCourse(int courseId, string userId)
         {
-            var result = await _userCourseRepository.UserCourse(courseId, userId);
+            var result = await _courseDetailsRepository.AddCourseToUser(courseId, userId);
 
             if (result != null)
             {

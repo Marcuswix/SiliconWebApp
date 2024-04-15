@@ -46,7 +46,7 @@ builder.Services.AddScoped<CourseDetailsRepository>();
 builder.Services.AddScoped<TeacherRepository>();
 builder.Services.AddScoped<UserManager<UserEntity>>();
 builder.Services.AddScoped<SignInManager<UserEntity>>();
-builder.Services.AddScoped<UserCourseRepository>();
+builder.Services.AddScoped<CourseDetailsRepository>();
 
 
 builder.Services.AddIdentity<UserEntity, IdentityRole>(options =>

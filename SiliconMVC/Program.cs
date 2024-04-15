@@ -48,7 +48,6 @@ namespace Infrastructure
             builder.Services.AddScoped<SignInManager<UserEntity>>(); 
             builder.Services.AddScoped<SubscribeRepository>();
             builder.Services.AddScoped<AccountServices>();
-            builder.Services.AddScoped<UserCourseServices>();
 
             builder.Services.AddHttpClient();
 

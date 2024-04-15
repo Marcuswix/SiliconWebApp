@@ -12,14 +12,15 @@ namespace SiliconMVC.Controllers
         private readonly HttpClient _httpClient;
         private readonly IConfiguration _configuration;
         private readonly CourseServices _courseServices;
-        private readonly UserCourseServices _userCourseServices;
+        private readonly UserServices _userServices;
 
-        public CourseDetailsController(HttpClient httpClient, IConfiguration configuration, CourseServices courseServices, UserCourseServices userCourseServices)
+
+        public CourseDetailsController(HttpClient httpClient, IConfiguration configuration, CourseServices courseServices, UserServices userServices)
         {
             _httpClient = httpClient;
             _configuration = configuration;
             _courseServices = courseServices;
-            _userCourseServices = userCourseServices;
+            _userServices = userServices;
         }
 
         private void SetValues()
@@ -67,11 +68,11 @@ namespace SiliconMVC.Controllers
 
                 var apiKey = _configuration["ApiKey:Secret"];
 
-                var result = await _userCourseServices.AddUserCourse(apiKey, userId, courseId);
-
+                var result = await _userServices.AddUserCourse(apiKey, userId, courseId);
+//´LäGGTILL MYCOURES
                 if (result != null)
                 {
-                    return View(result);
+                    return RedirectToAction("...");
 
                 }
             }
