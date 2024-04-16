@@ -75,7 +75,6 @@ namespace WebApi.Controllers
         {
             var result = _courseRepository.GetOneById(id);
 
-
             if (result.StatusCode == Infrastructure.Models.StatusCodes.OK)
             {
                 return Ok(result);

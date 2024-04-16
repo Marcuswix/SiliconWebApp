@@ -206,6 +206,12 @@
                 <button class="btn-theme-s" type="submit">
                     Join course
                 </button>
+
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <span id="noCoursesFound" class="error">@TempData["ErrorMessage"]</span>
+            }
+
             </form>
 
         </section>

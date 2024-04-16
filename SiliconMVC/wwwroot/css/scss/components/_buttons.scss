@@ -85,12 +85,12 @@
     }
 }
 
+
 .btn-red {
     @include button;
-    padding: 7px 28px;
-    color: $white;
-    border: none;
-    background: $danger;
+    color: $danger;
+    border: solid 1px $danger;
+    background: transparent;
 
     &:hover {
         text-decoration: none;

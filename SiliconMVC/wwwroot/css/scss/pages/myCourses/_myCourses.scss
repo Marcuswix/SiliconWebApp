@@ -1,0 +1,28 @@
+//mobil-first
+@media(min-width: 10px) 
+{
+    .myCoursesContainer {
+        display: grid;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+
+        .section-headline-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-block: 1rem;
+        }
+    }
+}
+
+@media(min-width: 992px) {
+    .myCoursesContainer {
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+
+        #headlineContainer {
+            grid-area: 1 / 1 / span 1 /span 2;
+        }
+    }
+}

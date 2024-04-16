@@ -7,7 +7,6 @@ namespace Infrastructure.Entities
         [Key]
         public int Id { get; set; }
         public string UserId { get; set; } = null!;
-        public UserEntity UserEntity { get; set; } = new UserEntity();
         public int CourseId { get; set; }
     }
 }

@@ -1,5 +1,7 @@
-﻿using Infrastructure.Services;
+﻿using Infrastructure.Entities;
+using Infrastructure.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Diagnostics;
@@ -12,15 +14,17 @@ namespace SiliconMVC.Controllers
         private readonly HttpClient _httpClient;
         private readonly IConfiguration _configuration;
         private readonly CourseServices _courseServices;
-        private readonly UserServices _userServices;
+        private readonly MyCoursesServices _myCoursesServices;
+        private readonly UserManager<UserEntity> _userManager;
 
 
-        public CourseDetailsController(HttpClient httpClient, IConfiguration configuration, CourseServices courseServices, UserServices userServices)
+        public CourseDetailsController(HttpClient httpClient, IConfiguration configuration, CourseServices courseServices, MyCoursesServices myCoursesServices, UserManager<UserEntity> userManager)
         {
             _httpClient = httpClient;
             _configuration = configuration;
             _courseServices = courseServices;
-            _userServices = userServices;
+            _myCoursesServices = myCoursesServices;
+            _userManager = userManager;
         }
 
         private void SetValues()
@@ -47,8 +51,7 @@ namespace SiliconMVC.Controllers
 
                 if(result != null)
                 {
-                        return View(result);
-                 
+                    return View(result);
                 }
             }
             return View();
@@ -57,7 +60,7 @@ namespace SiliconMVC.Controllers
         [HttpPost]
         [Route("/{courseId}")]
         [Authorize(Policy = "AuthenticatedUsers")]
-        public async Task<IActionResult> JoinCourse(int courseId, string userId)
+        public async Task<IActionResult> JoinCourse(int courseId)
         {
             SetValues();
 
@@ -68,12 +71,18 @@ namespace SiliconMVC.Controllers
 
                 var apiKey = _configuration["ApiKey:Secret"];
 
-                var result = await _userServices.AddUserCourse(apiKey, userId, courseId);
-//´LäGGTILL MYCOURES
-                if (result != null)
-                {
-                    return RedirectToAction("...");
+                var user = await _userManager.GetUserAsync(User);
 
+                var result = await _myCoursesServices.AddUserCourse(apiKey, user.Id, courseId);
+
+                if (result.StatusCode == Infrastructure.Models.StatusCodes.OK)
+                {
+                    return RedirectToAction("Index", "MyCourses");
+                }
+                if(result.StatusCode == Infrastructure.Models.StatusCodes.EXISTS)
+                {
+                    TempData["ErrorMessage"] = "This course is already added to your course library";
+                    return RedirectToAction("Index", "Courses");
                 }
             }
             return View();

@@ -33,7 +33,6 @@ namespace Infrastructure.Entities
 
         public bool IsExternalAccount { get; set; } = false;
 
-        public int CoursesId { get; set; }
         public ICollection<UserCourseItemEntity>? Courses { get; set; }
     }
 }

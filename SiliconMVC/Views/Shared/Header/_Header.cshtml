@@ -19,7 +19,12 @@
 
                 @if (_signInManager.IsSignedIn(User))
                 {
+                    var user = await _userManager.GetUserAsync(User);
+
                     <a class="menu-link" asp-controller="Courses" asp-action="Index">Courses</a>
+
+                    <a class="menu-link" asp-controller="MyCourses" asp-action="Index">My Courses</a>
+
                     @if (User.IsInRole("Admin"))
                     {
                         <a class="menu-link" asp-controller="Admin" asp-action="Index">Admin</a>
@@ -50,17 +55,16 @@
                     {
                         <a class="menu-link" asp-controller="Courses" asp-action="Index">
                         <li class="menu-link">Courses</li></a>
-                        <a class="menu-link" asp-controller="" asp-action="">
-                        <li class="menu-link">My Courses</li></a>
-                        
+                        <a class="menu-link" asp-controller="MyCourses" asp-action="Index">
+                        <li class="menu-link">My Courses</li></a> 
                         <a class="menu-link" asp-controller="Account" asp-action="Index">
                         <li class="menu-link">My Account</li></a>
 
-                        @if(User.IsInRole("Admin"))
-                        {
-                            <a class="menu-link" asp-controller="Admin" asp-action="Index">
-                            <li class="menu-link">Admin</li></a>
-                        }
+                         @if (User.IsInRole("Admin") || User.IsInRole("CIO") || User.IsInRole("SuperAdmin") || User.IsInRole("Manager"))
+                         {
+                             <a class="menu-link" asp-controller="Admin" asp-action="Index">
+                             <li class="menu-link">Admin</li></a>
+                         }
 
                         <a class="menu-link" asp-controller="Account" asp-action="SignOut">
                         <li class="menu-link">Sign Out</li></a>

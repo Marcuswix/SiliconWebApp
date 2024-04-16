@@ -44,27 +44,5 @@ namespace Infrastructure.Services
                 return ResponseFactory.Error();
             }
         }
-
-        public async Task<RepositoriesResult> AddUserCourse(string apiKey, string userId, int courseId)
-        {
-            try
-            {
-                var response = await _httpClient.PostAsync($"https://localhost:7117/api/Auth/userCourse?courseId={courseId}&userId={userId}&key={apiKey}", null);
-
-                if (response.IsSuccessStatusCode)
-                {
-                    var json = await response.Content.ReadAsStringAsync();
-                    var entity = JsonConvert.DeserializeObject<UserEntity>(json);
-                    return ResponseFactory.Ok();
-                }
-
-                return ResponseFactory.Error();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-                return null;
-            }
-        }
     }
 }

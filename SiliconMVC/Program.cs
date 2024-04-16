@@ -48,6 +48,7 @@ namespace Infrastructure
             builder.Services.AddScoped<SignInManager<UserEntity>>(); 
             builder.Services.AddScoped<SubscribeRepository>();
             builder.Services.AddScoped<AccountServices>();
+            builder.Services.AddScoped<MyCoursesServices>();
 
             builder.Services.AddHttpClient();
 
@@ -80,7 +81,7 @@ namespace Infrastructure
                 x.AddPolicy("CIO", policy => policy.RequireRole("SuperAdmin", "CIO"));
                 x.AddPolicy("Admins", policy => policy.RequireRole("SuperAdmin", "CIO", "Admin"));
                 x.AddPolicy("Managers", policy => policy.RequireRole("SuperAdmin", "CIO", "Admin", "Manager"));
-                x.AddPolicy("AuthenticatedUsers", policy => policy.RequireRole("SuperAdmin", "CIO", "Admin", "Manager", "Users"));
+                x.AddPolicy("AuthenticatedUsers", policy => policy.RequireRole("SuperAdmin", "CIO", "Admin", "Manager", "User"));
             });
 
             //builder.Services.AddAuthentication(x =>

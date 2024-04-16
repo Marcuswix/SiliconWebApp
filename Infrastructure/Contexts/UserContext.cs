@@ -28,12 +28,9 @@ namespace Infrastructure.Contexts
                 .HasKey(uci => uci.Id);
 
             builder.Entity<UserEntity>()
-                .HasMany(x => x.Courses);
-
-
-            builder.Entity<UserCourseItemEntity>()
-                .HasOne(x => x.UserEntity)
-                .WithMany(x => x.Courses);
+                .HasMany(x => x.Courses)
+                .WithOne()
+                .HasForeignKey(x => x.UserId);
         }
     }
 }

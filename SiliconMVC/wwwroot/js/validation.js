@@ -6,6 +6,8 @@
     {
         spanElement.classList.remove('field-validation-error');
         spanElement.classList.add('field-validation-valid');
+        spanElement.classList.remove('checkmark');
+        document.getElementById("termsspan").classList.remove("checkmark")
         spanElement.innerHTML = "";
     }
     if (validationResult === true) {
@@ -82,6 +84,7 @@ function textValidator(targetElement, minLength = 2) {
 
 function checkboxValidator(targetElement) {
 
+
     if (targetElement.name === "StartUps" || targetElement.name === "Newsletter" || targetElement.name === "AdvertisingUpdates" || targetElement.name === "WeekInReview" || targetElement.name === "EventUpdates" || targetElement.name === "Podcasts")
     {
         if (targetElement.checked) {
@@ -92,11 +95,14 @@ function checkboxValidator(targetElement) {
         }
     }
     if (targetElement.checked === true) {
+        console.log("ute")
         return formErrorHandler(targetElement, true)
     }
     else {
         return formErrorHandler(targetElement, false)
     }
+
+    document.getElementById("termsspan").classList.remove("checkmark")
 }
 
 let forms = document.querySelectorAll('form');

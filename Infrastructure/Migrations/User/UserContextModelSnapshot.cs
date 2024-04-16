@@ -62,21 +62,16 @@ namespace Infrastructure.Migrations.User
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("CourseId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserEntityId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserEntityId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("UserCourses");
                 });
@@ -99,9 +94,6 @@ namespace Infrastructure.Migrations.User
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("CoursesId")
-                        .HasColumnType("int");
 
                     b.Property<DateTime?>("Created")
                         .HasColumnType("datetime2");
@@ -319,13 +311,11 @@ namespace Infrastructure.Migrations.User
 
             modelBuilder.Entity("Infrastructure.Entities.UserCourseItemEntity", b =>
                 {
-                    b.HasOne("Infrastructure.Entities.UserEntity", "UserEntity")
+                    b.HasOne("Infrastructure.Entities.UserEntity", null)
                         .WithMany("Courses")
-                        .HasForeignKey("UserEntityId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("UserEntity");
                 });
 
             modelBuilder.Entity("Infrastructure.Entities.UserEntity", b =>

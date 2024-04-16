@@ -19,6 +19,7 @@
   <ItemGroup>
     <Folder Include="wwwroot\css\scss\pages\home\" />
     <Folder Include="wwwroot\css\scss\pages\Admin\" />
+    <Folder Include="wwwroot\css\scss\pages\myCourses\" />
     <Folder Include="wwwroot\css\scss\pages\notFound\" />
   </ItemGroup>
 

@@ -18,12 +18,11 @@ namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthController(IConfiguration configuration, UserContext userContext, SignInManager<UserEntity> signInManager, CourseDetailsRepository courseDetailsRepository) : ControllerBase
+    public class AuthController(IConfiguration configuration, UserContext userContext, SignInManager<UserEntity> signInManager) : ControllerBase
     {
         private readonly SignInManager<UserEntity> _signInManager = signInManager;
         private readonly IConfiguration _configuration = configuration;
         private readonly UserContext _userContext = userContext;
-        private readonly CourseDetailsRepository _courseDetailsRepository = courseDetailsRepository;
 
         [HttpPost]
         [Route("register")]
@@ -144,21 +143,6 @@ namespace WebApi.Controllers
                 });
             }
             return Unauthorized();
-        }
-
-        [HttpPost]
-        [Route("userCourse")]
-        public async Task<IActionResult> UserCourse(int courseId, string userId)
-        {
-            var result = await _courseDetailsRepository.AddCourseToUser(courseId, userId);
-
-            if (result != null)
-            {
-                return Ok(result);
-            }
-
-            return BadRequest();
-
         }
 
         //[UseApiKey]

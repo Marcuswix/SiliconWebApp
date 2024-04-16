@@ -56,8 +56,6 @@ namespace Infrastructure.Services
             }
         }
 
-
-
         public async Task<List<CourseEntity>> GetCoursesBySearch(string apiKey, string search)
         {
 

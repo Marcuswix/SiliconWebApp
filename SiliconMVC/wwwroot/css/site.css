@@ -47,6 +47,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap");
 p {
   margin: 0;
 }
@@ -968,10 +970,9 @@ h6, .h6 {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 7px 28px;
-  color: #FFFFFF;
-  border: none;
-  background: #EF4444;
+  color: #EF4444;
+  border: solid 1px #EF4444;
+  background: transparent;
 }
 .btn-red:hover {
   text-decoration: none;
@@ -1552,10 +1553,9 @@ h6, .h6 {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 7px 28px;
-  color: #FFFFFF;
-  border: none;
-  background: #EF4444;
+  color: #EF4444;
+  border: solid 1px #EF4444;
+  background: transparent;
 }
 .btn-red:hover {
   text-decoration: none;
@@ -2053,6 +2053,367 @@ input.input-validation-error::placeholder {
 
 .hide {
   display: none !important;
+}
+
+p {
+  margin: 0;
+}
+
+h1 {
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+h1 {
+  margin: 0;
+}
+
+html, body {
+  line-height: 160%;
+  font-weight: 400;
+  color: #565973;
+  font-family: "Manrope", sans-serif;
+  font-size: 16px;
+}
+
+.text-xs {
+  line-height: 160%;
+  font-weight: 400;
+  color: #565973;
+  font-family: "Manrope", sans-serif;
+  font-size: 12px !important;
+}
+
+.text-s {
+  line-height: 160%;
+  font-weight: 400;
+  color: #565973;
+  font-family: "Manrope", sans-serif;
+  font-size: 14px !important;
+}
+
+.text-m {
+  line-height: 160%;
+  font-weight: 400;
+  color: #565973;
+  font-family: "Manrope", sans-serif;
+  font-size: 16px !important;
+}
+
+.text-lg {
+  line-height: 160%;
+  font-weight: 400;
+  color: #565973;
+  font-family: "Manrope", sans-serif;
+  font-size: 18px !important;
+}
+
+.text-xl {
+  line-height: 160%;
+  font-weight: 400;
+  color: #565973;
+  font-family: "Manrope", sans-serif;
+  font-size: 20px !important;
+}
+
+.text-lead {
+  line-height: 160%;
+  font-weight: 400;
+  color: #565973;
+  font-family: "Manrope", sans-serif;
+  font-size: 24px !important;
+}
+
+.d1 {
+  line-height: 160%;
+  font-weight: 400;
+  color: #565973;
+  font-family: "Manrope", sans-serif;
+  font-weight: 800;
+  color: #0B0F19;
+  font-size: 80px !important;
+}
+
+.d2 {
+  line-height: 160%;
+  font-weight: 400;
+  color: #565973;
+  font-family: "Manrope", sans-serif;
+  font-weight: 800;
+  color: #0B0F19;
+  font-size: 72px !important;
+}
+
+.d3 {
+  line-height: 160%;
+  font-weight: 400;
+  color: #565973;
+  font-family: "Manrope", sans-serif;
+  font-weight: 800;
+  color: #0B0F19;
+  font-size: 64px !important;
+}
+
+.d4 {
+  line-height: 160%;
+  font-weight: 400;
+  color: #565973;
+  font-family: "Manrope", sans-serif;
+  font-weight: 800;
+  color: #0B0F19;
+  font-size: 56px !important;
+}
+
+.d5 {
+  line-height: 160%;
+  font-weight: 400;
+  color: #565973;
+  font-family: "Manrope", sans-serif;
+  font-weight: 800;
+  color: #0B0F19;
+  font-size: 48px !important;
+}
+
+.d6 {
+  line-height: 160%;
+  font-weight: 400;
+  color: #565973;
+  font-family: "Manrope", sans-serif;
+  font-weight: 800;
+  color: #0B0F19;
+  font-size: 42px !important;
+}
+
+h1, .h1 {
+  line-height: 160%;
+  font-weight: 400;
+  color: #565973;
+  font-family: "Manrope", sans-serif;
+  font-weight: 800;
+  color: #0B0F19;
+  font-size: 40px !important;
+  margin: 0px;
+}
+
+h2, .h2 {
+  line-height: 160%;
+  font-weight: 400;
+  color: #565973;
+  font-family: "Manrope", sans-serif;
+  font-weight: 800;
+  color: #0B0F19;
+  font-size: 32px !important;
+  margin: 0px;
+}
+
+h3, .h3 {
+  line-height: 160%;
+  font-weight: 400;
+  color: #565973;
+  font-family: "Manrope", sans-serif;
+  font-weight: 800;
+  color: #0B0F19;
+  font-size: 28px !important;
+  margin: 0px;
+}
+
+h4, .h4 {
+  line-height: 160%;
+  font-weight: 400;
+  color: #565973;
+  font-family: "Manrope", sans-serif;
+  font-weight: 800;
+  color: #0B0F19;
+  font-size: 24px !important;
+  margin: 0px;
+}
+
+h5, .h5 {
+  line-height: 160%;
+  font-weight: 400;
+  color: #565973;
+  font-family: "Manrope", sans-serif;
+  font-weight: 800;
+  color: #0B0F19;
+  font-size: 20px !important;
+  margin: 0px;
+}
+
+h6, .h6 {
+  line-height: 160%;
+  font-weight: 400;
+  color: #565973;
+  font-family: "Manrope", sans-serif;
+  font-weight: 800;
+  color: #0B0F19;
+  font-size: 16px !important;
+  margin: 0px;
+}
+
+.wrapper {
+  height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+}
+
+.showSection {
+  transition: opacity ease-in 280ms;
+  opacity: 1 !important;
+}
+
+.section-container {
+  width: 100%;
+}
+@media (min-width: 398px) {
+  .section-container {
+    max-width: 320px;
+  }
+}
+@media (min-width: 768px) {
+  .section-container {
+    max-width: 720px;
+  }
+}
+@media (min-width: 992px) {
+  .section-container {
+    max-width: 920px;
+  }
+}
+@media (min-width: 1200px) {
+  .section-container {
+    max-width: 1120px;
+  }
+}
+@media (min-width: 1400px) {
+  .section-container {
+    max-width: 1320px;
+  }
+}
+
+.overlay {
+  opacity: 0.5;
+  filter: blur(5px);
+  overflow-y: hidden;
+}
+
+.fixed-bottom {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: #F3F6FF;
+}
+.fixed-bottom .container {
+  gap: 1rem;
+}
+
+.courses-boxes {
+  border-radius: 0.6rem;
+  box-shadow: 0px 4px 13px -2px rgba(19, 16, 34, 0.06), 0px 4.8px 24.4px -6px rgba(19, 16, 34, 0.1);
+  height: auto;
+  transition: ease-in-out 120ms;
+}
+.courses-boxes .imageContainer {
+  position: relative;
+  margin: 0;
+  border-radius: 0.6rem;
+  display: flex;
+}
+.courses-boxes .imageContainer .image {
+  width: 100%;
+  border-radius: 0.6rem 0.6rem 0 0;
+}
+.courses-boxes .imageContainer .best-seller-container {
+  position: absolute;
+  left: 3%;
+  top: 6%;
+}
+.courses-boxes .text-container {
+  display: grid;
+  grid-template-rows: 1fr;
+  gap: 0.2rem;
+  padding: 1rem;
+}
+.courses-boxes .text-container a {
+  transition: ease-in-out 120ms;
+}
+.courses-boxes .text-container a:hover {
+  text-decoration: underline;
+  color: #565973;
+}
+.courses-boxes .text-container h5 {
+  color: #0B0F19;
+  margin: 0rem;
+  transition: ease-in-out 120ms;
+}
+.courses-boxes .text-container h5:hover {
+  text-decoration: underline;
+  color: #565973;
+}
+.courses-boxes .text-container p {
+  font-size: 0.9rem;
+}
+.courses-boxes .text-container .price-container {
+  display: flex;
+  gap: 0.5rem;
+}
+.courses-boxes .text-container .price-container .price {
+  color: #6366F1;
+}
+.courses-boxes .text-container .price-container .price h6 {
+  margin: 0;
+}
+.courses-boxes .text-container .price-container .red {
+  color: #EF4444;
+}
+.courses-boxes .text-container .price-container .red h6 {
+  margin: 0;
+}
+.courses-boxes .text-container .price-container .discount-price {
+  color: #9397AD;
+  text-decoration: line-through;
+}
+.courses-boxes .text-container .price-container .discount-price p {
+  font-size: 1rem;
+}
+.courses-boxes .text-container .hr {
+  margin-block: 0.5rem;
+}
+.courses-boxes .text-container .timeAndLikesParent {
+  display: flex;
+  gap: 2rem;
+  color: #9397AD;
+}
+.courses-boxes .text-container .timeAndLikesParent .timeAndLikesChild {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+.courses-boxes .text-container .checkboxBestSeller {
+  display: flex;
+}
+.courses-boxes .text-container .btnContainer {
+  padding-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
 }
 
 p {
@@ -4927,7 +5288,7 @@ h6, .h6 {
     opacity: 0 !important;
     transition: ease-in 1200ms;
   }
-  #account .containerAccount h5 {
+  #account .containerAccount .account-h5 {
     color: #6366F1;
   }
   #account .containerAccount .save-cancel {
@@ -5631,23 +5992,50 @@ h6, .h6 {
 .bookmark {
   width: 2rem;
   height: 2rem;
+  border: none;
   border-radius: 50%;
   background-color: white;
   position: absolute;
   right: 3%;
   top: 6%;
   transition: ease-in-out 120ms;
-}
-.bookmark:hover {
-  background-color: #B4B7C9;
-  transform: scale(1.2);
-}
-.bookmark .bookmarkchild {
-  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  top: 25%;
+}
+.bookmark .bubble-container {
+  position: absolute;
+  bottom: 120%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: opacity ease-in-out 120ms;
+  opacity: 0;
+}
+.bookmark .bubble-container .text-container {
+  text-align: center;
+  background-color: #33354D;
+  color: #F3F6FF;
+  width: 7rem;
+  padding-block: 8px;
+  font-size: 0.9rem;
+  border-radius: 0.4rem;
+  border: none;
+  z-index: 2;
+}
+.bookmark .bubble-container .triangel-bottom {
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid #33354D;
+}
+.bookmark:hover {
+  background-color: #D4D7E5;
+  transform: scale(1.1);
+}
+.bookmark:hover .bubble-container {
+  opacity: 1;
 }
 
 p {
@@ -6302,10 +6690,9 @@ h6, .h6 {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 7px 28px;
-  color: #FFFFFF;
-  border: none;
-  background: #EF4444;
+  color: #EF4444;
+  border: solid 1px #EF4444;
+  background: transparent;
 }
 .btn-red:hover {
   text-decoration: none;
@@ -6540,93 +6927,6 @@ a:Active {
   .course-container #noCoursesFound {
     padding: 2rem;
     text-align: center;
-  }
-  .course-container .courses-boxes {
-    border-radius: 0.6rem;
-    box-shadow: 0px 4px 13px -2px rgba(19, 16, 34, 0.06), 0px 4.8px 24.4px -6px rgba(19, 16, 34, 0.1);
-    height: auto;
-  }
-  .course-container .courses-boxes .courses-boxes {
-    transition: ease-in-out 120ms;
-  }
-  .course-container .courses-boxes .courses-boxes .a-title:hover {
-    text-decoration: underline;
-    color: #565973;
-  }
-  .course-container .courses-boxes .courses-boxes .a-title h5:hover {
-    color: #565973;
-  }
-  .course-container .courses-boxes .imageContainer {
-    position: relative;
-    margin: 0;
-    border-radius: 0.6rem;
-    display: flex;
-  }
-  .course-container .courses-boxes .imageContainer .image {
-    width: 100%;
-    border-radius: 0.6rem 0.6rem 0 0;
-  }
-  .course-container .courses-boxes .imageContainer .best-seller-container {
-    position: absolute;
-    left: 3%;
-    top: 6%;
-  }
-  .course-container .courses-boxes .text-container {
-    display: grid;
-    grid-template-rows: 1fr;
-    gap: 0.2rem;
-    padding: 1rem;
-  }
-  .course-container .courses-boxes .text-container h5 {
-    margin: 0rem;
-  }
-  .course-container .courses-boxes .text-container p {
-    font-size: 0.9rem;
-  }
-  .course-container .courses-boxes .text-container .price-container {
-    display: flex;
-    gap: 0.5rem;
-  }
-  .course-container .courses-boxes .text-container .price-container .price {
-    color: #6366F1;
-  }
-  .course-container .courses-boxes .text-container .price-container .price h6 {
-    margin: 0;
-  }
-  .course-container .courses-boxes .text-container .price-container .red {
-    color: #EF4444;
-  }
-  .course-container .courses-boxes .text-container .price-container .red h6 {
-    margin: 0;
-  }
-  .course-container .courses-boxes .text-container .price-container .discount-price {
-    color: #9397AD;
-    text-decoration: line-through;
-  }
-  .course-container .courses-boxes .text-container .price-container .discount-price p {
-    font-size: 1rem;
-  }
-  .course-container .courses-boxes .text-container .hr {
-    margin-block: 0.5rem;
-  }
-  .course-container .courses-boxes .text-container .timeAndLikesParent {
-    display: flex;
-    gap: 2rem;
-    color: #9397AD;
-  }
-  .course-container .courses-boxes .text-container .timeAndLikesParent .timeAndLikesChild {
-    display: flex;
-    align-items: center;
-    gap: 0.2rem;
-  }
-  .course-container .courses-boxes .text-container .checkboxBestSeller {
-    display: flex;
-  }
-  .course-container .courses-boxes .text-container .btnContainer {
-    padding-top: 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: end;
   }
   .pagination-container {
     display: grid;
@@ -7359,23 +7659,50 @@ h6, .h6 {
 .bookmark {
   width: 2rem;
   height: 2rem;
+  border: none;
   border-radius: 50%;
   background-color: white;
   position: absolute;
   right: 3%;
   top: 6%;
   transition: ease-in-out 120ms;
-}
-.bookmark:hover {
-  background-color: #B4B7C9;
-  transform: scale(1.2);
-}
-.bookmark .bookmarkchild {
-  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  top: 25%;
+}
+.bookmark .bubble-container {
+  position: absolute;
+  bottom: 120%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: opacity ease-in-out 120ms;
+  opacity: 0;
+}
+.bookmark .bubble-container .text-container {
+  text-align: center;
+  background-color: #33354D;
+  color: #F3F6FF;
+  width: 7rem;
+  padding-block: 8px;
+  font-size: 0.9rem;
+  border-radius: 0.4rem;
+  border: none;
+  z-index: 2;
+}
+.bookmark .bubble-container .triangel-bottom {
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid #33354D;
+}
+.bookmark:hover {
+  background-color: #D4D7E5;
+  transform: scale(1.1);
+}
+.bookmark:hover .bubble-container {
+  opacity: 1;
 }
 
 p {
@@ -8030,10 +8357,9 @@ h6, .h6 {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 7px 28px;
-  color: #FFFFFF;
-  border: none;
-  background: #EF4444;
+  color: #EF4444;
+  border: solid 1px #EF4444;
+  background: transparent;
 }
 .btn-red:hover {
   text-decoration: none;
@@ -8268,93 +8594,6 @@ a:Active {
   .course-container #noCoursesFound {
     padding: 2rem;
     text-align: center;
-  }
-  .course-container .courses-boxes {
-    border-radius: 0.6rem;
-    box-shadow: 0px 4px 13px -2px rgba(19, 16, 34, 0.06), 0px 4.8px 24.4px -6px rgba(19, 16, 34, 0.1);
-    height: auto;
-  }
-  .course-container .courses-boxes .courses-boxes {
-    transition: ease-in-out 120ms;
-  }
-  .course-container .courses-boxes .courses-boxes .a-title:hover {
-    text-decoration: underline;
-    color: #565973;
-  }
-  .course-container .courses-boxes .courses-boxes .a-title h5:hover {
-    color: #565973;
-  }
-  .course-container .courses-boxes .imageContainer {
-    position: relative;
-    margin: 0;
-    border-radius: 0.6rem;
-    display: flex;
-  }
-  .course-container .courses-boxes .imageContainer .image {
-    width: 100%;
-    border-radius: 0.6rem 0.6rem 0 0;
-  }
-  .course-container .courses-boxes .imageContainer .best-seller-container {
-    position: absolute;
-    left: 3%;
-    top: 6%;
-  }
-  .course-container .courses-boxes .text-container {
-    display: grid;
-    grid-template-rows: 1fr;
-    gap: 0.2rem;
-    padding: 1rem;
-  }
-  .course-container .courses-boxes .text-container h5 {
-    margin: 0rem;
-  }
-  .course-container .courses-boxes .text-container p {
-    font-size: 0.9rem;
-  }
-  .course-container .courses-boxes .text-container .price-container {
-    display: flex;
-    gap: 0.5rem;
-  }
-  .course-container .courses-boxes .text-container .price-container .price {
-    color: #6366F1;
-  }
-  .course-container .courses-boxes .text-container .price-container .price h6 {
-    margin: 0;
-  }
-  .course-container .courses-boxes .text-container .price-container .red {
-    color: #EF4444;
-  }
-  .course-container .courses-boxes .text-container .price-container .red h6 {
-    margin: 0;
-  }
-  .course-container .courses-boxes .text-container .price-container .discount-price {
-    color: #9397AD;
-    text-decoration: line-through;
-  }
-  .course-container .courses-boxes .text-container .price-container .discount-price p {
-    font-size: 1rem;
-  }
-  .course-container .courses-boxes .text-container .hr {
-    margin-block: 0.5rem;
-  }
-  .course-container .courses-boxes .text-container .timeAndLikesParent {
-    display: flex;
-    gap: 2rem;
-    color: #9397AD;
-  }
-  .course-container .courses-boxes .text-container .timeAndLikesParent .timeAndLikesChild {
-    display: flex;
-    align-items: center;
-    gap: 0.2rem;
-  }
-  .course-container .courses-boxes .text-container .checkboxBestSeller {
-    display: flex;
-  }
-  .course-container .courses-boxes .text-container .btnContainer {
-    padding-top: 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: end;
   }
   .pagination-container {
     display: grid;
@@ -9414,10 +9653,9 @@ h6, .h6 {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 7px 28px;
-  color: #FFFFFF;
-  border: none;
-  background: #EF4444;
+  color: #EF4444;
+  border: solid 1px #EF4444;
+  background: transparent;
 }
 .btn-red:hover {
   text-decoration: none;
@@ -9842,23 +10080,50 @@ h6, .h6 {
 .bookmark {
   width: 2rem;
   height: 2rem;
+  border: none;
   border-radius: 50%;
   background-color: white;
   position: absolute;
   right: 3%;
   top: 6%;
   transition: ease-in-out 120ms;
-}
-.bookmark:hover {
-  background-color: #B4B7C9;
-  transform: scale(1.2);
-}
-.bookmark .bookmarkchild {
-  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  top: 25%;
+}
+.bookmark .bubble-container {
+  position: absolute;
+  bottom: 120%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: opacity ease-in-out 120ms;
+  opacity: 0;
+}
+.bookmark .bubble-container .text-container {
+  text-align: center;
+  background-color: #33354D;
+  color: #F3F6FF;
+  width: 7rem;
+  padding-block: 8px;
+  font-size: 0.9rem;
+  border-radius: 0.4rem;
+  border: none;
+  z-index: 2;
+}
+.bookmark .bubble-container .triangel-bottom {
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid #33354D;
+}
+.bookmark:hover {
+  background-color: #D4D7E5;
+  transform: scale(1.1);
+}
+.bookmark:hover .bubble-container {
+  opacity: 1;
 }
 
 p {
@@ -10513,10 +10778,9 @@ h6, .h6 {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 7px 28px;
-  color: #FFFFFF;
-  border: none;
-  background: #EF4444;
+  color: #EF4444;
+  border: solid 1px #EF4444;
+  background: transparent;
 }
 .btn-red:hover {
   text-decoration: none;
@@ -10928,5 +11192,28 @@ a:Active {
     display: flex;
     flex-direction: row;
     gap: 1rem;
+  }
+}
+@media (min-width: 10px) {
+  .myCoursesContainer {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+  .myCoursesContainer .section-headline-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-block: 1rem;
+  }
+}
+@media (min-width: 992px) {
+  .myCoursesContainer {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+  .myCoursesContainer #headlineContainer {
+    grid-area: 1/1/span 1/span 2;
   }
 }

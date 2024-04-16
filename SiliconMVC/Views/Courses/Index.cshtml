@@ -18,6 +18,12 @@
 
     <div class="headlineCourses">
         <h1>Courses</h1>
+
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <span id="noCoursesFound" class="error">@TempData["ErrorMessage"]</span>
+        }
+
         <div class="search-container">
             <div class="dropdown">
                 <button class="btn-transparent dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -65,13 +71,19 @@
                             
                         }
 
-                        <a asp-controller="Courses" asp-action="MyCourses" asp-route-id="@course.Id" class="bookmark">
-                            <div class="bookmarkchild">
+                        <form asp-controller="CourseDetails" asp-action="JoinCourse" asp-route-courseId="@course.Id" method="post">
+                            <button type="submit" class="bookmark">
+                                <div class="bubble-container">
+                                    <div class="text-container">
+                                        Add course
+                                    </div>
+                                    <div class="triangel-bottom"></div>
+                                </div>
                                 <svg width="12" height="16" viewBox="0 0 12 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M10.5 0.5H1.5C0.67275 0.5 0 1.17275 0 2V5.957V6.5V15.5L6 12.071L12 15.5V6.5V5.957V2C12 1.17275 11.3273 0.5 10.5 0.5ZM10.5 12.9147L6 10.3438L1.5 12.9147V6.5V5.957V2H10.5V5.957V6.5V12.9147Z" fill="#33354D" />
                                 </svg>
-                            </div>
-                        </a>
+                        </button>
+                        </form>
                     </div>
                     <div class="text-container">
                         <a class="a-title" asp-controller="CourseDetails" asp-action="Index" asp-route-courseId="@course.Id"><h5>@course.Title</h5></a>
@@ -107,9 +119,6 @@
                 </div>
             }
         }
-
-        <span id="noCoursesFound" class="error">@TempData["ErrorMessage"]</span>
-
     </div>
 
     <!-- Pagination -->
