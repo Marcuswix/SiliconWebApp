@@ -77,6 +77,7 @@ namespace SiliconMVC.Controllers
 
                 if (result.StatusCode == Infrastructure.Models.StatusCodes.OK)
                 {
+                    TempData["SuccessMessage"] = "The course was successfully added!";
                     return RedirectToAction("Index", "MyCourses");
                 }
                 if(result.StatusCode == Infrastructure.Models.StatusCodes.EXISTS)

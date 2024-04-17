@@ -67,7 +67,28 @@ namespace Infrastructure.Services
         {
             try
             {
-                var response = await _httpClient.PostAsync($"https://localhost:7117/delete?courseId={courseId}&userId={userId}&key={apiKey}", null);
+                var response = await _httpClient.DeleteAsync($"https://localhost:7117/delete?courseId={courseId}&userId={userId}&key={apiKey}");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return ResponseFactory.Ok();
+                }
+
+                return ResponseFactory.Error();
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return null;
+            }
+        }
+
+        public async Task<RepositoriesResult> DeleteAllCourses(string apiKey, string userId)
+        {
+            try
+            {
+                var response = await _httpClient.DeleteAsync($"https://localhost:7117/deleteAllCourses?userId={userId}&key={apiKey}");
 
                 if (response.IsSuccessStatusCode)
                 {

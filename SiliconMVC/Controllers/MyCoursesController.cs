@@ -87,8 +87,8 @@ namespace SiliconMVC.Controllers
 
                         if (result.StatusCode == Infrastructure.Models.StatusCodes.OK)
                         {
-                            TempData["SuccessMessage"] = "The course was deleted successfully!";
-                            return View(result);
+                            TempData["SuccessMessage"] = "The course was successfully deleted!";
+                            return RedirectToAction("Index");
                         }
                         else
                         {
@@ -104,5 +104,42 @@ namespace SiliconMVC.Controllers
             }
         }
 
+        [HttpPost]
+        public async Task<IActionResult> DeleteAllCourses()
+        {
+            setValues();
+            try
+            {
+                if (HttpContext.Request.Cookies.TryGetValue("AccessToken", out var token))
+                {
+                    _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+                    var apiKey = _configuration["ApiKey:Secret"];
+
+                    var user = await _userManager.GetUserAsync(User);
+
+                    if (user != null)
+                    {
+                        var result = await _myCoursesServices.DeleteAllCourses(apiKey, user.Id);
+
+                        if (result.StatusCode == Infrastructure.Models.StatusCodes.OK)
+                        {
+                            TempData["SuccessMessage"] = "All courses was successfully deleted!";
+                            return RedirectToAction("Index");
+                        }
+                        else
+                        {
+                            TempData["ErrorMessage"] = "Something went wrong...";
+                            return RedirectToAction("Index");
+                        }
+                    }
+                }
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message); return View();
+            }
+        }
     }
 }

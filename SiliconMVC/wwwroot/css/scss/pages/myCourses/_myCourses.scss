@@ -1,17 +1,29 @@
+@import '../../core/_colors.scss';
+
 //mobil-first
 @media(min-width: 10px) 
 {
     .myCoursesContainer {
         display: grid;
+        grid-template-columns: 1fr;
         align-items: center;
         justify-content: center;
         gap: 1rem;
 
         .section-headline-container {
             display: flex;
+            flex-direction: column;
+            row-gap: 1rem;
             justify-content: space-between;
             align-items: center;
             padding-block: 1rem;
+        }
+
+        #noMyCourses {
+            text-align: center;
+            color: $gray-600;
+            font-size: 1.2rem;
+            grid-area: 2 / 1 / span 1 / span 2;
         }
     }
 }
@@ -20,6 +32,11 @@
     .myCoursesContainer {
         grid-template-columns: 1fr 1fr;
         gap: 2rem;
+
+        .section-headline-container {
+            flex-direction: row;
+            padding-block: 1rem;
+        }
 
         #headlineContainer {
             grid-area: 1 / 1 / span 1 /span 2;

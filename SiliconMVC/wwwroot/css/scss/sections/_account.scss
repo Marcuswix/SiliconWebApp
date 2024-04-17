@@ -2,8 +2,6 @@
 
 @media(min-width: 10px) {
     #account {
-
-
         .grey-color {
             color: $gray-600;
         }
@@ -11,7 +9,6 @@
         hr {
             margin-block: 2.5rem;
         }
-
         display: grid;
         grid-template-columns: 1fr;
         margin-block: 2rem;
@@ -137,6 +134,7 @@
 
         .leftside {
             border-right: solid $gray-300 2px;
+            height: 100%;
             padding-right: 1rem;
         }
 

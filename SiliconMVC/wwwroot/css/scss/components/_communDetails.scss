@@ -1,0 +1,9 @@
+@import '../core/_colors.scss';
+
+@media(min-width: 1320px)
+{
+    .hr-vertical {
+        height: 100vh;
+        color: $gray-200;
+    }
+}

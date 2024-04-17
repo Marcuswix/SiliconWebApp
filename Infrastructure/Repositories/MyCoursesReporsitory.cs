@@ -87,21 +87,22 @@ namespace Infrastructure.Repositories
         {
             try
             {
-                var user = await _userContext.Users.FirstOrDefaultAsync(x => x.Id == userId);
-             
-                if (user != null)
+                var userCourses = _userContext.UserCourses.Where(x => x.UserId == userId).ToList();
+
+                if (userCourses.Count != 0)
                 {
-                    var course = user.Courses.FirstOrDefault(x => x.CourseId == courseId);
-
-                    if (course != null)
+                    foreach (var course in userCourses)
                     {
-                        user.Courses.Remove(course);
-                        await _userContext.SaveChangesAsync();
+                        var courseToDelete = userCourses.FirstOrDefault(x => x.CourseId == courseId);
+
+                        if (courseToDelete.CourseId == courseId)
+                        {
+                            _userContext.UserCourses.Remove(courseToDelete);
+                            await _userContext.SaveChangesAsync();
+                            return true;
+                        }
                     }
-
-                    return true;
                 }
-
                 return false;
             }
             catch (Exception ex)
@@ -116,16 +117,13 @@ namespace Infrastructure.Repositories
         {
             try
             {
-                var user = await _userContext.Users.FirstOrDefaultAsync(x => x.Id == userId);
+                var userCourses = _userContext.UserCourses.Where(x => x.UserId == userId).ToList();
 
-                if (user != null)
+                if (userCourses.Count != 0)
                 {
-                    foreach (var course in user.Courses)
-                    {
-                        user.Courses.Remove(course);
-                    }
-                    await _userContext.SaveChangesAsync();
-                    return true;
+                   _userContext.UserCourses.RemoveRange(userCourses);
+                   await _userContext.SaveChangesAsync();
+                   return true;
                 }     
                 return false;
             }

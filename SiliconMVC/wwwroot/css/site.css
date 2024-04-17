@@ -976,7 +976,7 @@ h6, .h6 {
 }
 .btn-red:hover {
   text-decoration: none;
-  background: #565973;
+  background: #EF4444;
   color: #FFFFFF;
 }
 
@@ -1559,7 +1559,7 @@ h6, .h6 {
 }
 .btn-red:hover {
   text-decoration: none;
-  background: #565973;
+  background: #EF4444;
   color: #FFFFFF;
 }
 
@@ -2416,6 +2416,20 @@ h6, .h6 {
   align-items: end;
 }
 
+@media (min-width: 992px) {
+  .courses-boxes {
+    transition: ease-in-out 120ms;
+  }
+  .courses-boxes:hover {
+    box-shadow: 0px 2px 8px #B4B7C9;
+  }
+}
+@media (min-width: 1320px) {
+  .hr-vertical {
+    height: 100vh;
+    color: #EFF2FC;
+  }
+}
 p {
   margin: 0;
 }
@@ -5314,6 +5328,7 @@ h6, .h6 {
   }
   #account .leftside {
     border-right: solid #E2E5F1 2px;
+    height: 100%;
     padding-right: 1rem;
   }
   #account .containerAccount {
@@ -6696,7 +6711,7 @@ h6, .h6 {
 }
 .btn-red:hover {
   text-decoration: none;
-  background: #565973;
+  background: #EF4444;
   color: #FFFFFF;
 }
 
@@ -6942,7 +6957,7 @@ a:Active {
     align-items: center;
   }
 }
-@media (min-width: 1820px) {
+@media (min-width: 992px) {
   #courses .navigation {
     justify-content: left;
   }
@@ -6968,23 +6983,15 @@ a:Active {
     width: 20rem;
   }
   .course-container {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
   }
   .course-container #noCoursesFound {
     grid-column: 2;
   }
-  .course-container .courses-boxes {
-    transition: ease-in-out 120ms;
-  }
-  .course-container .courses-boxes:hover {
-    box-shadow: 0px 2px 8px #B4B7C9;
-  }
-  .course-container .courses-boxes:hover .a-title:hover {
-    text-decoration: underline;
-    color: #565973;
-  }
-  .course-container .courses-boxes:hover .a-title h5:hover {
-    color: #565973;
+}
+@media (min-width: 1320px) {
+  .course-container {
+    grid-template-columns: 1fr 1fr 1fr;
   }
 }
 @media (min-width: 10px) {
@@ -8363,7 +8370,7 @@ h6, .h6 {
 }
 .btn-red:hover {
   text-decoration: none;
-  background: #565973;
+  background: #EF4444;
   color: #FFFFFF;
 }
 
@@ -8609,7 +8616,7 @@ a:Active {
     align-items: center;
   }
 }
-@media (min-width: 1820px) {
+@media (min-width: 992px) {
   #courses .navigation {
     justify-content: left;
   }
@@ -8635,23 +8642,15 @@ a:Active {
     width: 20rem;
   }
   .course-container {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
   }
   .course-container #noCoursesFound {
     grid-column: 2;
   }
-  .course-container .courses-boxes {
-    transition: ease-in-out 120ms;
-  }
-  .course-container .courses-boxes:hover {
-    box-shadow: 0px 2px 8px #B4B7C9;
-  }
-  .course-container .courses-boxes:hover .a-title:hover {
-    text-decoration: underline;
-    color: #565973;
-  }
-  .course-container .courses-boxes:hover .a-title h5:hover {
-    color: #565973;
+}
+@media (min-width: 1320px) {
+  .course-container {
+    grid-template-columns: 1fr 1fr 1fr;
   }
 }
 p {
@@ -9659,7 +9658,7 @@ h6, .h6 {
 }
 .btn-red:hover {
   text-decoration: none;
-  background: #565973;
+  background: #EF4444;
   color: #FFFFFF;
 }
 
@@ -10784,7 +10783,7 @@ h6, .h6 {
 }
 .btn-red:hover {
   text-decoration: none;
-  background: #565973;
+  background: #EF4444;
   color: #FFFFFF;
 }
 
@@ -11197,21 +11196,34 @@ a:Active {
 @media (min-width: 10px) {
   .myCoursesContainer {
     display: grid;
+    grid-template-columns: 1fr;
     align-items: center;
     justify-content: center;
     gap: 1rem;
   }
   .myCoursesContainer .section-headline-container {
     display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
     justify-content: space-between;
     align-items: center;
     padding-block: 1rem;
+  }
+  .myCoursesContainer #noMyCourses {
+    text-align: center;
+    color: #9397AD;
+    font-size: 1.2rem;
+    grid-area: 2/1/span 1/span 2;
   }
 }
 @media (min-width: 992px) {
   .myCoursesContainer {
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
+  }
+  .myCoursesContainer .section-headline-container {
+    flex-direction: row;
+    padding-block: 1rem;
   }
   .myCoursesContainer #headlineContainer {
     grid-area: 1/1/span 1/span 2;

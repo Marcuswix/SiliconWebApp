@@ -67,7 +67,7 @@
     }
 }
 
-@media(min-width:1820px)
+@media(min-width: 992px)
 {
     #courses {
         .navigation {
@@ -102,32 +102,17 @@
     }
 
     .course-container {
-        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
 
         #noCoursesFound {
             grid-column: 2;
         }
+    }
+}
 
-        .courses-boxes {
-            transition: ease-in-out 120ms;
-
-            &:hover {
-                box-shadow: 0px 2px 8px $gray-500;
-
-                .a-title {
-                    &:hover {
-                        text-decoration: underline;
-                        color: $gray-700;
-                    }
-
-                    h5 {
-
-                        &:hover {
-                            color: $gray-700;
-                        }
-                    }
-                }
-            }
-        }
+@media(min-width:1320px)
+{
+    .course-container {
+        grid-template-columns: 1fr 1fr 1fr;
     }
 }

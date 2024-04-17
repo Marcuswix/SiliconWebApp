@@ -112,3 +112,15 @@
         }
     }
 }
+
+//Desktop
+@media(min-width: 992px)
+{
+    .courses-boxes {
+        transition: ease-in-out 120ms;
+
+        &:hover {
+            box-shadow: 0px 2px 8px $gray-500;
+        }
+    }
+}

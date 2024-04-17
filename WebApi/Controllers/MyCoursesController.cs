@@ -73,23 +73,25 @@ namespace WebApi.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpDelete]
         [Route("/delete")]
         public async Task<IActionResult> DeleteCourse(int courseId, string userId)
         {
-            var result = await _myCoursesReporsitory.DeleteACourse(courseId, userId);
-
-            if (result == true)
+            if(courseId != 0 && userId != null)
             {
-                return Ok(result);
-            }
+                var result = await _myCoursesReporsitory.DeleteACourse(courseId, userId);
 
+                if (result == true)
+                {
+                    return Ok(result);
+                }
+            }
             return BadRequest();
         }
 
         [HttpDelete]
         [Route("/deleteAllCourses")]
-        public async Task<IActionResult> DeleteAllCourse(int courseId, string userId)
+        public async Task<IActionResult> DeleteAllCourse(string userId)
         {
             var result = await _myCoursesReporsitory.DeleteAllCourses(userId);
 
