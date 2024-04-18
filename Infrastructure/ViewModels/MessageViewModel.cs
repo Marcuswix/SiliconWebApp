@@ -4,8 +4,8 @@ namespace Infrastructure.ViewModels
 {
     public class MessageViewModel
     {
-        public MessageModel? Message { get; set; }
+        public ContactMessageModel? Message { get; set; }
 
-        public ApplicationModel? Application { get; set; }
+        public ContactCareersModel? Application { get; set; }
     }
 }

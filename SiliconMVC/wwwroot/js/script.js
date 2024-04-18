@@ -60,53 +60,6 @@ window.onload = function () {
     window.scrollTo(0, scrollPosition);
 };
 
-function showHideMessage()
-{
-    if (contactForm.classList.contains("hideForm")) {
-        contactForm.classList.remove("hideForm")
-        applicationForm.classList.add("hideForm")
-
-    }
-    else {
-        contactForm.classList.add("hideForm")
-    }
-}
-
-function showHideApplication() {
-    if (applicationForm.classList.contains("hideForm"))
-    {
-        applicationForm.classList.remove("hideForm")
-        contactForm.classList.add("hideForm")
-    }
-    else 
-    {
-        applicationForm.classList.add("hideForm")
-    }
-}
-
-function hideMessage() {
-    contactForm.classList.add("hideForm")
-    applicationForm.classList.add("hideForm")
-}
-
-const messageApplication = document.getElementById("ThanksforyourMessage");
-
-function onsubmitMessage() {
-
-    setTimeout(function () {
-        messageApplication.classList.remove("success");
-        messageApplication.classList.add("hide");
-    }, 3000);
-}
-const messageMessage = document.getElementById("thanksforyourApplication");
-function onsubmitApplication() {
-
-    setTimeout(function () {
-        messageMessage.classList.remove("success");
-        messageMessage.classList.add("hide");
-    }, 3000);
-}
-
 document.addEventListener("DOMContentLoaded", function () {
     var main = document.getElementById("main");
         setTimeout(function () {

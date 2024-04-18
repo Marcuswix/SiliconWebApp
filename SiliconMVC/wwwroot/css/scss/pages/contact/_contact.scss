@@ -19,7 +19,8 @@
 
 
         .navigation {
-            display: flex;
+            display: none;
+            width: 100%;
             column-gap: 0.5rem;
             color: $gray-600;
 
@@ -191,6 +192,18 @@
 
 @media(min-width: 1820px) {
     #contact {
+
+        .navigation {
+            display: flex;
+            column-gap: 0.5rem;
+            color: $gray-600;
+
+            .home {
+                margin-right: 0.5rem;
+                margin-top: 0.25rem;
+            }
+        }
+
         .container {
             padding-block: 4rem;
 

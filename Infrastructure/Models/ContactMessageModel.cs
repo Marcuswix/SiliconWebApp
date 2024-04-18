@@ -2,7 +2,7 @@
 
 namespace Infrastructure.Models
 {
-    public class MessageModel
+    public class ContactMessageModel
     {
         [Required(ErrorMessage = "You must enter a name")]
         [Display(Name = "Name", Prompt = "Enter your name", Order = 0)]
@@ -10,11 +10,11 @@ namespace Infrastructure.Models
 
         [Required(ErrorMessage = "You must enter an email address")]
         [Display(Name = "Email", Prompt = "Enter your email", Order = 1)]
-        [EmailAddress]
+        [EmailAddress(ErrorMessage = "You must enter a valid email address")]
         public string Email { get; set; } = null!;
 
-        [Display(Name = "Subject", Order = 2)]
-        public string? Subject { get; set; }
+        [Display(Name = "Service", Order = 2)]
+        public string? Service { get; set; }
 
         [Display(Name = "Message", Prompt = "Enter you message here...", Order = 3)]
         [Required(ErrorMessage = "You must enter a message")]

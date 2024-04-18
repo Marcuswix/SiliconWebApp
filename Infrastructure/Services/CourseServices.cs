@@ -31,12 +31,10 @@ namespace Infrastructure.Services
                     var coursesObject = JObject.Parse(coursesJson);
                     var coursesArray = coursesObject["contentResult"]["$values"].ToObject<List<CourseEntity>>();
 
-                    // Hämta kategorier separat
                     var categoriesResponse = await _httpClient.GetAsync("https://localhost:7117/api/Category");
                     var categoriesJson = await categoriesResponse.Content.ReadAsStringAsync();
                     var categories = JsonConvert.DeserializeObject<List<CategoryEntity>>(categoriesJson);
 
-                    // Lägg till kategorier till varje kurs
                     foreach (var course in coursesArray)
                     {
                         course.Category = categories.FirstOrDefault(c => c.Id == course.CategoryId);

@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastru
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "WebApi\WebApi.csproj", "{A76B18CE-F38E-49BC-89CF-EC769805E498}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SiliconTests", "SiliconTests\SiliconTests.csproj", "{68D74D73-593F-4967-9FF0-C73CCB291BAE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SiliconTests", "SiliconTests\SiliconTests.csproj", "{68D74D73-593F-4967-9FF0-C73CCB291BAE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

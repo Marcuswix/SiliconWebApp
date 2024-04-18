@@ -1,5 +1,6 @@
 ﻿function formErrorHandler(targetElement, validationResult)
 {
+
     let spanElement = document.querySelector(`[data-valmsg-for="${targetElement.name}"]`);
 
     if (validationResult === true && targetElement.type === 'checkbox')
@@ -95,7 +96,7 @@ function checkboxValidator(targetElement) {
         }
     }
     if (targetElement.checked === true) {
-        console.log("ute")
+
         return formErrorHandler(targetElement, true)
     }
     else {
@@ -108,7 +109,7 @@ function checkboxValidator(targetElement) {
 let forms = document.querySelectorAll('form');
 
 forms.forEach(form => {
-    let inputs = form.querySelectorAll('input');
+    let inputs = form.querySelectorAll('input, textarea');
 
     inputs.forEach(input => {
         if (input.dataset.val === 'true')
@@ -119,7 +120,14 @@ forms.forEach(form => {
                 checkboxValidator(e.target)
                 });
             }
-            else {
+            if (input.name === "textarea")
+            {
+                input.addEventListener('keyup', (e) => {
+                    textValidator(e.target);
+                });
+            }
+            else
+            {
                 input.addEventListener('keyup', (e) => {
                     switch (e.target.type) {
                         case 'text':
@@ -131,12 +139,16 @@ forms.forEach(form => {
                         case 'password':
                             passwordValidator(e.target);
                             break;
+                        default:
+                            textValidator(e.target);
+                            break;
                     }
                 });
             }
         }
     });
 })
+
 
 
 

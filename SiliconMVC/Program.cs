@@ -49,6 +49,8 @@ namespace Infrastructure
             builder.Services.AddScoped<SubscribeRepository>();
             builder.Services.AddScoped<AccountServices>();
             builder.Services.AddScoped<MyCoursesServices>();
+            builder.Services.AddScoped<ContactServices>();
+            builder.Services.AddScoped<GetTokenAndApiKey>();
 
             builder.Services.AddHttpClient();
 

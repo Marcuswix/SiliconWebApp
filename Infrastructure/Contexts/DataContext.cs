@@ -1,8 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Infrastructure.Entities;
-using System.Reflection.Emit;
-using System.Security.Cryptography.X509Certificates;
 
 namespace Infrastructure.Contexts
 {
@@ -39,6 +37,10 @@ namespace Infrastructure.Contexts
         public DbSet<WhatYouLearnEntity> WhatYouLearn { get; set; }
 
         public DbSet<WhatYouLearnItemsEntity> WhatYouLearnItems { get; set; }
+
+        public DbSet<ContactMessageEntity> ContactMessages { get; set; }
+
+        public DbSet<ContactCareersEntity> ContactCareers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
