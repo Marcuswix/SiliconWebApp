@@ -115,19 +115,34 @@ namespace Infrastructure.Repositories
 {
     try
     {
-        var entity = new CourseEntity
-        {
-            Title = model.Title,
-            Author = model.Author,
-            Description = model.Description,
-            DiscountPrice = model.DiscountPrice,
-            Hours = model.Hours,
-            IsBestseller = model.IsBestseller,
-            LikesInNumbers = model.LikesInNumbers,
-            LikesInProcent = model.LikesInProcent,
-            Price = model.Price,
-            WhatYouLearn = model.WhatYouLearn,
-        };
+                var entity = new CourseEntity
+                {
+                    Title = model.Title,
+                    Author = model.Author,
+                    Description = model.Description,
+                    DiscountPrice = model.DiscountPrice,
+                    Hours = model.Hours,
+                    IsBestseller = model.IsBestseller,
+                    LikesInNumbers = model.LikesInNumbers,
+                    LikesInProcent = model.LikesInProcent,
+                    Price = model.Price,
+                    WhatYouLearn = model.WhatYouLearn,
+                    IsDigital = model.IsDigital,
+                    ExtraInfoOne = model.ExtraInfoOne,
+                    ExtraInfoThree = model.ExtraInfoThree,
+                    ExtraInfoTwo = model.ExtraInfoTwo,
+                    ImageUrl = model.ImageUrl,
+                    ImageALtText = model.ImageALtText,
+                    NumberOfStars = model.NumberOfStars,
+                    Resourses = model.Resourses,
+                    NumberOfArticles = model.NumberOfArticles,
+                    ProgramDetailsId = model.ProgramDetailsId,
+                    TeacherId = model.TeacherId == 0 ? 1 : model.TeacherId,
+                    Ingress = model.Ingress,
+                    WhatYouLearnId = model.WhatYouLearnId,
+                    CategoryId = model.CategoryId == 0 ? 1 : model.CategoryId
+
+                };
 
         var result = _dataContext.Courses.Add(entity);
         await _dataContext.SaveChangesAsync();
@@ -146,6 +161,19 @@ namespace Infrastructure.Repositories
                 LikesInProcent = entity.LikesInProcent,
                 Price = entity.Price,
                 WhatYouLearn = entity.WhatYouLearn,
+                IsDigital = entity.IsDigital,
+                ExtraInfoOne = entity.ExtraInfoOne,
+                ExtraInfoThree  = entity.ExtraInfoThree,
+                ExtraInfoTwo    = entity.ExtraInfoTwo,
+                ImageUrl = entity.ImageUrl,
+                ImageALtText = entity.ImageALtText,
+                NumberOfStars = entity.NumberOfStars,
+                Resourses = entity.Resourses,
+                NumberOfArticles = entity.NumberOfArticles,
+                ProgramDetailsId = 1,
+                CategoryId = 1,
+                TeacherId = 1,
+                WhatYouLearnId = 1,
             };
             
             return ResponseFactory.Ok(course);

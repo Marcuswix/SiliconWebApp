@@ -1,6 +1,5 @@
 ﻿using Infrastructure.Entities;
 using Infrastructure.Models;
-using Infrastructure.Repositories;
 
 namespace Infrastructure.Factories
 {

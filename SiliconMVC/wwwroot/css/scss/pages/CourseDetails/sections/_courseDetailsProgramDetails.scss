@@ -29,7 +29,7 @@
                     .outerCircle {
                         width: auto;
                         height: auto;
-                        border: 0.6rem solid $gray-200;
+                        border: 0.6rem solid var(--color-gray-200);
                         border-radius: 50%;
 
                         .innerCircle {
@@ -39,7 +39,7 @@
                             justify-content: center;
                             align-items: center;
                             border-radius: 50%;
-                            box-shadow: 0px 0px 5px $gray-400;
+                            box-shadow: 0px 0px 5px var(--color-gray-400);
 
                             h3 {
                                 font-size: 1.2rem;
@@ -52,7 +52,7 @@
                     .line {
                         width: 0.15rem;
                         height: 65%;
-                        background-color: $gray-300;
+                        background-color: var(--color-gray-300);
                     }
                 }
 
@@ -68,7 +68,6 @@
     #ProgramDetails {
         gap: 2rem;
         width: 100%;
-        padding-block: 0rem;
 
         h1 {
             text-align: left;
@@ -91,7 +90,7 @@
                     .outerCircle {
                         width: auto;
                         height: auto;
-                        border: 0.6rem solid $gray-200;
+                        border: 0.6rem solid var(--color-gray-200);
                         border-radius: 50%;
 
                         .innerCircle {
@@ -101,7 +100,7 @@
                             justify-content: center;
                             align-items: center;
                             border-radius: 50%;
-                            box-shadow: 0px 0px 5px $gray-400;
+                            box-shadow: 0px 0px 5px var(--color-gray-400);
 
                             h3 {
                                 font-size: 1.2rem;
@@ -114,7 +113,7 @@
                     .line {
                         width: 0.15rem;
                         height: 65%;
-                        background-color: $gray-300;
+                        background-color: var(--color-gray-300);
                     }
                 }
 

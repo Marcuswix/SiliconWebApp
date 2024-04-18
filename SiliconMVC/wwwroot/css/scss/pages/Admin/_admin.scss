@@ -25,20 +25,20 @@
                 justify-content: space-between;
                 align-items: center;
                 column-gap: 1rem;
-                border: solid 1px $gray-200;
+                border: solid 1px var(--color-gray-200);
             }
         }
 
         .areYouShureContainer {
             display: none;
-            background-color: $gray-200;
+            background-color: var(--color-gray-200);
             padding: 2rem;
             position: absolute;
             left: 50%;
             top: 50%;
             transform: translate(-50%, -50%);
             z-index: 2;
-            box-shadow: 2px 3px 5px $gray-200;
+            box-shadow: 2px 3px 5px var(--color-gray-200);
             transition: ease-in-out 120ms;
 
 
@@ -65,18 +65,18 @@
             transition: color ease-in-out 120ms;
 
             &:hover {
-                color: $gray-500;
-                text-shadow: 1px 1px 2px $gray-200;
+                color: var(--color-gray-500);
+                text-shadow: 1px 1px 2px var(--color-gray-200);
             }
         }
 
         h6 {
-                transition: color ease-in-out 120ms;
+            transition: color ease-in-out 120ms;
 
-                &:hover {
-                    color: $gray-500;
-                    text-shadow: 1px 1px 2px $gray-200;
-                }
+            &:hover {
+                color: var(--color-gray-500);
+                text-shadow: 1px 1px 2px var(--color-gray-200);
+            }
         }
     }
 
@@ -96,14 +96,14 @@
 
 .areYouShureContainer {
     display: none;
-    background-color: $gray-200;
+    background-color: var(--color-gray-200);
     padding: 2rem;
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
     z-index: 2;
-    box-shadow: 2px 3px 5px $gray-200;
+    box-shadow: 2px 3px 5px var(--color-gray-200);
     transition: ease-in-out 120ms;
     text-align: center;
 
@@ -112,7 +112,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        gap: 1rem; 
+        gap: 1rem;
     }
 }
 

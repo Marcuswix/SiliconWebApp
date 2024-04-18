@@ -1,46 +1,39 @@
 @media(min-width: 10px)
 {
-    #lightDark
-    {
+    #lightDark {
         background: linear-gradient(to right, black 50%, white 50%);
         width: 100%;
         padding-block: 2rem;
 
-        .textContainer
-        {
+        .textContainer {
             display: flex;
             justify-content: center;
-            column-gap: 1rem; 
+            column-gap: 1rem;
 
-            .dark
-            {
+            .dark {
                 width: 50%;
-                color: white;
+                color: var(--color-white);
                 text-align: right;
-                
-                h1
-                {
-                    color: white;
+
+                h1 {
+                    color: var(--color-white);
                     text-align: right;
                 }
             }
-    
-            .light
-            {
+
+            .light {
                 width: 50%;
                 text-align: left;
             }
         }
 
-        .imageContainer
-        {
-            grid-column: 1 / span 2; 
+        .imageContainer {
+            grid-column: 1 / span 2;
             position: relative;
             height: 50vh;
             display: flex;
 
-            .macbookPro
-            {
+            .macbookPro {
                 position: absolute;
                 top: 50%;
                 left: 50%;

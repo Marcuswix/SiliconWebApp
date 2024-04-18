@@ -26,7 +26,8 @@ function hideMessage() {
 
 const messageName = document.getElementById("messageName");
 const messageEmail = document.getElementById("messageEmail");
-const messageMessage = document.getElementById("messageMessage");
+const messageMessage = document.getElementById("messageMessage").classList.add("field-validation-error");
+const filloutForm = document.getElementById("fillOutForm");
 
 function onsubmitMessage(event)
 {
@@ -34,7 +35,7 @@ function onsubmitMessage(event)
     {
         var hasError = true;
 
-            if (messageName.classList.contains("field-validation-valid") && messageEmail.classList.contains("field-validation-valid") && messageMessage.classList.contains("field-validation-valid"))
+        if (messageName.classList.contains("field-validation-valid") && messageEmail.classList.contains("field-validation-valid") && !messageMessage.classList.includes("field-validation-error") && messageMessage.classList.contains("field-validation-valid"))
             {
                 console.log("InneInneInneInne");
                 console.log("Felaktigt span-element:", span.innerText);
@@ -46,7 +47,40 @@ function onsubmitMessage(event)
 
         if (hasError) {
             event.preventDefault();
-            document.getElementById("fillOutForm").classList.remove("hideSpan");
+            filloutForm.classList.remove("hideSpan");
+        }
+        else {
+            console.log("inneInne");
+        }
+    }
+    catch {
+        console.log(Error.Error)
+    }
+}
+
+const applicationName = document.getElementById("applicationName");
+const applicationEmail = document.getElementById("applicationEmail");
+const applicationMessage = document.getElementById("applicationMessage").classList.add("field-validation-error");
+const applicationfilloutForm = document.getElementById("applicationfillOutForm");
+
+
+function onsubmitApplication(event) {
+    try {
+        var hasError = true;
+
+        if (applicationName.classList.contains("field-validation-valid") && applicationEmail.classList.contains("field-validation-valid") && !applicationMessage.classList.includes("field-validation-error") && applicationMessage.classList.contains("field-validation-valid"))
+        {
+            console.log("InneInneInneInne");
+            console.log("Felaktigt span-element:", span.innerText);
+            hasError = false;
+            return;
+        }
+
+        console.log(hasError);
+
+        if (hasError) {
+            event.preventDefault();
+            applicationfilloutForm.classList.remove("hideSpan");
         }
         else {
             console.log("inneInne");

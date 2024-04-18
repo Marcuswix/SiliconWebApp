@@ -2,136 +2,136 @@
 
 @media(min-width: 10px)
 {
-    #download
-    {
-        background-color: $gray-100;
+    #download {
+        background-color: var(--color-gray-100);
         width: 100%;
         padding-block: 2rem;
 
-        .imageContainer
+        .flex-container 
         {
-            width: 100%;
-            padding-inline: 1rem;
-            height: auto;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
 
-            .imagePhone
-            {
-                width: 80%;
+            .imageContainer {
+                width: 100%;
+                padding: 1rem;
                 height: auto;
-            }
-        }
+                display: flex;
+                justify-content: center;
+                align-items: center;
 
-        .container
-        {
-            margin-block: 1rem;
-            text-align: center;
-
-            h1
-            {
-                line-height: 3.2rem;
-            }
-
-            .contentContainer
-            {
-                padding-block: 1rem;
-                p
-                {
-                    margin: 0;
-                }
-                .btn-buy
-                {
-                    margin-block: 1rem;
+                .imagePhone {
+                    width: 80%;
+                    height: auto;
                 }
             }
 
-            #appstore
-            {
-                border-top: solid $gray-300 1px;
+            .textContainerDownload {
+                margin-block: 1rem;
+                text-align: center;
+
+                h1 {
+                    line-height: 3.2rem;
+                }
+
+                .contentContainer {
+                    padding-block: 1rem;
+
+                    p {
+                        margin: 0;
+                    }
+
+                    .btn-buy {
+                        margin-block: 1rem;
+                    }
+                }
+
+                #appstore {
+                    border-top: solid var(--color-gray-300) 1px;
+                }
             }
         }
     }
 }
 
-@media(min-width: 1820px)
+@media(min-width: 720px) 
 {
-    #download
-    {
+    #download {
         display: flex;
         justify-content: center;
         align-items: center;
         padding-block: 1rem;
 
-        .section-wrapper
-        {
-            max-width: 1320px;
-
-        display: flex;
-        justify-content: space-between;
-        column-gap: 10rem;
-        padding-inline: 6rem;
-        
-        .imageContainer
-        {
-            grid-column: 1;
-            width: 100%;
-            height: auto;
-
-            .imagePhone
-            {
-                width: 100%;
-                height: auto;
-            }
-        }
-
-        .container
-        {
-            grid-column: 2;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            text-align: left;
-
-            .contentContainer
-            {
-                display: flex;
-
-                h3
-                {
-                    margin: 0;
-                    margin-top: 0.5rem;
-                }
-                
-                .btn-buy
-                {
-                    margin-block: 1rem;
-                }
-
-                .headlineContainer
-                {
-                    display: block;
-                }
-
-                .btn-container
-                {
-                    margin-top: auto;
-                    margin-left: 4rem;
-
-                    .btn-buy
-                    {
-                        margin: 0;
-                    }
-                }  
-            }
-
-            #appstore
-            {
-                border-top: none;
+        .flex-container {
+                .imageContainer {
+                    width: 50vw;
+                    height: auto;
             }
         }
     }
-}      
 }
+
+
+@media(min-width: 1320px) {
+    #download {
+
+        .flex-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            column-gap: 8rem;
+
+            .imageContainer {
+                grid-column: 1;
+                width: 90%;
+                height: auto;
+                padding-inline: 0rem;
+
+                .imagePhone {
+                    width: 100%;
+                    height: auto;
+                }
+            }
+
+            .textContainerDownload {
+                grid-column: 2;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                text-align: left;
+
+                .contentContainer {
+                    display: flex;
+
+                    h4 {
+                        margin: 0;
+                        margin-top: 0.5rem;
+                    }
+
+                    .btn-buy {
+                        margin-block: 1rem;
+                    }
+
+                    .headlineContainer {
+                        display: block;
+                    }
+
+                    .btn-container {
+                        margin-top: auto;
+                        margin-left: 4rem;
+
+                        .btn-buy {
+                            margin: 0;
+                        }
+                    }
+                }
+
+                #appstore {
+                    border-top: none;
+                }
+            }
+        }
+    }
+        }
 

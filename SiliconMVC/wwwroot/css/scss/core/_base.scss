@@ -5,6 +5,7 @@
 html, body {
     @include standard-text;
     font-size: 16px;
+    background-color: var(--color-white);
 }
 
 .text-xs { @include text-xs; }
@@ -92,7 +93,7 @@ h6, .h6 { @include h6; }
     bottom: 0;
     right: 0;
     left: 0;
-    background: $gray-100;
+    background: var(--color-gray-100);
 
 
     .container {

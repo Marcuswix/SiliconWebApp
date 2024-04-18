@@ -3,20 +3,11 @@ using Newtonsoft.Json;
 using static System.Net.WebRequestMethods;
 using System.Text;
 using System.Diagnostics;
-using Infrastructure.Helpers;
-using Microsoft.AspNetCore.Http;
 
 namespace Infrastructure.Services
 {
     public class ContactServices
     {
-        private readonly GetTokenAndApiKey _tokenAndApiKey;
-        private readonly HttpClient _httpClient;
-
-        public ContactServices(GetTokenAndApiKey tokenAndApiKey)
-        {
-            _tokenAndApiKey = tokenAndApiKey;
-        }
 
         public async Task<bool> SendMessage(ContactMessageModel model, string apiKey)
         {

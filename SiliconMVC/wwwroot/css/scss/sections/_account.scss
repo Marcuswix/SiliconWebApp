@@ -3,12 +3,13 @@
 @media(min-width: 10px) {
     #account {
         .grey-color {
-            color: $gray-600;
+            color: var(--color-gray-600);
         }
 
         hr {
             margin-block: 2.5rem;
         }
+
         display: grid;
         grid-template-columns: 1fr;
         margin-block: 2rem;
@@ -31,8 +32,8 @@
                 z-index: 0;
 
                 .image-container-child {
-                    border: solid $gray-300 1px;
-                    box-shadow: 0px 0px 2px $gray-300;
+                    border: solid var(--color-gray-300) 1px;
+                    box-shadow: 0px 0px 2px var(--color-gray-300);
                     border-radius: 50%;
                     overflow: hidden;
 
@@ -49,17 +50,17 @@
                     right: 0;
                     width: 2rem;
                     height: 2rem;
-                    border: solid $gray-300 1px;
+                    border: solid var(--color-gray-300) 1px;
                     border-radius: 50%;
                     z-index: 1;
-                    background-color: white;
+                    background-color: var(--color-white);
                     display: flex;
                     justify-content: center;
                     align-items: center;
                     transition: background-color ease-in-out 120ms;
 
                     &:hover {
-                        background-color: $gray-400;
+                        background-color: var(--color-gray-400);
                     }
                 }
             }
@@ -133,7 +134,7 @@
         margin-bottom: 6rem;
 
         .leftside {
-            border-right: solid $gray-300 2px;
+            border-right: solid var(--color-gray-300) 2px;
             height: 100%;
             padding-right: 1rem;
         }
@@ -148,11 +149,11 @@
                 column-gap: 2rem;
                 margin-top: 1.5rem;
 
-                #AccountHeadline
-                {
+                #AccountHeadline {
                     grid-column: 1 / span 2
                 }
-                    #boxFirstName {
+
+                #boxFirstName {
                     grid-column: 1 / span 1;
                 }
 

@@ -2,7 +2,7 @@
 
 input {
     outline: none;
-    border: solid $gray-300 2px;
+    border: solid var(--color-gray-300) 2px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -21,13 +21,14 @@ input {
 }
 
 .input {
-    border: solid $gray-300 2px;
+    border: solid var(--color-gray-300) 2px;
     border-radius: 0.4rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
     padding: 0.5rem;
+    background-color: white;
 
     input {
         margin-top: 0rem;
@@ -47,7 +48,7 @@ input {
 
 .inputArea {
     width: 100%;
-    border: solid $gray-300 2px;
+    border: solid var(--color-gray-300) 2px;
     border-radius: 0.4rem;
     padding: 0.6rem;
     margin-top: 0.3rem;
@@ -57,7 +58,7 @@ input {
 
 .select {
     width: 100%;
-    border: solid $gray-300 2px;
+    border: solid var(--color-gray-300) 2px;
     border-radius: 0.4rem;
     padding: 0.6rem;
     margin-top: 0.3rem;

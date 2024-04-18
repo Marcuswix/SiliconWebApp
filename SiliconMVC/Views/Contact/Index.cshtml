@@ -119,7 +119,7 @@
                                 <span id="messageMessage" asp-validation-for="Message.Message"></span>
                             </div>
                         </div>
-                        <textarea  asp-for="Message.Message" class="inputArea"></textarea>
+                        <textarea asp-for="Message.Message" class="inputArea"></textarea>
                     </div>
                     <button class="btn-theme-s" onclick="return onsubmitMessage(event)" type="submit">Send Contact Request</button>
                 </form>
@@ -130,22 +130,22 @@
                 <button class="x-mark-container" id="x-mark-contact" onclick="{hideMessage()}">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
-                <form id="Application" onsubmit="return onsubmitMessage(event)" class="form-message" method="post" asp-controller="Contact" asp-action="Application" novalidate>
+                <form id="Application" onsubmit="return onsubmitApplication(event)" class="form-message" method="post" asp-controller="Contact" asp-action="Application" novalidate>
                     <h2 id="headlineform">Wanna Work with Us?</h2>
 
-                    <span id="fillOutForm" class="error hideSpan">You must fill out the form...</span>
+                    <span id="applicationfillOutForm" class="error hideSpan">You must fill out the form...</span>
 
                     <div class="input-container">
                         <div>
                             <label asp-for="Application.Name"><b>Full Name</b></label>
-                            <span asp-validation-for="Application.Name"></span>
+                            <span id="applicationName" asp-validation-for="Application.Name"></span>
                         </div>
                             <input asp-for="Application.Name"/>
                     </div>
                     <div class="input-container">
                         <div>
                             <label asp-for="Application.Email"><b>Email</b></label>
-                            <span asp-validation-for="Application.Email"></span>
+                            <span id="applicationEmail" asp-validation-for="Application.Email"></span>
                         </div>
                             <input asp-for="Application.Email"/>
                         </div>
@@ -164,10 +164,10 @@
                         <div class="input-theme">
                             <div class="input-container">
                                 <label asp-for="Application.Message"><b>Application Message</b></label>
-                                <span asp-validation-for="Application.Message"></span>
+                                <span id="applicationMessage" asp-validation-for="Application.Message"></span>
                             </div>
                         </div>
-                        <textarea asp-for="Application.Message" name="textarea" class="inputArea"></textarea>
+                        <textarea asp-for="Application.Message" class="inputArea"></textarea>
                     </div>
                     <button class="btn-theme-s" type="submit">Send Application</button>
                 </form>

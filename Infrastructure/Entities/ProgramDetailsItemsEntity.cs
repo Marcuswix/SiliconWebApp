@@ -11,7 +11,7 @@ namespace Infrastructure.Entities
 
         public ProgramDetailsEntity ProgramDetailsEntity { get; set; } = new ProgramDetailsEntity();
 
-        public string DetailTitle { get; set; } = null!;
+        public string? DetailTitle { get; set; } = null!;
 
         public string? Detail { get; set; } = null!;
     }

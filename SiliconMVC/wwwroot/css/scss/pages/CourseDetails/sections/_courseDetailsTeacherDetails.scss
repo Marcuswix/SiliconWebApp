@@ -10,8 +10,10 @@
         .something {
             color: white;
             width: 100%;
+            height: auto;
             z-index: 0;
             position: absolute;
+            bottom: 0;
         }
 
         .imageContainer {
@@ -27,17 +29,18 @@
         .textContainerCourses {
             padding: 1rem;
             width: 100%;
-            background-color: #0B0F19;
+            background-color: var(--color-gray-900);
             z-index: -1;
 
             .contentContainerCourses {
                 h1 {
-                    color: white;
+                    color: var(--color-white);
                     font-weight: 900;
                 }
 
-                color: $gray-500;
+                color: var(--color-gray-400);
                 display: grid;
+                align-self: center;
                 gap: 1rem;
 
                 .btnContainerCourses {
@@ -54,12 +57,13 @@
     }
 }
 
-//Desktop 992px
-@media(min-width: 992px) {
+//992px to Desktop
+@media(min-width: 992px) 
+{
     #CourseTeacher {
         width: 100%;
         display: grid;
-        grid-template-columns: 40% 60%;
+        grid-template-columns: 2fr 3fr;
         position: relative;
 
         .imageContainer {
@@ -68,11 +72,12 @@
             align-items: center;
             height: 100%;
             overflow: hidden;
+            margin: 0;
         }
 
-        .imageContainer img {
-            max-width: 100%;
-            max-height: 100%;
+        .img {
+            max-width: 34rem;
+            max-height: auto;
         }
 
         .textContainerCourses {
@@ -82,6 +87,7 @@
 
             .contentContainerCourses {
                 max-width: 28rem;
+                gap: 2rem;
 
                 .btnContainerCourses {
                     display: flex;

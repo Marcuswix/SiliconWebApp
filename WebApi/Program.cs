@@ -2,8 +2,11 @@ using Infrastructure.Contexts;
 using Infrastructure.Entities;
 using Infrastructure.Factories;
 using Infrastructure.Repositories;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using System.Text.Json.Serialization;
 using WebApi.Configurations;
 

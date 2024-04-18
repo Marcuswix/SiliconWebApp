@@ -21,7 +21,7 @@
                 gap: 1rem;
 
                 .dropdown-toggle {
-                    border: 2px solid $gray-300;
+                    border: 2px solid var(--color-gray-300);
                     border-radius: 0.4rem;
                     display: flex;
                     justify-content: space-between;
@@ -89,7 +89,7 @@
                     transition: ease-in-out 120ms;
 
                     &:hover {
-                        background-color: $gray-300;
+                        background-color: var(--color-gray-300);
                         text-decoration: none;
                     }
                 }

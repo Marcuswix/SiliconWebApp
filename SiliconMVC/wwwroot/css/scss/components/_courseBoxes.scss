@@ -35,18 +35,18 @@
 
             &:hover {
                 text-decoration: underline;
-                color: $gray-700;
+                color: var(--color-gray-700);
             }
         }
 
         h5 {
-            color: $gray-900;
+            color: var(--color-gray-900);
             margin: 0rem;
             transition: ease-in-out 120ms;
 
             &:hover {
                 text-decoration: underline;
-                color: $gray-700;
+                color: var(--color-gray-700);
             }
         }
 
@@ -75,7 +75,7 @@
             }
 
             .discount-price {
-                color: $gray-600;
+                color: var(--color-gray-600);
                 text-decoration: line-through;
 
                 p {
@@ -91,7 +91,7 @@
         .timeAndLikesParent {
             display: flex;
             gap: 2rem;
-            color: $gray-600;
+            color: var(--color-gray-600);
 
             .timeAndLikesChild {
                 display: flex;
@@ -120,7 +120,7 @@
         transition: ease-in-out 120ms;
 
         &:hover {
-            box-shadow: 0px 2px 8px $gray-500;
+            box-shadow: 0px 2px 8px var(--color-gray-500);
         }
     }
 }

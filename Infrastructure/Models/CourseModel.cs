@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Infrastructure.Entities;
+using System.ComponentModel.DataAnnotations;
 
 namespace Infrastructure.Models
 {
@@ -21,16 +22,17 @@ namespace Infrastructure.Models
         [Display(Name = "DiscountPrice")]
         public string? DiscountPrice { get; set; }
 
-        [Required]
-        [StringLength(100)]
-        [Display(Name = "Category", Prompt = "Select a category")]
-        public string CategoryName { get; set; } = null!;
+        [Display(Name = "Ingress")]
+        public string? Ingress { get; set; }
 
         [Display(Name = "Hours")]
         public string? Hours { get; set; }
 
         [Display(Name = "IsBestseller")]
         public bool IsBestseller { get; set; }
+
+        [Display(Name = "IsDigital")]
+        public bool IsDigital { get; set; }
 
         [Display(Name = "LikesInNumbers")]
         public string? LikesInNumbers { get; set; }
@@ -49,6 +51,26 @@ namespace Infrastructure.Models
         [Display(Name = "WhatYouLearn")]
         public string? WhatYouLearn { get; set; }
 
-        public string ErrorrMessage { get; set; } = string.Empty;
+        public string? NumberOfArticles { get; set; }
+
+        public string? Resourses { get; set; }
+
+        public string? ExtraInfoOne { get; set; }
+
+        public string? ExtraInfoTwo { get; set; }
+
+        public string? ExtraInfoThree { get; set; }
+
+        [Range(0, 5)]
+        public int? NumberOfStars { get; set; }
+
+        public int CategoryId { get; set; }
+        
+        public int TeacherId { get; set; }
+
+        public int? WhatYouLearnId { get; set; }
+        
+        public int? ProgramDetailsId { get; set; }
+
     }
 }

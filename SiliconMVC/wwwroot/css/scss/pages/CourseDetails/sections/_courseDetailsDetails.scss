@@ -59,7 +59,7 @@
 
                 .orgPrice {
                     font-size: 1rem;
-                    color: $gray-500;
+                    color: var(--color-gray-500);
                     text-decoration: line-through;
                 }
             }
@@ -70,7 +70,7 @@
 @media(min-width: 992px) {
     #CourseDetails {
         padding: 1rem;
-        padding-top: 5rem;
+        padding-top: 8rem;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         grid-template-rows: autor auto;

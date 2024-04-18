@@ -1,5 +1,4 @@
-﻿using Infrastructure.Contexts;
-using Infrastructure.Models;
+﻿using Infrastructure.Models;
 using Infrastructure.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +11,6 @@ namespace WebApi.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [UseApiKey]
-    //[Authorize]
     public class CoursesController : ControllerBase
     {
         private readonly CoursesRepository _courseRepository;
@@ -91,13 +89,14 @@ namespace WebApi.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Create(CourseModel model)
         {
             if(ModelState.IsValid && model != null)
             {
                 var unName = _courseRepository.NameExist(model.Title);
 
-                if(unName.StatusCode == Infrastructure.Models.StatusCodes.NOT_FOUND)
+                if(unName.StatusCode == Infrastructure.Models.StatusCodes.OK)
                 {
                     var result = await _courseRepository.CreateOne(model);
 
@@ -122,6 +121,7 @@ namespace WebApi.Controllers
             return BadRequest();
         }
 
+        [Authorize]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id)
         {
@@ -141,6 +141,7 @@ namespace WebApi.Controllers
             }
         }
 
+        [Authorize]
         [HttpPut]
         public async Task<IActionResult> Update(int id, CourseModel model)
         {

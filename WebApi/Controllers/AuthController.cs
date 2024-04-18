@@ -1,9 +1,6 @@
 ﻿using Infrastructure.Contexts;
 using Infrastructure.Entities;
-using Infrastructure.Factories;
 using Infrastructure.Models;
-using Infrastructure.Repositories;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -128,12 +125,17 @@ namespace WebApi.Controllers
                                     new(ClaimTypes.Email, model.Email),
                                     new(ClaimTypes.Name, model.Email),
                     }),
+                    //Hur länge gäller denna token
                     Expires = DateTime.UtcNow.AddDays(1),
+                    //Vem är utfärdaren?
                     Issuer = _configuration["Jwt:Issuer"],
+                    //Vem ska ta emot?
                     Audience = _configuration["Jwt:Audience"],
+                    //Den hemliga nyckeln...
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
                 };
 
+                //Här skapas själva token...
                 var token = tokenHandler.CreateToken(tokenDescriptor);
                 var tokenString = tokenHandler.WriteToken(token);
 
@@ -144,37 +146,5 @@ namespace WebApi.Controllers
             }
             return Unauthorized();
         }
-
-        //[UseApiKey]
-        //[HttpPost]
-        //[Route("/tokenTwo")]
-        //public IActionResult GetToken()
-        //{
-        //    try
-        //    {
-        //        var tokenHandler = new JwtSecurityTokenHandler();
-
-        //        var tokenDescriptor = new SecurityTokenDescriptor
-        //        {
-        //            //Vem är utfärdaren?
-        //            Issuer = _configuration["Token:Issuer"],
-        //            //Vem ska tSystem.ArgumentOutOfRangeException: 'IDX10653: The encryption algorithm 'http://www.w3.org/2001/04/xmldsig-more#hmac-sha512' requires a key size of at least '128' bits. Key '[PII of type 'Microsoft.IdentityModel.Tokens.SymmetricSecurityKey' is hidden. For more details, see https://aka.ms/IdentityModel/PII.]', is of size: '96'. Arg_ParamName_Name'a emot?
-        //            Audience = _configuration["Token:Audience"],
-        //            //Hur länge gäller denna token
-        //            Expires = DateTime.Now.AddMinutes(15),
-        //            //Den hemliga nyckeln...
-        //            SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Token:Secret"]!)), SecurityAlgorithms.HmacSha512Signature)
-        //        };
-
-
-        //        //Här skapas själva token...
-        //        var token = tokenHandler.CreateToken(tokenDescriptor);
-        //        return Ok(tokenHandler.WriteToken(token));
-        //    }
-        //    catch (Exception ex) {
-        //        Debug.WriteLine("" + ex.Message);
-        //        return Unauthorized();
-        //    }
-        //}
     }
 }

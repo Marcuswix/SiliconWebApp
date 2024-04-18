@@ -8,21 +8,23 @@
     var contentIntegrate = integrate.First();
 }
 
-<section id="integrate" class="section-margin">
-    <wrapper class="section-wrapper-integrate">
-        <div class="headlinesIntegrate">
-            <h1>@contentIntegrate.Title</h1>
-            <p>@contentIntegrate.Ingress</p>
-        </div>
-        <div class="box-container">
+<section id="integrate">
+    <div class="container">
+        <div class="section-wrapper-integrate">
+            <div class="headlinesIntegrate">
+                <h1>@contentIntegrate.Title</h1>
+                <p>@contentIntegrate.Ingress</p>
+            </div>
+            <div class="box-container">
 
-            @foreach (var item in contentIntegrate.IntegrateItems)
-            {
-                <div class="box-integrate">
-                    <img src="~/images/iconsbrands/@item.ImageUrl" alt="@item.AltText" />
-                    <p>@item.Text</p>
-                </div>
-            }
+                @foreach (var item in contentIntegrate.IntegrateItems)
+                {
+                    <div class="box-integrate">
+                        <img src="~/images/iconsbrands/@item.ImageUrl" alt="@item.AltText" />
+                        <p>@item.Text</p>
+                    </div>
+                }
+            </div>
         </div>
-    </wrapper>
+    </div>
 </section>
