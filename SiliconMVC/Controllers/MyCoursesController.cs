@@ -96,11 +96,11 @@ namespace SiliconMVC.Controllers
                         }
                     }
                 }
-                return View();
+                return View("Index");
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.Message); return View();
+                Debug.WriteLine(ex.Message); return View("Index");
             }
         }
 

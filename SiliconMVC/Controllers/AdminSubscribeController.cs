@@ -2,9 +2,8 @@
 using Infrastructure.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.AspNetCore.Http;
-using System.Net;
+using Infrastructure.Entities;
+using Infrastructure.ViewModels;
 
 namespace SiliconMVC.Controllers
 {
@@ -28,7 +27,7 @@ namespace SiliconMVC.Controllers
 
         [HttpGet]
         [Route("/admin/subscribers")]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(SubscriberEntity entity)
         {
             SetDefaultViewValues();
 
@@ -38,7 +37,13 @@ namespace SiliconMVC.Controllers
 
             if (response != null && response.Count() > 0)
             {
-                    return View(response);
+                var model = new SubscriberViewModel
+                {
+                    SubscriberEntity = entity != null ? entity : null,
+                    Subscribers = response
+                };
+
+                return View(model);
             }
             if(response != null && response.Count() == 0)
             {
@@ -60,7 +65,6 @@ namespace SiliconMVC.Controllers
             {
                 var (token, apiKey) = _getTokenAndApiKey.GetTokenAndApiKeyHelper(HttpContext);
 
-
                 var response = await _adminSubscribeServices.Delete(email, token, apiKey);
 
                 if (response.StatusCode == Infrastructure.Models.StatusCodes.OK)
@@ -70,7 +74,7 @@ namespace SiliconMVC.Controllers
                 }
                 else if (response.StatusCode == Infrastructure.Models.StatusCodes.NOT_FOUND)
                 {
-                    TempData["ErrorMessage"] = "Not found: ";
+                    TempData["ErrorMessage"] = "couldn't find any email that matched";
                 }
                 else if(response.StatusCode == Infrastructure.Models.StatusCodes.UNAUTHORIZED)
                 {
@@ -86,6 +90,47 @@ namespace SiliconMVC.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        public async Task<IActionResult> GetOne(string email)
+        {
+            SetDefaultViewValues();
 
+            if (email != null)
+            {
+                var (token, apiKey) = _getTokenAndApiKey.GetTokenAndApiKeyHelper(HttpContext);
+
+                var response = await _adminSubscribeServices.GetOne(email, token, apiKey);
+
+                if (response.StatusCode == Infrastructure.Models.StatusCodes.OK)
+                {
+                    var result = response.ContentResult as SubscriberEntity;
+
+                    return RedirectToAction("Index", result);
+                }
+                else if (response.StatusCode == Infrastructure.Models.StatusCodes.NOT_FOUND)
+                {
+                    TempData["ErrorMessage"] = "Not found: ";
+                    return RedirectToAction("Index");
+                }
+                else if (response.StatusCode == Infrastructure.Models.StatusCodes.UNAUTHORIZED)
+                {
+                    TempData["ErrorMessage"] = "You are unauthorized to do this action";
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    TempData["ErrorMessage"] = "No response from API";
+                    return RedirectToAction("Index");
+                }
+            }
+            if(email == null)
+            {
+                TempData["ErrorMessage"] = "You must enter a email address...";
+                return RedirectToAction("Index");
+            }
+
+            TempData["ErrorMessage"] = "Something went wrong";
+            return RedirectToAction("Index");
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Infrastructure.Contexts;
 using Infrastructure.Entities;
 using Infrastructure.Factories;
+using Infrastructure.Helpers;
 using Infrastructure.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
@@ -59,7 +60,6 @@ namespace Infrastructure.Repositories
         }
 
         //Read
-
         public async Task<RepositoriesResult> GetAll()
         {
             try
@@ -72,7 +72,7 @@ namespace Infrastructure.Repositories
                     }
                     if (result!.Count == 0)
                     {
-                        return ResponseFactory.NotFound("No subscribers in the list...");
+                        return ResponseFactory.NotFound();
                     }
 
             
@@ -85,11 +85,12 @@ namespace Infrastructure.Repositories
             }
         }
 
-        public async Task<RepositoriesResult> GetOne(int id)
+        public async Task<RepositoriesResult> GetOne(string email)
         {
             try
             {
-                    var result = await _dataContext.Subscribers.FirstOrDefaultAsync(x => x.Id == id);
+
+                    var result = await _dataContext.Subscribers.FirstOrDefaultAsync(x => x.Email == email);
 
                     if (result != null)
                     {
@@ -97,7 +98,7 @@ namespace Infrastructure.Repositories
                     }
                     if (result == null)
                     {
-                        return ResponseFactory.NotFound("No subscriber with that email exists...");
+                        return ResponseFactory.NotFound();
                     }
 
                 return ResponseFactory.Error();
@@ -127,7 +128,7 @@ namespace Infrastructure.Repositories
                     }
                     if (result == null)
                     {
-                        return ResponseFactory.NotFound("No subscriber with that email exists...");
+                        return ResponseFactory.NotFound();
                     }
                 }
 
@@ -157,7 +158,7 @@ namespace Infrastructure.Repositories
                     }
                     if (result == null)
                     {
-                        return ResponseFactory.NotFound("No subscriber with that email exists...");
+                        return ResponseFactory.NotFound();
                     }
                 }
 

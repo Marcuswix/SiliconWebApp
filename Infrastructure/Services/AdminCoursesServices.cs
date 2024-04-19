@@ -29,7 +29,7 @@ namespace Infrastructure.Services
             try
             {
                 
-                var http = new HttpClient();
+                using var http = new HttpClient();
 
                 var content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
 

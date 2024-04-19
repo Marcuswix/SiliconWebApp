@@ -11,12 +11,12 @@ namespace SiliconMVC.Controllers
     public class AdminAddCourseController : Controller
     {
         private readonly GetTokenAndApiKey _getTokenAndApiKey;
-        private readonly AdminCoursesServices _adminCoursesServices;
+        private readonly CourseServices _courseServices;
 
-        public AdminAddCourseController(GetTokenAndApiKey getTokenAndApiKey, AdminCoursesServices adminCoursesServices)
+        public AdminAddCourseController(GetTokenAndApiKey getTokenAndApiKey, CourseServices courseServices)
         {
             _getTokenAndApiKey = getTokenAndApiKey;
-            _adminCoursesServices = adminCoursesServices;
+            _courseServices = courseServices;
         }
 
         private void SetValues()
@@ -29,37 +29,37 @@ namespace SiliconMVC.Controllers
         [Route("/admin/create-course")]
         public async Task <IActionResult> Index()
         {
-            var model = new CourseModel();
             SetValues();
+            var model = new CourseModel();
             return View(model);
         }
 
-        [HttpPost]
-        public async Task <IActionResult> Create(CourseModel model)
-        {
-            SetValues();
+        //[HttpPost]
+        //public async Task <IActionResult> Create(CourseModel model)
+        //{
+        //    SetValues();
 
-            if (ModelState.IsValid) 
-            {
-                var (token, apiKey) = _getTokenAndApiKey.GetTokenAndApiKeyHelper(HttpContext);
+        //    if (ModelState.IsValid) 
+        //    {
+        //        var (token, apiKey) = _getTokenAndApiKey.GetTokenAndApiKeyHelper(HttpContext);
 
-                var response = await _adminCoursesServices.CreateCourse(token, apiKey, model);
+        //        //var response = await _courseServices.GetOneCourse(token, apiKey, model);
 
-                if(response.StatusCode == Infrastructure.Models.StatusCodes.OK)
-                {
-                    TempData["SuccessMessage"] = "Course was added successfully";
-                    return View("Index");
-                }
-                if(response.StatusCode == Infrastructure.Models.StatusCodes.EXISTS)
-                {
-                    TempData["ErrorMessage"] = "A course with same title already exist.";
-                }
-                else
-                {
-                    TempData["ErrorMessage"] = "Something went wrong. Please try agin later.";
-                }
-            }
-            return View("Index");
-        }
+        //        if(response.StatusCode == Infrastructure.Models.StatusCodes.OK)
+        //        {
+        //            TempData["SuccessMessage"] = "Course was added successfully";
+        //            return View("Index");
+        //        }
+        //        if(response.StatusCode == Infrastructure.Models.StatusCodes.EXISTS)
+        //        {
+        //            TempData["ErrorMessage"] = "A course with same title already exist.";
+        //        }
+        //        else
+        //        {
+        //            TempData["ErrorMessage"] = "Something went wrong. Please try agin later.";
+        //        }
+        //    }
+        //    return View("Index");
+        //}
     }
 }

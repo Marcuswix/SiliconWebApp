@@ -1,6 +1,6 @@
 ﻿function formErrorHandler(targetElement, validationResult)
 {
-
+    var termsspan = document.getElementById("termsspan");
     let spanElement = document.querySelector(`[data-valmsg-for="${targetElement.name}"]`);
 
     if (validationResult === true && targetElement.type === 'checkbox')
@@ -24,6 +24,8 @@
         spanElement.classList.remove('field-validation-valid');
         spanElement.innerHTML = targetElement.dataset.valRequired;
     }
+
+    termsspan.classList.remove('checkmark')
 }
 
 function subscribeFormErrorHandler(targetElement, validationResult)

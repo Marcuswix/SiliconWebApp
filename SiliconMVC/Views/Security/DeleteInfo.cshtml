@@ -28,12 +28,16 @@
 
         <div id="areYouShureDeleteAccount" class="areYouShureContainer">
             <p>Are you sure you wish to delete your account?</p>
+            <form asp-controller="Security" asp-action="Delete" method="post" novalidate>
+            <div passwordInputContainer>
+                <label>Type your password: </label>
+                <input class="input" name="password" type="password" />
+            </div>
             <div class="btnContainer">
-                <form asp-controller="Security" asp-action="Delete" method="post" novalidate>
-                    <button class="btn-theme" type="submit">Yes</button>
-                </form>
+                <button class="btn-theme" type="submit">Yes</button>
                 <button class="btn-red" onclick="cancelDeleteAccount()">Cancel</button>
             </div>
+        </form>
         </div>
 
 <script src="/js/areYouShure.js"></script>

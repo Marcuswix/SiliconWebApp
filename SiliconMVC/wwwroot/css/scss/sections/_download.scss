@@ -84,12 +84,12 @@
 
             .imageContainer {
                 grid-column: 1;
-                width: 90%;
+                max-width: 32rem;
                 height: auto;
-                padding-inline: 0rem;
+                padding-inline: 1rem;
 
                 .imagePhone {
-                    width: 100%;
+                    width: 90%;
                     height: auto;
                 }
             }

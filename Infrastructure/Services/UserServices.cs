@@ -11,23 +11,15 @@ namespace Infrastructure.Services
 {
     public class UserServices
     {
-        private readonly HttpClient _httpClient;
-        private readonly IConfiguration _configuration;
-
-
-        public UserServices(HttpClient httpClient, IConfiguration configuration)
-        {
-            _httpClient = httpClient;
-            _configuration = configuration;
-        }
-
         public async Task<RepositoriesResult> DeleteUser(string id, string apiKey)
         {
             try
             {
-                if(id != null)
+                if(id != null && apiKey != null)
                 {
-                    var result = await _httpClient.DeleteAsync($"https://localhost:7117/api/Security?id={id}&key={apiKey}");
+                    using var _http = new HttpClient();
+
+                    var result = await _http.DeleteAsync($"https://localhost:7117/api/Security?id={id}&key={apiKey}");
                     
                     if(result.IsSuccessStatusCode)
                     {
@@ -41,6 +33,7 @@ namespace Infrastructure.Services
             }
             catch (Exception ex)
             {
+                Debug.WriteLine(ex.Message);
                 return ResponseFactory.Error();
             }
         }

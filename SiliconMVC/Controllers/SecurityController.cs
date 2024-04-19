@@ -68,20 +68,27 @@ namespace SiliconMVC.Controllers
         #endregion
 
 
-        #region [HttpGet] DeleteAccount
-        [HttpGet]
-        [Authorize(Policy = "AuthenticatedUsers")]
-        public IActionResult DeleteAccountView(DeleteAccountModel model)
-        {
-            SetDefaultViewValues();
+        //#region [HttpGet] DeleteAccount
+        //[HttpGet]
+        //[Authorize(Policy = "AuthenticatedUsers")]
+        //public async IActionResult DeleteAccountView(DeleteAccountModel model, string password)
+        //{
+        //    SetDefaultViewValues();
 
-            if (!_signInManager.IsSignedIn(User))
-            {
-                return RedirectToAction("SigIn", "Account");
-            }
-            return View(model);
-        }
-        #endregion
+        //    if (!_signInManager.IsSignedIn(User))
+        //    {
+        //        var user = await _userManager.GetUserAsync(User);
+
+        //        var passwordCorrect = await _userManager.CheckPasswordAsync(user, password);
+        //        if (passwordCorrect) 
+        //        {
+        //            return RedirectToAction("SigIn", "Account");
+        //        }
+
+        //    }
+        //    return View(model);
+        //}
+        //#endregion
 
 
         #region [HttpPost] ChangePassword
@@ -121,7 +128,7 @@ namespace SiliconMVC.Controllers
         #region [HttpDelete] DeleteAccount
         [HttpPost]
         [Authorize(Policy = "AuthenticatedUsers")]
-        public async Task<IActionResult> Delete(string api)
+        public async Task<IActionResult> Delete(string password)
         {
 
             SetDefaultViewValues();
@@ -138,14 +145,21 @@ namespace SiliconMVC.Controllers
                 }
 
                 var user = await _userManager.GetUserAsync(User);
-                var result = await _userServices.DeleteUser(user!.Id, apiKey!);
 
-                if (result.StatusCode == Infrastructure.Models.StatusCodes.OK)
+                var checkpassword = await _userManager.CheckPasswordAsync(user, password);
+
+                if(checkpassword == true)
                 {
-                    await _signInManager.SignOutAsync(); 
-                    TempData["SuccessfullyDeleted"] = "The account was successfully deleted.";
-                    return RedirectToAction("Index", "SignUp");
+                    var result = await _userServices.DeleteUser(user!.Id, apiKey!);
+
+                    if (result.StatusCode == Infrastructure.Models.StatusCodes.OK)
+                    {
+                        await _signInManager.SignOutAsync();
+                        TempData["SuccessfullyDeleted"] = "The account was successfully deleted.";
+                        return RedirectToAction("Index", "SignUp");
+                    }
                 }
+                TempData["SuccessfullyDeleted"] = "Incorrect password...";
             }
 
             return View("Index");

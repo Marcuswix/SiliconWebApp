@@ -17,10 +17,18 @@
             display: grid;
             align-items: center;
             grid-template-columns: 1fr;
-            row-gap: 0.5rem;
+            row-gap: 1rem;
+            text-align: center;
+
+            .search-container-subscriber {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
 
             .subscriberContainerChild {
-                padding: 0.5rem;
+                padding: 1rem;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
@@ -41,11 +49,11 @@
             box-shadow: 2px 3px 5px var(--color-gray-200);
             transition: ease-in-out 120ms;
 
-
             .btnContainer {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
+                padding-block:1rem;
             }
         }
 

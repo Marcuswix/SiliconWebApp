@@ -66,10 +66,10 @@ namespace WebApi.Controllers
         #endregion
 
         #region [HttpGet] GetOne
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetOne(int id)
+        [HttpGet("/api/Subscribe/getone/{email}")]
+        public async Task<IActionResult> GetOne(string email)
         {
-                var result = await _subscribeRepository.GetOne(id);
+                var result = await _subscribeRepository.GetOne(email);
 
                 if (result.StatusCode == Infrastructure.Models.StatusCodes.OK)
                 {

@@ -1,43 +1,40 @@
 ﻿using Infrastructure.Entities;
 using Infrastructure.Factories;
 using Infrastructure.Models;
-using Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Newtonsoft.Json;
 using System.IdentityModel.Tokens.Jwt;
 using System.Net;
 using System.Net.Http.Headers;
+using System.Text;
 
 namespace Infrastructure.Services
 {
     public class SubscribeServices
     {
-        private readonly SubscribeRepository _repository;
-
-        public SubscribeServices(SubscribeRepository repository)
+        public async Task<RepositoriesResult> AddSubscriber(SubscribeModel model, string apiKey)
         {
-            _repository = repository;
-        }
-
-        public async Task<RepositoriesResult> AddSubscriber(SubscribeModel model)
-        {
-            if (model != null) 
+            if (model != null && apiKey != null) 
             {
-                var result = await _repository.AddSubscriber(model);
+                using var http = new HttpClient();
 
-                if (result.StatusCode == Infrastructure.Models.StatusCodes.OK)
+                var content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+
+                var result = await http.PostAsync($"https://localhost:7117/api/Subscribe?key={apiKey}", content);
+
+                if (result.IsSuccessStatusCode)
                 {
-                    return ResponseFactory.Ok("Your subscribtion is added");
+                    return ResponseFactory.Ok();
                 }
-                if (result.StatusCode == Infrastructure.Models.StatusCodes.EXISTS)
+                if (result.StatusCode == HttpStatusCode.Conflict)
                 {
-                    return ResponseFactory.AlreadyExist("This email is already up for subscription");
+                    return ResponseFactory.AlreadyExist();
                 }
 
                 return ResponseFactory.NotFound();
             }
 
-            return ResponseFactory.Error("Could add a subscribtion");
+            return ResponseFactory.Error();
         }
 
         public async Task<List<SubscriberEntity>> GetAllSubscribers(string token, string apiKey)
@@ -70,7 +67,6 @@ namespace Infrastructure.Services
                         return null!;
                     }
                 }
-
                 return null!;
             }
             catch
@@ -79,7 +75,6 @@ namespace Infrastructure.Services
             }
         }
 
-
         public async Task<RepositoriesResult> Delete(string email, string token, string apiKey)
         {
 
@@ -87,11 +82,43 @@ namespace Infrastructure.Services
             {
                 using var http = new HttpClient();
 
+                http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
                 var response = await http.DeleteAsync($"https://localhost:7117/api/Subscribe?email={email}&token={token}&key={apiKey}");
 
                 if (response.IsSuccessStatusCode)
                 {
                     return ResponseFactory.Ok();
+                }
+                else if (response.StatusCode == HttpStatusCode.NotFound)
+                {
+                    return ResponseFactory.NotFound();
+                }
+            }
+            return ResponseFactory.Error();
+        }
+
+        public async Task<RepositoriesResult> GetOne(string email, string token, string apiKey)
+        {
+
+            if (email != null && token != null && apiKey != null)
+            {
+                using var http = new HttpClient();
+
+                http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+                var response = await http.GetAsync($"https://localhost:7117/api/Subscribe/getone/{email}?key={apiKey}");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var json = await response.Content.ReadAsStringAsync();
+
+                    var result = JsonConvert.DeserializeObject<ApiResponseModelOneSubscriber>(json);
+
+                    if (result?.ContentResult != null)
+                    {
+                        return ResponseFactory.Ok(result.ContentResult);
+                    }
                 }
                 else if (response.StatusCode == HttpStatusCode.NotFound)
                 {

@@ -1,4 +1,4 @@
-﻿@model List<SubscriberEntity>;
+﻿@model SubscriberViewModel;
 @using Infrastructure.Entities;
 
 <div class="container">
@@ -7,7 +7,6 @@
         </div>
     <div class="subscriberContainerParent">
 
-        <div class="container">
             @if (TempData["SuccessMessage"] != null)
             {
                 <span class="success center">@TempData["SuccessMessage"]</span>
@@ -16,10 +15,42 @@
             {
                 <span class="error center">@TempData["ErrorMessage"]</span>
             }
-        </div>
-        @if(Model != null)
+
+        <form asp-controller="AdminSubscribe" asp-action="GetOne" method="post" class="search-container-subscriber">
+            <div class="input">
+                <input id="searchEmail" name="email" placeholder="Serach email" />
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <button type="submit" class="btn-theme">Search</button>
+        </form>
+        
+        @if(Model.SubscriberEntity != null && Model.SubscriberEntity.Email != null)
         {
-            @foreach (var subscriber in Model)
+            <div class="name-box">
+                <div class="subscriberContainerChild">
+                    <label>@Model.SubscriberEntity.Email</label>
+                    <button class="btn-red" onclick="areYouShure('@Model.SubscriberEntity.Email')">Delete</button>
+                </div>
+            </div>
+
+            <div id="areYouShure_@Model.SubscriberEntity.Email" class="areYouShureContainer">
+                <p>Are you sure you wish to unsubscribe?</p>
+                <div class="btnContainer">
+                    <form asp-controller="AdminSubscribe" asp-action="Delete" method="post" novalidate>
+                        <input type="hidden" name="email" value="@Model.SubscriberEntity.Email" />
+                        <button class="btn-theme" type="submit">Yes</button>
+                    </form>
+                    <button class="btn-red" onclick="cancel('areYouShure_@Model.SubscriberEntity.Email')">Cancel</button>
+                </div>
+            </div>
+        }
+
+
+        @if(Model.Subscribers != null)
+        {
+            <div><h2>All Subscribers</h2></div>
+
+            @foreach (var subscriber in Model.Subscribers)
             {
                 <div class="name-box">
                     <div class="subscriberContainerChild">

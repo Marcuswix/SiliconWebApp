@@ -37,7 +37,7 @@ namespace Infrastructure.Controllers
         [Authorize]
         [HttpGet]
         [Route("/accountdetails")]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(AccountAddressDetailsViewModel model)
         {
             SetDefaultViewValues();
 
@@ -69,7 +69,7 @@ namespace Infrastructure.Controllers
                 ViewData["AddressInfo"] = addressInfoView.Model;
             }
 
-            return View();
+            return View(model);
         }
         #endregion
 
@@ -257,7 +257,7 @@ namespace Infrastructure.Controllers
                         result.ContentResult = newAddress;
 
                     TempData["SuccessMessageAddressInfo"] = "A address was successfully added!";
-                    return RedirectToAction("Index", "Account", newAddress);
+                    return RedirectToAction("Index", "Account", model);
                     }
 
                 TempData["SuccessMessageAddressInfo"] = "A address was successfully added!";

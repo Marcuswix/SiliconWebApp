@@ -3,16 +3,19 @@ using Infrastructure.Models;
 using Infrastructure.Services;
 using Newtonsoft.Json;
 using System.Text;
+using Infrastructure.Helpers;
 
 namespace Infrastructure.Controllers;
 
 public class HomeController : Controller
 {
     private readonly SubscribeServices _subscribeServices;
+    private readonly GetTokenAndApiKey _tokenAndApiKey;
 
-    public HomeController(SubscribeServices subscribeServices)
+    public HomeController(SubscribeServices subscribeServices, GetTokenAndApiKey tokenAndApiKey)
     {
         _subscribeServices = subscribeServices;
+        _tokenAndApiKey = tokenAndApiKey;
     }
 
     private void SetValues()
@@ -36,17 +39,15 @@ public class HomeController : Controller
         
         if (ModelState.IsValid)
         {
-            using var http = new HttpClient();
+            var (token, apiKey) = _tokenAndApiKey.GetTokenAndApiKeyHelper(HttpContext);
 
-            var content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+            var response = await _subscribeServices.AddSubscriber(model, apiKey);
 
-            var response = await http.PostAsync("https://localhost:7117/api/Subscribe?key=920344b7-dd86-4721-9ce0-92e80f7d7da4", content);
-
-            if (response.IsSuccessStatusCode)
+            if (response.StatusCode == Infrastructure.Models.StatusCodes.OK)
             {
                 TempData["Message"] = "Your are now subscribing!";
             }
-            else if (response.StatusCode == System.Net.HttpStatusCode.Conflict)
+            else if (response.StatusCode == Infrastructure.Models.StatusCodes.EXISTS)
             {
                 TempData["ErrorMessage"] = "This email address is already registerd for subscription.";
             }
