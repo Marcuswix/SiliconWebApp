@@ -1,8 +1,9 @@
-﻿using Infrastructure.Entities;
-using Infrastructure.Models;
+﻿using Infrastructure.Helpers;
+using Infrastructure.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Http;
 using System.Net;
 
 namespace SiliconMVC.Controllers
@@ -10,6 +11,15 @@ namespace SiliconMVC.Controllers
     [Authorize(Policy = "Admins")]
     public class AdminSubscribeController : Controller
     {
+        private readonly GetTokenAndApiKey _getTokenAndApiKey;
+        private readonly SubscribeServices _adminSubscribeServices;
+
+        public AdminSubscribeController(GetTokenAndApiKey getTokenAndApiKey, SubscribeServices adminSubscribeServices)
+        {
+            _getTokenAndApiKey = getTokenAndApiKey;
+            _adminSubscribeServices = adminSubscribeServices;
+        }
+
         private void SetDefaultViewValues()
         {
             ViewBag.ShowFooter = false;
@@ -22,31 +32,22 @@ namespace SiliconMVC.Controllers
         {
             SetDefaultViewValues();
 
-            using var http = new HttpClient();
+            var (token, apiKey) = _getTokenAndApiKey.GetTokenAndApiKeyHelper(HttpContext);
 
-            var response = await http.GetAsync("https://localhost:7117/api/Subscribe?key=920344b7-dd86-4721-9ce0-92e80f7d7da4");
+            var response = await _adminSubscribeServices.GetAllSubscribers(token, apiKey);
 
-            if (response != null)
+            if (response != null && response.Count() > 0)
             {
-                var json = await response.Content.ReadAsStringAsync();
-
-                var apiResponse = JsonConvert.DeserializeObject<ApiResponseModel>(json);
-
-                if (apiResponse!.StatusCode == 200)
-                {
-                    var data = apiResponse.ContentResult;
-                    return View(data);
-                }
-                else
-                {
-                    TempData["ErrorMessage"] = "API request failed: " + apiResponse.Message;
-                }
+                    return View(response);
+            }
+            if(response != null && response.Count() == 0)
+            {
+                TempData["ErrorMessage"] = "There are no subscribers in the list...";
             }
             else
             {
                 TempData["ErrorMessage"] = "No response from API";
             }
-
             return View();
         }
 
@@ -57,20 +58,21 @@ namespace SiliconMVC.Controllers
 
             if (email != null)
             {
-                using var http = new HttpClient();
+                var (token, apiKey) = _getTokenAndApiKey.GetTokenAndApiKeyHelper(HttpContext);
 
-                var response = await http.DeleteAsync($"https://localhost:7117/api/Subscribe?email={email}");
 
-                if (response.IsSuccessStatusCode)
+                var response = await _adminSubscribeServices.Delete(email, token, apiKey);
+
+                if (response.StatusCode == Infrastructure.Models.StatusCodes.OK)
                 {
                     TempData["SuccessMessage"] = "The email is off from subscription";
                     return RedirectToAction("Index");
                 }
-                else if (response.StatusCode == HttpStatusCode.NotFound)
+                else if (response.StatusCode == Infrastructure.Models.StatusCodes.NOT_FOUND)
                 {
                     TempData["ErrorMessage"] = "Not found: ";
                 }
-                else if(response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                else if(response.StatusCode == Infrastructure.Models.StatusCodes.UNAUTHORIZED)
                 {
                     TempData["ErrorMessage"] = "You are unauthorized to do this action";
                 }
@@ -79,6 +81,7 @@ namespace SiliconMVC.Controllers
                     TempData["ErrorMessage"] = "No response from API";
                 }
             }
+
             TempData["ErrorMessage"] = "Something went wrong";
             return RedirectToAction("Index");
         }

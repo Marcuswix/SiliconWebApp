@@ -13171,7 +13171,7 @@ h6, .h6 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 1rem;
+  padding: 1rem;
 }
 
 .areYouShureContainer {

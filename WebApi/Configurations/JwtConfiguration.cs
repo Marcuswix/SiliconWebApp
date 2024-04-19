@@ -11,7 +11,7 @@ namespace WebApi.Configurations
 
         //IServiceCollection samlar alla appens tjänster ex. databasanrop och autentisering... Det som ger ".Services"
 
-        //IConfiguration gör så att man kan komma åt API-nyvcklar, databaser och anslutninsgsträngar... Det som ger ".Configuration"
+        //IConfiguration gör så att man kan komma åt API-nycklar, databaser och anslutninsgsträngar... Det som ger ".Configuration"
 
         //this gör så att du lägger till din funktion i IserviceCollection
         public static void RegisterJwt(this IServiceCollection services, IConfiguration configuration)

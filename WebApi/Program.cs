@@ -73,6 +73,15 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 //    .AllowAnyHeader();
 //}) );
 
+builder.Services.AddAuthorization(x =>
+{
+    x.AddPolicy("SuperAdmins", policy => policy.RequireRole("SuperAdmin"));
+    x.AddPolicy("CIO", policy => policy.RequireRole("SuperAdmin", "CIO"));
+    x.AddPolicy("Admins", policy => policy.RequireRole("SuperAdmin", "CIO", "Admin"));
+    x.AddPolicy("Managers", policy => policy.RequireRole("SuperAdmin", "CIO", "Admin", "Manager"));
+    x.AddPolicy("AuthenticatedUsers", policy => policy.RequireRole("SuperAdmin", "CIO", "Admin", "Manager", "User"));
+});
+
 var app = builder.Build();
 
 //AllowAnyHeaders är att vi vill tillåta alla keys, m.m., AllowAnyOrigin gör att alla får komma åt APIet, AllowAnyMethod tillåter alla metoder (post, get, ...)

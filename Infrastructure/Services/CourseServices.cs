@@ -1,5 +1,6 @@
 ﻿using Infrastructure.Entities;
 using Infrastructure.Helpers;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -12,6 +13,8 @@ namespace Infrastructure.Services
     {
         private readonly HttpClient _httpClient;
         private readonly CourseResponse _response;
+
+
 
         public CourseServices(HttpClient httpClient, CourseResponse response)
         {
@@ -114,6 +117,33 @@ namespace Infrastructure.Services
                 return null;
             }
         }
+
+        public async Task<bool> DeleteCourse(string apiKey, int courseId)
+        {
+
+            try
+            {
+                if(courseId != 0 && apiKey != null)
+                {
+                    var response = await _httpClient.DeleteAsync($"https://localhost:7117/api/Courses?id={courseId}&key={apiKey}");
+
+                    if (response.IsSuccessStatusCode)
+                    {
+
+                        return true;
+                    }
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
+
+        
 
         public async Task<TeacherEntity> GetOneTeacher(string apiKey, int id)
         {

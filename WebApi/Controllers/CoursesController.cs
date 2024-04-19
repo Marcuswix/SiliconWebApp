@@ -89,7 +89,6 @@ namespace WebApi.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public async Task<IActionResult> Create(CourseModel model)
         {
             if(ModelState.IsValid && model != null)
@@ -121,7 +120,6 @@ namespace WebApi.Controllers
             return BadRequest();
         }
 
-        [Authorize]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id)
         {
@@ -141,7 +139,6 @@ namespace WebApi.Controllers
             }
         }
 
-        [Authorize]
         [HttpPut]
         public async Task<IActionResult> Update(int id, CourseModel model)
         {

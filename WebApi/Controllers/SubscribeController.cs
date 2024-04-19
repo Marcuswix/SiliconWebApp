@@ -1,5 +1,6 @@
 ﻿using Infrastructure.Models;
 using Infrastructure.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApi.Filters;
@@ -7,6 +8,7 @@ using WebApi.Filters;
 namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
+    [UseApiKey]
     [ApiController]
     public class SubscribeController : ControllerBase
     {
@@ -45,8 +47,6 @@ namespace WebApi.Controllers
 
 
         #region [HttpGet] Get/Read
-        //[Authorize(Policy = "Admins")]
-        [UseApiKey]
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -82,7 +82,6 @@ namespace WebApi.Controllers
 
         #region [HttpPut] Update
         [HttpPut]
-        [UseApiKey]
         public async Task <IActionResult> Update(int id, SubscribeModel model)
         {
             if (model != null && ModelState.IsValid)
